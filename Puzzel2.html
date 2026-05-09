@@ -28,31 +28,37 @@
 	</head>
 
 	<body>
-		<button
-			id="btn_reqPermission"
-			style="position: absolute; z-index: 200; top: 40%; padding: 2em"
-		>
-			Hey! This will be much better with sensors. Allow?
-		</button>
 		<div style="color: white" id="output_message"></div>
 
 		<div id="info" class="hidden">
-			<p>
-				Wisch den aktuellen Hinweis nach links oder rechts um den
-				nächsten oder den vorherigen Hinweis zu sehen, oder click
-				einfach auf das Feld, für das du den Hinweis sehen möchtest.<br /><br />Click
-				nochmal auf das ausgewählte Feld um zwischen senkrecht und
-				waagerecht zu wechseln.<br /><br />Brauchst du Hilfe?<br />Dann
-				drück lange auf den Hinweis, an dem du fest steckst.
-			</p>
-			<button>Zurück</button>
-			<button>Speichern</button>
+			<details>
+				<summary>HELP</summary>
+				<p>
+					Wisch den aktuellen Hinweis nach links oder rechts um den
+					nächsten oder den vorherigen Hinweis zu sehen, oder click
+					einfach auf das Feld, für das du den Hinweis sehen
+					möchtest.<br /><br />Click nochmal auf das ausgewählte Feld
+					um zwischen senkrecht und waagerecht zu wechseln.<br /><br />Brauchst
+					du Hilfe?<br />Dann drück lange auf den Hinweis, an dem du
+					fest steckst.
+				</p>
+			</details>
+			<details>
+				<summary>CHEAT</summary>
+				<p>
+					Du kannst dein Handy schütteln für ein paar extra
+					Buchstaben.
+					<button id="btn_reqPermission">Willst du schummeln?</button>
+				</p>
+			</details>
+			<button class="close-button">SAVE</button>
+			<button class="close-button">CLOSE</button>
 		</div>
 
 		<div id="rätsel-container"></div>
 
 		<div id="hinweis-container">
-			<p id="hinweis" style="color: grey">
+			<p id="hinweis">
 				Click auf ein Feld für den Rätselhinweis. Click nochmal um die
 				Richtung zu ändern
 			</p>
@@ -95,7 +101,6 @@
 			</div>
 		</div>
 
-		<script src="js/Shake.ts" type="text/typescript"></script>
 		<script src="js/raetsel/puzzle2.js" type="text/javascript"></script>
 		<script src="js/main.js" type="text/javascript"></script>
 	</body>

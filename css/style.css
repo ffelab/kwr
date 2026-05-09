@@ -7,6 +7,16 @@
 	src: url(./fonts/PPRadioGrotesk-Regular.ttf);
 }
 
+:root {
+	--primary-bg-color: rgb(0, 0, 0);
+	--lighter-bg-color: rgb(36, 36, 40);
+	--between-dark-light: rgb(84, 84, 84);
+	--primary-highlight-color: #7984ff;
+	--secondary-highlight-color: #d1d9ff;
+	--primary-text-color: rgb(255, 255, 255);
+	--darker-text-color: rgb(221, 221, 226);
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -22,7 +32,7 @@ body {
 	height: 96vh;
 
 	font-family: "JetBrainsMono";
-	background-color: rgb(0, 0, 0);
+	background-color: var(--primary-bg-color);
 }
 
 #rätsel-container {
@@ -30,10 +40,11 @@ body {
 	display: grid;
 	grid-template-columns: repeat(11, min(40px, calc(96vw / 11)));
 
-	background: rgb(255, 255, 255);
+	background: var(--primary-text-color);
 }
 
 .box {
+	color: var(--primary-bg-color);
 	position: relative;
 	aspect-ratio: 1 / 1;
 	max-width: 40px;
@@ -41,26 +52,26 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 0.7px solid black;
+	border: 0.7px solid var(--primary-bg-color);
 
 	font-size: min(1.6rem, calc(96vw / 18));
 	cursor: pointer;
-	background: white;
+	background: var(--primary-text-color);
 	font-family: "JetBrainsMono";
 }
 
 .box.black {
 	box-sizing: content-box;
-	background: black;
+	background: var(--primary-bg-color);
 	cursor: default;
 }
 .word {
-	background: #dde3fd;
+	background: var(--secondary-highlight-color);
 }
 
 .box.active {
-	background: #7984ff;
-	color: white;
+	background: var(--primary-highlight-color);
+	color: var(--primary-text-color);
 }
 
 .box.active::after {
@@ -68,7 +79,7 @@ body {
 	position: absolute;
 	width: 2.2px;
 	height: 55%;
-	background: rgb(255, 255, 255);
+	background: var(--primary-text-color);
 	border: none;
 	left: 22%;
 	top: 20%;
@@ -85,9 +96,9 @@ body {
 button,
 details {
 	font-family: "JetBrainsMono";
-	background-color: rgb(36, 36, 36);
+	background-color: var(--lighter-bg-color);
 	border: none;
-	color: rgb(174, 174, 174);
+	color: var(--darker-text-color);
 }
 
 .buchstaben-container {
@@ -116,7 +127,7 @@ details {
 
 #hinweis-liste {
 	display: none;
-	color: white;
+	color: var(--primary-text-color);
 	position: absolute;
 	left: 10vw;
 	top: 5vw;
@@ -132,7 +143,7 @@ details {
 }
 
 #hinweis-container {
-	color: white;
+	color: var(--primary-text-color);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -150,6 +161,7 @@ details {
 	text-align: center;
 	vertical-align: baseline;
 	font-size: 1.2rem;
+	color: var(--lighter-bg-color);
 }
 
 #info {
@@ -160,7 +172,7 @@ details {
 	text-align: center;
 	justify-content: flex-end;
 	background-color: rgba(0, 0, 0, 0.9);
-	color: white;
+	color: var(--primary-text-color);
 	font-size: 1rem;
 	padding: 3rem;
 	width: 100vw;

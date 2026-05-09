@@ -410,7 +410,7 @@ letterBtns.forEach((btn) => {
 backspaceBtn.addEventListener("click", handleBackspace);
 
 toggleBtn.addEventListener("click", openInfo);
-const infoButtons = info.querySelectorAll("button");
+const infoButtons = info.querySelectorAll(".close-button");
 infoButtons.forEach((btn) => {
 	btn.addEventListener("click", closeInfo);
 });

@@ -30,23 +30,40 @@
 	<body>
 		<button
 			id="btn_reqPermission"
-			style="position: absolute; z-index: 200; top: 40%; padding: 2em"
+			style="
+				position: absolute;
+				z-index: 200;
+				top: 40%;
+				padding: 2em;
+				display: none;
+			"
 		>
 			Hey! This will be much better with sensors. Allow?
 		</button>
 		<div style="color: white" id="output_message"></div>
 
 		<div id="info" class="hidden">
-			<p>
-				Wisch den aktuellen Hinweis nach links oder rechts um den
-				nächsten oder den vorherigen Hinweis zu sehen, oder click
-				einfach auf das Feld, für das du den Hinweis sehen möchtest.<br /><br />Click
-				nochmal auf das ausgewählte Feld um zwischen senkrecht und
-				waagerecht zu wechseln.<br /><br />Brauchst du Hilfe?<br />Dann
-				drück lange auf den Hinweis, an dem du fest steckst.
-			</p>
-			<button>Zurück</button>
-			<button>Speichern</button>
+			<details>
+				<summary>Hilfe</summary>
+				<p>
+					Wisch den aktuellen Hinweis nach links oder rechts um den
+					nächsten oder den vorherigen Hinweis zu sehen, oder click
+					einfach auf das Feld, für das du den Hinweis sehen
+					möchtest.<br /><br />Click nochmal auf das ausgewählte Feld
+					um zwischen senkrecht und waagerecht zu wechseln.<br /><br />Brauchst
+					du Hilfe?<br />Dann drück lange auf den Hinweis, an dem du
+					fest steckst.
+				</p>
+			</details>
+			<details>
+				<summary>Schummeln</summary>
+				<p id="btn_reqPermission">
+					Hey! This will be much better with sensors. Allow?
+				</p>
+				<p style="color: white" id="output_message"></p>
+			</details>
+			<button class="close-button">Zurück</button>
+			<button class="close-button">Speichern</button>
 		</div>
 
 		<div id="rätsel-container"></div>

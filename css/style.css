@@ -29,7 +29,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	height: 96vh;
+	height: 96dvh;
 
 	font-family: "JetBrainsMono";
 	background-color: var(--primary-bg-color);
@@ -176,7 +176,7 @@ details {
 	font-size: 1rem;
 	padding: 3rem;
 	width: 100vw;
-	height: 100vh;
+	height: 100dvh;
 	position: absolute;
 	z-index: 100;
 	hyphens: auto;
@@ -192,6 +192,14 @@ details {
 		}
 	}
 }
+
+summary {
+	margin-right: auto;
+	margin-left: auto;
+	list-style-position: outside;
+	width: fit-content;
+}
+
 #btn_reqPermission {
 	margin-top: 2vw;
 	font-size: 1rem;

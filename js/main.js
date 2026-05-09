@@ -445,7 +445,7 @@ async function checkMotionPermission() {
 			const permission = await DeviceMotionEvent.requestPermission();
 
 			if (permission === "granted") {
-				btn_reqPermission.style.display = "none";
+				closeInfo();
 				setMotionListeners();
 			}
 		} catch (e) {

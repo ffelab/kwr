@@ -485,10 +485,14 @@ async function checkMotionPermission() {
 }
 
 function setMotionListeners() {
-	window.addEventListener("devicemotion", (event) => {
-		btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
-		console.log("MOTION FIRED");
+	let isShaking = false;
+	let lastShakeTime = 0;
 
+	const SHAKE_THRESHOLD = 15;
+	const RESET_THRESHOLD = 2;
+	const COOLDOWN = 1000;
+
+	window.addEventListener("devicemotion", (event) => {
 		const acc = event.acceleration;
 		if (!acc) return;
 
@@ -498,12 +502,26 @@ function setMotionListeners() {
 			Math.abs(acc.z || 0),
 		);
 
-		console.log("MAX:", max);
+		const now = Date.now();
 
-		if (max > 10) {
+		// Trigger shake
+		if (
+			!isShaking &&
+			max > SHAKE_THRESHOLD &&
+			now - lastShakeTime > COOLDOWN
+		) {
+			isShaking = true;
+			lastShakeTime = now;
+
 			schummelzaehler++;
 			display.textContent = "Schummeln aktiviert!";
-			savePuzzle();
+
+			savePuzzle(); // persist
+		}
+
+		// Reset when device is calm again
+		if (isShaking && max < RESET_THRESHOLD) {
+			isShaking = false;
 		}
 	});
 }

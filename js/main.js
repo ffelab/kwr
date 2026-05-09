@@ -8,7 +8,7 @@ let permissionGranted = false;
 /* ===================== STATE ===================== */
 
 const state = {
-	current: { row: 0, col: 0 },
+	current: { row: null, col: null },
 	direction: "horizontal",
 	currentClueIndex: 0,
 };
@@ -68,6 +68,7 @@ function buildGrid() {
 }
 
 function isBlack(r, c) {
+	if (state.current.row === null) return;
 	return grid[r][c].el.classList.contains("black");
 }
 
@@ -161,6 +162,7 @@ function toggleDirection() {
 /* ===================== INPUT ===================== */
 
 function writeCell(value) {
+	if (state.current.row === null) return;
 	const { row, col } = state.current;
 	const cell = grid[row][col];
 	cell.letter = value;
@@ -176,6 +178,9 @@ function moveNext() {
 
 	if (row < SIZE && col < SIZE && !isBlack(row, col)) {
 		setActive(row, col);
+	} else {
+		clearHighlight();
+		state.current = { row: null, col: null };
 	}
 }
 
@@ -450,7 +455,7 @@ document.addEventListener("keydown", (e) => {
 	}
 });
 
-//TEST-START
+//=================== SHAKE MECHANIK =====================//
 
 const btn_reqPermission = document.getElementById("btn_reqPermission");
 
@@ -493,6 +498,10 @@ function setMotionListeners() {
 	const COOLDOWN = 1000;
 
 	window.addEventListener("devicemotion", (event) => {
+		if (state.current.row === null) {
+			alert("Wähle ein Feld aus bevor du schüttelst!");
+			return;
+		}
 		const acc = event.acceleration;
 		if (!acc) return;
 
@@ -526,8 +535,6 @@ function setMotionListeners() {
 		}
 	});
 }
-
-//TEST-END
 
 /* ===================== INIT ===================== */
 

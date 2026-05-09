@@ -447,8 +447,8 @@ async function checkMotionPermission() {
 			const permission = await DeviceMotionEvent.requestPermission();
 
 			if (permission === "granted") {
-				btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
-				btn_reqPermission.style.textDecoration = "none";
+				// btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
+				// btn_reqPermission.style.textDecoration = "none";
 				closeInfo();
 				setMotionListeners();
 			}
@@ -456,8 +456,8 @@ async function checkMotionPermission() {
 			console.log("Permission error:", e);
 		}
 	} else {
-		btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
-		btn_reqPermission.style.textDecoration = "none";
+		// btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
+		// btn_reqPermission.style.textDecoration = "none";
 		closeInfo();
 		setMotionListeners();
 	}

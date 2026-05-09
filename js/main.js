@@ -544,4 +544,22 @@ function setMotionListeners() {
 
 buildGrid();
 loadPuzzle();
-console.log(state.current.row);
+
+let resetTouchStart = 0;
+let resetTouches = 0;
+
+document.addEventListener("touchstart", (e) => {
+	resetTouches = e.touches.length;
+	resetTouchStart = Date.now();
+});
+
+document.addEventListener("touchend", () => {
+	const duration = Date.now() - resetTouchStart;
+
+	if (resetTouches === 3 && duration > 1200) {
+		console.log("DEV RESET TRIGGERED");
+
+		localStorage.clear();
+		location.reload();
+	}
+});

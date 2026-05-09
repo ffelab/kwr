@@ -179,10 +179,12 @@ details {
 		}
 	}
 }
-a {
-	text-decoration: underline;
+#btn_reqPermission {
+	font-size: 1rem;
+	text-decoration: underline dotted;
 	z-index: 200;
 }
+
 .hidden {
 	display: none;
 }

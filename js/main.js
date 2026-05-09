@@ -3,6 +3,7 @@
 const { PUZZLE_ID, SIZE, BLACK_FIELDS, NUMBER_FIELDS, CLUES } = puzzleData;
 
 let schummelzaehler = 0;
+let permissionGranted = false;
 
 /* ===================== STATE ===================== */
 
@@ -73,23 +74,39 @@ function isBlack(r, c) {
 /* ===================== PERSISTENCE ===================== */
 
 function savePuzzle() {
-	const puzzlestate = grid.map((row) => row.map((cell) => cell.letter || ""));
-	localStorage.setItem(`puzzle${PUZZLE_ID}`, JSON.stringify(puzzlestate));
+	const puzzleState = {
+		grid: grid.map((row) => row.map((cell) => cell.letter || "")),
+		schummelzaehler: schummelzaehler,
+		permissionGranted: permissionGranted,
+	};
+
+	localStorage.setItem(`puzzle${PUZZLE_ID}`, JSON.stringify(puzzleState));
 }
 
 function loadPuzzle() {
 	const saved = localStorage.getItem(`puzzle${PUZZLE_ID}`);
 	if (!saved) return;
 
-	const puzzlestate = JSON.parse(saved);
+	const data = JSON.parse(saved);
 
+	const puzzleState = data.grid;
 	for (let r = 0; r < SIZE; r++) {
 		for (let c = 0; c < SIZE; c++) {
-			const value = puzzlestate?.[r]?.[c];
+			const value = puzzleState?.[r]?.[c];
 			if (!value) continue;
 			grid[r][c].letter = value;
 			grid[r][c].letterEl.textContent = value;
 		}
+	}
+
+	schummelzaehler = data.schummelzaehler || 0;
+
+	motionEnabled = data.motionEnabled || false;
+
+	if (motionEnabled) {
+		btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
+		btn_reqPermission.style.textDecoration = "none";
+		setMotionListeners();
 	}
 }
 
@@ -447,19 +464,23 @@ async function checkMotionPermission() {
 			const permission = await DeviceMotionEvent.requestPermission();
 
 			if (permission === "granted") {
+				permissionGranted = true;
 				btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 				btn_reqPermission.style.textDecoration = "none";
 				closeInfo();
 				setMotionListeners();
+				savePuzzle();
 			}
 		} catch (e) {
 			console.log("Permission error:", e);
 		}
 	} else {
+		permissionGranted = true;
 		btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 		btn_reqPermission.style.textDecoration = "none";
 		closeInfo();
 		setMotionListeners();
+		savePuzzle();
 	}
 }
 
@@ -481,6 +502,7 @@ function setMotionListeners() {
 		if (max > 10) {
 			schummelzaehler++;
 			display.textContent = "Schummeln aktiviert!";
+			savePuzzle();
 		}
 	});
 }

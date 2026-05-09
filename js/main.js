@@ -445,6 +445,8 @@ async function checkMotionPermission() {
 			const permission = await DeviceMotionEvent.requestPermission();
 
 			if (permission === "granted") {
+				btn_reqPermission.textContent = `Schummelzähler: ${Schummelzähler}`;
+				btn_reqPermission.style.textDecoration = "none";
 				closeInfo();
 				setMotionListeners();
 			}
@@ -472,8 +474,7 @@ function setMotionListeners() {
 		console.log("MAX:", max);
 
 		if (max > 10) {
-			const output = document.getElementById("output_message");
-			output.innerHTML = "SHAKEN!";
+			schummelzähler++;
 			setTimeout(() => {
 				output.innerHTML = "";
 			}, 2000);

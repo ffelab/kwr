@@ -179,9 +179,12 @@ function moveNext() {
 
 	if (row < SIZE && col < SIZE && !isBlack(row, col)) {
 		setActive(row, col);
+		if (grid[row][col].letter !== "" && !isBlack(row, col)) moveNext();
 	} else {
 		clearHighlight();
 		state.current = { row: null, col: null };
+		display.textContent = "Wähle das nächste Feld aus";
+		display.style.color = "grey";
 	}
 }
 
@@ -269,6 +272,7 @@ function showClue() {
 	if (index !== -1) state.currentClueIndex = index;
 
 	renderClue(state.currentClueIndex);
+	display.style.color = "white";
 }
 
 function renderClue(index) {
@@ -526,7 +530,6 @@ function setMotionListeners() {
 			isShaking = true;
 			lastShakeTime = now;
 
-			schummelzaehler++;
 			fillRandomField();
 			btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 			display.textContent = "Schummeln aktiviert!";
@@ -642,4 +645,5 @@ function fillRandomField() {
 	const cell = grid[r][c];
 	cell.letter = correctLetter;
 	cell.letterEl.textContent = correctLetter;
+	schummelzaehler++;
 }

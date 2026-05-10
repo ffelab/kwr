@@ -30,7 +30,6 @@ body {
 	align-items: center;
 	justify-content: space-between;
 	height: 100dvh;
-
 	font-family: "JetBrainsMono";
 	background-color: var(--primary-bg-color);
 }
@@ -174,7 +173,7 @@ button.empty {
 	text-align: center;
 	vertical-align: baseline;
 	font-size: 1.2rem;
-	color: var(--lighter-bg-color);
+	color: var(--between-dark-light);
 }
 
 #info {

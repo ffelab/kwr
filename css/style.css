@@ -214,6 +214,7 @@ summary {
 }
 
 #btn_reqPermission {
+	background-color: var(--lighter-bg-color);
 	margin-top: 2vw;
 	font-size: 1rem;
 	text-decoration: underline dotted;

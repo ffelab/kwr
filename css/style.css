@@ -7,7 +7,7 @@
 	src: url(./fonts/PPRadioGrotesk-Regular.ttf);
 }
 
-:root {
+/* :root {
 	--primary-bg-color: rgb(0, 0, 0);
 	--lighter-bg-color: rgb(36, 36, 40);
 	--between-dark-light: rgb(84, 84, 84);
@@ -15,6 +15,16 @@
 	--secondary-highlight-color: #d1d9ff;
 	--primary-text-color: rgb(255, 255, 255);
 	--darker-text-color: rgb(221, 221, 226);
+} */
+
+:root {
+	--primary-bg-color: rgb(255, 255, 255);
+	--lighter-bg-color: rgb(220, 220, 220);
+	--between-dark-light: rgb(147, 147, 147);
+	--primary-highlight-color: #7984ff;
+	--secondary-highlight-color: #d1d9ff;
+	--primary-text-color: rgb(0, 0, 0);
+	--darker-text-color: rgb(36, 36, 36);
 }
 
 * {
@@ -39,11 +49,11 @@ body {
 	display: grid;
 	grid-template-columns: repeat(11, min(40px, calc(96vw / 11)));
 
-	background: var(--primary-text-color);
+	background: var(--primary-bg-color);
 }
 
 .box {
-	color: var(--primary-bg-color);
+	color: var(--primary-text-color);
 	position: relative;
 	aspect-ratio: 1 / 1;
 	max-width: 40px;
@@ -51,17 +61,17 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 0.7px solid var(--primary-bg-color);
+	border: 0.7px solid var(--primary-text-color);
 
 	font-size: min(1.6rem, calc(96vw / 18));
 	cursor: pointer;
-	background: var(--primary-text-color);
+	background: var(--primary-bg-color);
 	font-family: "JetBrainsMono";
 }
 
 .box.black {
 	box-sizing: content-box;
-	background: var(--primary-bg-color);
+	background: var(--primary-text-color);
 	cursor: default;
 }
 .word {
@@ -70,7 +80,7 @@ body {
 
 .box.active {
 	background: var(--primary-highlight-color);
-	color: var(--primary-text-color);
+	color: var(--primary-bg-color);
 }
 
 .box.active::after {
@@ -78,7 +88,7 @@ body {
 	position: absolute;
 	width: 2.2px;
 	height: 55%;
-	background: var(--primary-text-color);
+	background: var(--primary-bg-color);
 	border: none;
 	left: 22%;
 	top: 20%;

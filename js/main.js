@@ -272,7 +272,7 @@ function showClue() {
 	if (index !== -1) state.currentClueIndex = index;
 
 	renderClue(state.currentClueIndex);
-	display.style.color = "white";
+	display.style.color = "black";
 }
 
 function renderClue(index) {
@@ -501,7 +501,7 @@ function setMotionListeners() {
 	let isShaking = false;
 	let lastShakeTime = 0;
 
-	const SHAKE_THRESHOLD = 65;
+	const SHAKE_THRESHOLD = 50;
 	const RESET_THRESHOLD = 2;
 	const COOLDOWN = 1000;
 

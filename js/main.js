@@ -363,7 +363,7 @@ function checkSolution() {
 const swipe = { startX: 0, currentX: 0, active: false };
 
 display.addEventListener("touchstart", (e) => {
-	display.style.color = "white";
+	display.style.color = "black";
 	swipe.active = true;
 	swipe.startX = swipe.currentX = e.touches[0].clientX;
 	display.style.transition = "none";

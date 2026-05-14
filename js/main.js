@@ -1,6 +1,6 @@
 /* ===================== CONFIG & CONSTANTS ===================== */
 
-const { PUZZLE_ID, SIZE, BLACK_FIELDS, NUMBER_FIELDS, CLUES } = puzzleData;
+const { PUZZLE_ID, SIZE, BLACK_FIELDS, CLUES } = puzzleData;
 
 let schummelzaehler = 0;
 let permissionGranted = false;
@@ -22,6 +22,7 @@ const letterBtns = document.querySelectorAll(".letter-button");
 const backspaceBtn = document.querySelector(".backspace-button");
 const info = document.getElementById("info");
 const checkButton = document.getElementById("cmd");
+const body = document.querySelector("body");
 
 /* ===================== GRID ===================== */
 
@@ -31,13 +32,7 @@ function isBlackField(r, c) {
 	return BLACK_FIELDS.some(([br, bc]) => br === r && bc === c);
 }
 
-function isNumberField(r, c) {
-	return NUMBER_FIELDS.some(([br, bc]) => br === r && bc === c);
-}
-
 function buildGrid() {
-	let questionNumber = 1;
-
 	for (let r = 0; r < SIZE; r++) {
 		grid[r] = [];
 
@@ -49,13 +44,6 @@ function buildGrid() {
 
 			if (isBlackField(r, c)) {
 				cell.classList.add("black");
-			}
-
-			if (isNumberField(r, c)) {
-				const numEl = document.createElement("div");
-				numEl.className = "question-number";
-				numEl.textContent = questionNumber++;
-				cell.appendChild(numEl);
 			}
 
 			const letterEl = document.createElement("div");
@@ -217,6 +205,41 @@ function handleBackspace() {
 
 /* ===================== CLUES ===================== */
 
+function addNumberField() {
+	let questionNumber = 1;
+
+	for (let r = 0; r < SIZE; r++) {
+		for (let c = 0; c < SIZE; c++) {
+			const cell = grid[r][c];
+
+			if (cell.el.classList.contains("black")) continue;
+
+			const left = grid[r][c - 1];
+			const right = grid[r][c + 1];
+			const top = grid[r - 1]?.[c];
+			const bottom = grid[r + 1]?.[c];
+
+			const isHorizontalStart =
+				(!left || left.el.classList.contains("black")) &&
+				right &&
+				!right.el.classList.contains("black");
+
+			const isVerticalStart =
+				(!top || top.el.classList.contains("black")) &&
+				bottom &&
+				!bottom.el.classList.contains("black");
+
+			if (isHorizontalStart || isVerticalStart) {
+				const numEl = document.createElement("div");
+				numEl.className = "question-number";
+				numEl.textContent = questionNumber++;
+
+				cell.el.appendChild(numEl);
+			}
+		}
+	}
+}
+
 function buildClueList() {
 	const list = [];
 
@@ -253,7 +276,7 @@ function getCurrentClue() {
 	let clue = getWordStart(state.direction);
 
 	if (!clue) {
-		toggleDirection();
+		// toggleDirection();    //UN-UNCOMMENT AFTER EDITING!!!!
 		clue = getWordStart(state.direction);
 	}
 
@@ -303,10 +326,12 @@ function goToClue(index) {
 function openInfo() {
 	info.classList.remove("hidden");
 	info.classList.add("flex");
+	body.classList.add("dark");
 }
 function closeInfo() {
 	info.classList.add("hidden");
 	info.classList.remove("flex");
+	body.classList.remove("dark");
 }
 
 function checkSolution() {
@@ -548,6 +573,7 @@ function setMotionListeners() {
 
 buildGrid();
 loadPuzzle();
+addNumberField();
 
 let resetTouchStart = 0;
 let resetTouches = 0;

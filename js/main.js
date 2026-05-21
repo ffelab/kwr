@@ -1,6 +1,7 @@
 /* ===================== CONFIG & CONSTANTS ===================== */
 
-const { PUZZLE_ID, SIZE, BLACK_FIELDS, CLUES } = puzzleData;
+const { PUZZLE_ID, SIZE, MIN_WORD_LENGTH, BLACK_FIELDS, NUMBER_FIELDS, CLUES } =
+	puzzleData;
 
 let schummelzaehler = 0;
 let permissionGranted = false;
@@ -70,11 +71,11 @@ function savePuzzle() {
 		permissionGranted: permissionGranted,
 	};
 
-	localStorage.setItem(`puzzle${PUZZLE_ID}`, JSON.stringify(puzzleState));
+	localStorage.setItem(`kwr${PUZZLE_ID}`, JSON.stringify(puzzleState));
 }
 
 function loadPuzzle() {
-	const saved = localStorage.getItem(`puzzle${PUZZLE_ID}`);
+	const saved = localStorage.getItem(`kwr${PUZZLE_ID}`);
 	if (!saved) return;
 
 	const data = JSON.parse(saved);
@@ -112,7 +113,7 @@ function clearHighlight() {
 function highlightWord(r, c) {
 	const horiz = state.direction === "horizontal";
 
-	// Walk backward to start of word
+	// GO backward to start of word
 	let primary = horiz ? c : r;
 	while (
 		primary > 0 &&
@@ -124,7 +125,7 @@ function highlightWord(r, c) {
 	}
 	grid[horiz ? r : primary][horiz ? primary : c].el.classList.add("word");
 
-	// Walk forward to end of word
+	// GO forward to end of word
 	let fwd = (horiz ? c : r) + 1;
 	while (fwd < SIZE && !isBlack(horiz ? r : fwd, horiz ? fwd : c)) {
 		grid[horiz ? r : fwd][horiz ? fwd : c].el.classList.add("word");
@@ -212,29 +213,55 @@ function addNumberField() {
 		for (let c = 0; c < SIZE; c++) {
 			const cell = grid[r][c];
 
-			if (cell.el.classList.contains("black")) continue;
+			if (NUMBER_FIELDS) {
+				function isNumberField(r, c) {
+					return NUMBER_FIELDS.some(
+						([br, bc]) => br === r && bc === c,
+					);
+				}
+				if (isNumberField(r, c)) {
+					const numEl = document.createElement("div");
+					numEl.className = "question-number";
+					numEl.textContent = questionNumber++;
+					cell.el.appendChild(numEl);
+				}
+			} else {
+				if (cell.el.classList.contains("black")) continue;
+				let right2 = null;
+				let bottom2 = null;
+				const left = grid[r][c - 1];
+				const right = grid[r][c + 1];
+				const top = grid[r - 1]?.[c];
+				const bottom = grid[r + 1]?.[c];
+				if (MIN_WORD_LENGTH > 2) {
+					right2 = grid[r][c + 2];
+					bottom2 = grid[r + 2]?.[c];
+				} else {
+					right2 = grid[r][c + 1];
+					bottom2 = grid[r + 1]?.[c];
+				}
 
-			const left = grid[r][c - 1];
-			const right = grid[r][c + 1];
-			const top = grid[r - 1]?.[c];
-			const bottom = grid[r + 1]?.[c];
+				const isHorizontalStart =
+					(!left || left.el.classList.contains("black")) &&
+					right &&
+					!right.el.classList.contains("black") &&
+					right2 &&
+					!right2.el.classList.contains("black");
 
-			const isHorizontalStart =
-				(!left || left.el.classList.contains("black")) &&
-				right &&
-				!right.el.classList.contains("black");
+				const isVerticalStart =
+					(!top || top.el.classList.contains("black")) &&
+					bottom &&
+					!bottom.el.classList.contains("black") &&
+					bottom2 &&
+					!bottom2.el.classList.contains("black");
 
-			const isVerticalStart =
-				(!top || top.el.classList.contains("black")) &&
-				bottom &&
-				!bottom.el.classList.contains("black");
+				if (isHorizontalStart || isVerticalStart) {
+					const numEl = document.createElement("div");
+					numEl.className = "question-number";
+					numEl.textContent = questionNumber++;
 
-			if (isHorizontalStart || isVerticalStart) {
-				const numEl = document.createElement("div");
-				numEl.className = "question-number";
-				numEl.textContent = questionNumber++;
-
-				cell.el.appendChild(numEl);
+					cell.el.appendChild(numEl);
+				}
 			}
 		}
 	}

@@ -1,7 +1,26 @@
 const puzzleData = {
-	PUZZLE_ID: "3",
+	PUZZLE_ID: "03",
 	SIZE: 10,
-	BLACK_FIELDS: [[,]],
+	MIN_WORD_LENGTH: 3,
+
+	BLACK_FIELDS: [
+		[2, 4],
+		[2, 5],
+		[4, 0],
+		[4, 1],
+		[4, 4],
+		[4, 5],
+		[4, 8],
+		[4, 9],
+		[5, 2],
+		[5, 4],
+		[5, 5],
+		[5, 7],
+		[8, 4],
+		[8, 5],
+		[9, 4],
+		[9, 5],
+	],
 	CLUES: {
 		WAAGERECHT: {
 			1: { c: "Clue 1", l: "9", s: "" },

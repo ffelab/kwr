@@ -68,7 +68,7 @@ const puzzleData = {
 				s: "ESEL",
 			},
 			11: {
-				c: `Herzensangelegenheit: Bemisst die Schläge`,
+				c: `Herzensangelegenheit:\nBemisst die Schläge`,
 				l: "4",
 				s: "PULS",
 			},
@@ -80,7 +80,7 @@ const puzzleData = {
 			16: { c: "Schon vorbei, glatt verpasst", l: "4", s: "EBEN" },
 			18: { c: "Alle Kompasse führen dahin", l: "7", s: "NORDPOL" },
 			19: {
-				c: "Redaktionelle Dusselei (tierisch peinlich)",
+				c: "Redaktionelle Dusselei,\ntierisch peinlich",
 				l: "4",
 				s: "ENTE",
 			},
@@ -88,7 +88,7 @@ const puzzleData = {
 		SENKRECHT: {
 			1: { c: "Gar nicht mal so selten", l: "3", s: "OFT" },
 			2: {
-				c: "Kommandeur*in und Informati-ker*in sind sich einig: Dem ... folgt unweigerlich die prompte Ausführung",
+				c: "Kommandeur*in und Informatiker*in sind sich einig: Dem folgt unweigerlich eine prompte Ausführung",
 				l: "6",
 				s: "BEFEHL",
 			},
@@ -100,7 +100,7 @@ const puzzleData = {
 				s: "ADOBE",
 			},
 			10: {
-				c: "Mal künstlich handschriftlich, mal szenisch anweisend, mal ausführlich programmiert",
+				c: "Mal künstlich handschriftlich, mal szenisch anweisend,\nmal ausführlich programmiert",
 				l: "6",
 				s: "SCRIPT",
 			},

@@ -140,6 +140,7 @@ function setActive(r, c) {
 	clearHighlight();
 
 	state.current = { row: r, col: c };
+
 	grid[r][c].el.classList.add("active");
 	highlightWord(r, c);
 	showClue();
@@ -330,7 +331,8 @@ function showClue() {
 function renderClue(index) {
 	const entry = clueList[index];
 	if (!entry) return;
-	display.textContent = `${entry.c}  (${entry.l})`;
+	display.textContent = `${entry.c}`;
+	// display.textContent = `${entry.c}  (${entry.l})`;
 }
 
 function goToClue(index) {
@@ -705,3 +707,7 @@ function fillRandomField() {
 	cell.letterEl.textContent = correctLetter;
 	schummelzaehler++;
 }
+
+if (display.textContent === "")
+	display.textContent =
+		"Click auf ein Feld für den Rätselhinweis. Click nochmal\num die Richtung zu ändern";

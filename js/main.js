@@ -688,21 +688,21 @@ function setMotionListeners() {
 
 /* ===================== INIT ===================== */
 
-let userCity;
+// let userCity;
 
-async function getCity() {
-	const res = await fetch("http://ip-api.com/json/?fields=61439");
-	const data = await res.json();
+// async function getCity() {
+// 	const res = await fetch("http://ip-api.com/json/?fields=61439");
+// 	const data = await res.json();
 
-	showCity(data.city); // pass it forward
-}
+// 	showCity(data.city); // pass it forward
+// }
 
-function showCity(city) {
-	console.log("City is:", city);
-	// display.innerHTML = city;
-}
+// function showCity(city) {
+// 	console.log("City is:", city);
+// 	// display.innerHTML = city;
+// }
 
-getCity();
+// getCity();
 
 buildGrid();
 loadPuzzle();

@@ -198,36 +198,67 @@ function checkAllSolved() {
 	return true;
 }
 
+function getRandomColor() {
+	const colors = [
+		"#ff4d4d", // red
+		"#4dd2ff", // blue
+		"#4dff88", // green
+		"#ffd24d", // yellow
+		"#b84dff", // purple
+		"#ff7ad9", // pink
+	];
+
+	return colors[Math.floor(Math.random() * colors.length)];
+}
+
 function triggerWinAnimation() {
+	console.log("PUZZLE SOLVED!");
 	clearHighlight();
 
 	display.textContent = "🎉 Gelöst! 🎉";
 
-	let delay = 0;
+	const centerCells = [
+		{ r: SIZE / 2 - 1, c: SIZE / 2 - 1 },
+		{ r: SIZE / 2 - 1, c: SIZE / 2 },
+		{ r: SIZE / 2, c: SIZE / 2 - 1 },
+		{ r: SIZE / 2, c: SIZE / 2 },
+	];
 
 	for (let r = 0; r < SIZE; r++) {
 		for (let c = 0; c < SIZE; c++) {
 			const cell = grid[r][c].el;
 
-			// skip black cells if you want
 			if (cell.classList.contains("black")) continue;
 
+			let dist = Infinity;
+
+			for (const center of centerCells) {
+				const d = Math.abs(r - center.r) + Math.abs(c - center.c);
+				dist = Math.min(dist, d);
+			}
+
+			const delay = dist * 70;
+
+			var audio = new Audio(
+				"../img/freesound_community-winsquare-6993.mp3",
+			);
+
 			setTimeout(() => {
+				audio.play();
+				cell.style.setProperty("--win-color", getRandomColor());
 				cell.classList.add("win-blink");
 			}, delay);
-
-			delay += 80; // stagger effect
 		}
 	}
 
-	// remove effect after animation
+	// cleanup
 	setTimeout(() => {
 		for (let r = 0; r < SIZE; r++) {
 			for (let c = 0; c < SIZE; c++) {
 				grid[r][c].el.classList.remove("win-blink");
 			}
 		}
-	}, delay + 6000);
+	}, SIZE * 1000);
 }
 
 /* ===================== INPUT ===================== */
@@ -450,55 +481,6 @@ function closeInfo() {
 	info.classList.add("hidden");
 	info.classList.remove("flex");
 	body.classList.remove("dark");
-}
-
-function checkSolution() {
-	for (const dir of ["WAAGERECHT", "SENKRECHT"]) {
-		for (const number in CLUES[dir]) {
-			const entry = CLUES[dir][number];
-			const solution = entry.s;
-
-			if (!solution) continue;
-
-			// find start cell
-			let start = null;
-
-			for (let r = 0; r < SIZE; r++) {
-				for (let c = 0; c < SIZE; c++) {
-					const numEl =
-						grid[r][c].el.querySelector(".question-number");
-					if (numEl?.textContent == number) {
-						start = { row: r, col: c };
-						break;
-					}
-				}
-				if (start) break;
-			}
-
-			if (!start) continue;
-
-			// fill letters
-			let r = start.row;
-			let c = start.col;
-
-			for (let i = 0; i < solution.length; i++) {
-				if (r >= SIZE || c >= SIZE || isBlack(r, c)) break;
-				grid[r][c].letterEl.style.color = "black";
-				const letter = solution[i];
-
-				console.log(grid[r][c].letter);
-				// grid[r][c].letter = letter;
-				if (grid[r][c].letterEl.textContent !== letter) {
-					if (grid[r][c].letterEl.textContent !== "") {
-						grid[r][c].letterEl.style.color = "red";
-					}
-				}
-
-				if (dir === "WAAGERECHT") c++;
-				else r++;
-			}
-		}
-	}
 }
 
 /* ===================== SWIPE ===================== */

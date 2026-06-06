@@ -152,6 +152,84 @@ function toggleDirection() {
 	setActive(state.current.row, state.current.col);
 }
 
+function checkAllSolved() {
+	for (const dir of ["WAAGERECHT", "SENKREcht".toUpperCase()]) {
+		for (const number in CLUES[dir]) {
+			const entry = CLUES[dir][number];
+			const solution = entry.s;
+
+			// find start cell
+			let start = null;
+
+			for (let r = 0; r < SIZE; r++) {
+				for (let c = 0; c < SIZE; c++) {
+					const numEl =
+						grid[r][c].el.querySelector(".question-number");
+					if (numEl?.textContent == number) {
+						start = { r, c };
+						break;
+					}
+				}
+				if (start) break;
+			}
+
+			if (!start) continue;
+
+			// compare letters
+			let r = start.r;
+			let c = start.c;
+
+			for (let i = 0; i < solution.length; i++) {
+				const cell = grid[r][c];
+
+				const current = cell.letter || "";
+				const expected = solution[i];
+
+				if (current !== expected) {
+					return false;
+				}
+
+				if (dir === "WAAGERECHT") c++;
+				else r++;
+			}
+		}
+	}
+
+	return true;
+}
+
+function triggerWinAnimation() {
+	clearHighlight();
+
+	display.textContent = "🎉 Gelöst! 🎉";
+
+	let delay = 0;
+
+	for (let r = 0; r < SIZE; r++) {
+		for (let c = 0; c < SIZE; c++) {
+			const cell = grid[r][c].el;
+
+			// skip black cells if you want
+			if (cell.classList.contains("black")) continue;
+
+			setTimeout(() => {
+				cell.classList.add("win-blink");
+			}, delay);
+
+			delay += 80; // stagger effect
+		}
+	}
+
+	// remove effect after animation
+	setTimeout(() => {
+		for (let r = 0; r < SIZE; r++) {
+			for (let c = 0; c < SIZE; c++) {
+				grid[r][c].el.classList.remove("win-blink");
+			}
+		}
+	}, delay + 6000);
+}
+
 /* ===================== INPUT ===================== */
 
 function writeCell(value) {
@@ -161,7 +239,12 @@ function writeCell(value) {
 	cell.letter = value;
 	cell.letterEl.textContent = value;
 	savePuzzle();
-	moveNext();
+
+	if (checkAllSolved()) {
+		triggerWinAnimation();
+	} else {
+		moveNext();
+	}
 }
 
 function moveNext() {
@@ -605,9 +688,21 @@ function setMotionListeners() {
 
 /* ===================== INIT ===================== */
 
-fetch("http://ip-api.com/json/?fields=61439")
-	.then((res) => res.json())
-	.then((res) => console.log(res.city));
+let userCity;
+
+async function getCity() {
+	const res = await fetch("http://ip-api.com/json/?fields=61439");
+	const data = await res.json();
+
+	showCity(data.city); // pass it forward
+}
+
+function showCity(city) {
+	console.log("City is:", city);
+	// display.innerHTML = city;
+}
+
+getCity();
 
 buildGrid();
 loadPuzzle();

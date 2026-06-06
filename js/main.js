@@ -210,7 +210,7 @@ function getRandomColor() {
 
 	return colors[Math.floor(Math.random() * colors.length)];
 }
-
+var audio = new Audio("../img/freesound_community-winsquare-6993.mp3");
 function triggerWinAnimation() {
 	console.log("PUZZLE SOLVED!");
 	clearHighlight();
@@ -238,10 +238,6 @@ function triggerWinAnimation() {
 			}
 
 			const delay = dist * 70;
-
-			var audio = new Audio(
-				"../kreuzwortraetsel/img/freesound_community-winsquare-6993.mp3",
-			);
 
 			setTimeout(() => {
 				audio.play();

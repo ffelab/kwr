@@ -52,7 +52,7 @@ const puzzleData = {
 		WAAGERECHT: {
 			4: { c: "Panda, Punto oder 500", l: "4", s: "FIAT" },
 			6: {
-				c: "Einer sorgt für Abkühlung, einige füllen den Stundenplan",
+				c: "Einer sorgt für Abkühlung,\neinige füllen den Stundenplan",
 				l: "7",
 				s: "FAECHER",
 			},

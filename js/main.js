@@ -176,7 +176,7 @@ function moveNext() {
 		clearHighlight();
 		state.current = { row: null, col: null };
 		display.textContent = "Wähle das nächste Feld aus";
-		display.style.color = "var(--between-dark-light)";
+		display.style.color = "var(--primary-bg-color)";
 	}
 }
 
@@ -363,7 +363,7 @@ function closeInfo() {
 	clearHighlight();
 	state.current = { row: null, col: null };
 	display.textContent = "Wähle das nächste Feld aus";
-	display.style.color = "var(--between-dark-light)";
+	display.style.color = "var(--primary-bg-color)";
 	info.classList.add("hidden");
 	info.classList.remove("flex");
 	body.classList.remove("dark");
@@ -604,6 +604,10 @@ function setMotionListeners() {
 }
 
 /* ===================== INIT ===================== */
+
+fetch("http://ip-api.com/json/?fields=61439")
+	.then((res) => res.json())
+	.then((res) => console.log(res.city));
 
 buildGrid();
 loadPuzzle();

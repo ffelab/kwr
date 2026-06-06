@@ -62,8 +62,16 @@ const puzzleData = {
 	CLUES: {
 		WAAGERECHT: {
 			3: { c: "", l: "4", s: "CODE" },
-			5: { c: "", l: "4", s: "HTML" },
-			6: { c: "", l: "10", s: "ROADRUNNER" },
+			5: {
+				c: "Browseranleitung: Haufenweise musste lesen",
+				l: "4",
+				s: "HTML",
+			},
+			6: {
+				c: "Objekt der Koyoten-Begierde: Der absolute Renner",
+				l: "10",
+				s: "ROADRUNNER",
+			},
 			7: { c: "", l: "8", s: "DAEMPFER" },
 			9: { c: "", l: "8", s: "MONITORE" },
 		},

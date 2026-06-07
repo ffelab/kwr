@@ -212,8 +212,7 @@ function getRandomColor() {
 }
 var audio = new Audio("./img/freesound_community-winsquare-6993.mp3");
 function unlockAudio() {
-	audio.play().then(() => {
-		audio.pause();
+	audio.pause().then(() => {
 		audio.currentTime = 0;
 	});
 

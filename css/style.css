@@ -52,6 +52,22 @@ body.dark {
 	background-color: black;
 }
 
+#start-container {
+	width: 100dvw;
+	height: 100dvh;
+	background-color: white;
+	position: absolute;
+	z-index: 9999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#start {
+	font-size: min(1.6rem, calc(94dvw / 16));
+	padding: 0 2dvw;
+}
+
 #rätsel-container {
 	border: solid var(--primary-text-color) 1.8px;
 	border-radius: 2px;

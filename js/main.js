@@ -155,7 +155,12 @@ async function getUserCity() {
 	}
 }
 
-getUserCity();
+document.getElementById("start").addEventListener("click", async () => {
+	const city = await getUserCity();
+
+	display.innerHTML = `User Location: ${city}`;
+	document.getElementById("start-container").style.display = "none";
+});
 
 /* ===================== CONFIG & CONSTANTS ===================== */
 

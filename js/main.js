@@ -50,6 +50,7 @@
 
 const CACHE_KEY = "userLocationCache";
 const CACHE_TIME = 1000 * 60 * 60 * 24; // 24h
+localStorage.removeItem(CACHE_KEY);
 
 // -------------------- CACHE --------------------
 function getCache() {
@@ -123,6 +124,7 @@ async function getUserCity() {
 	const cached = getCache();
 	if (cached) {
 		console.log("Cache:", cached);
+		display.innerHTML = `Cache: ${cached}`;
 		return cached;
 	}
 
@@ -130,6 +132,7 @@ async function getUserCity() {
 	try {
 		const gpsCity = await getGPSLocation();
 		console.log("GPS:", gpsCity);
+		display.innerHTML = `GPS: ${gpsCity}`;
 
 		setCache(gpsCity);
 		return gpsCity;
@@ -141,11 +144,13 @@ async function getUserCity() {
 	try {
 		const ipCity = await getIPLocation();
 		console.log("IP:", ipCity);
+		display.innerHTML = `IP: ${ipCity}`;
 
 		setCache(ipCity);
 		return ipCity;
 	} catch (e) {
 		console.log("All location methods failed");
+		display.innerHTML = "All location methods failed";
 		return null;
 	}
 }

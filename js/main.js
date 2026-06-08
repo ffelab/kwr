@@ -1,52 +1,156 @@
-const cacheKey = "userLocationData";
-const cacheDuration = 1000 * 60 * 60 * 24;
+// const cacheKey = "userLocationData";
+// const cacheDuration = 1000 * 60 * 60 * 24;
 
-function getCachedCity() {
-	const cached = localStorage.getItem(cacheKey);
-	if (!cached) return null;
+// function getCachedCity() {
+// 	const cached = localStorage.getItem(cacheKey);
+// 	if (!cached) return null;
 
-	const parsed = JSON.parse(cached);
+// 	const parsed = JSON.parse(cached);
 
-	if (Date.now() - parsed.timestamp > cacheDuration) {
-		localStorage.removeItem(cacheKey);
+// 	if (Date.now() - parsed.timestamp > cacheDuration) {
+// 		localStorage.removeItem(cacheKey);
+// 		return null;
+// 	}
+
+// 	return parsed.data;
+// }
+
+// function setCachedCity(data) {
+// 	localStorage.setItem(
+// 		cacheKey,
+// 		JSON.stringify({
+// 			data,
+// 			timestamp: Date.now(),
+// 		}),
+// 	);
+// }
+
+// async function getCity() {
+// 	const cached = getCachedCity();
+
+// 	if (cached) {
+// 		console.log("From cache:", cached.city);
+// 		return cached;
+// 	}
+
+// 	const res = await fetch(
+// 		"https://api.ipdata.co?api-key=2b4cb62ac6f29b072111dd7abcdef8c0f3cac6a88b2c9f3fb6519fd8",
+// 	);
+
+// 	const data = await res.json();
+
+// 	setCachedCity(data);
+
+// 	console.log("From API:", data.city);
+
+// 	return data;
+// }
+
+// getCity();
+
+const CACHE_KEY = "userLocationCache";
+const CACHE_TIME = 1000 * 60 * 60 * 24; // 24h
+
+// -------------------- CACHE --------------------
+function getCache() {
+	const raw = localStorage.getItem(CACHE_KEY);
+	if (!raw) return null;
+
+	const data = JSON.parse(raw);
+
+	if (Date.now() - data.timestamp > CACHE_TIME) {
+		localStorage.removeItem(CACHE_KEY);
 		return null;
 	}
 
-	return parsed.data;
+	return data.value;
 }
 
-function setCachedCity(data) {
+function setCache(value) {
 	localStorage.setItem(
-		cacheKey,
+		CACHE_KEY,
 		JSON.stringify({
-			data,
+			value,
 			timestamp: Date.now(),
 		}),
 	);
 }
 
-async function getCity() {
-	const cached = getCachedCity();
+// -------------------- GPS --------------------
+function getGPSLocation() {
+	return new Promise((resolve, reject) => {
+		if (!navigator.geolocation) return reject("No geolocation");
 
-	if (cached) {
-		console.log("From cache:", cached.city);
-		return cached;
-	}
+		navigator.geolocation.getCurrentPosition(
+			async (pos) => {
+				const { latitude, longitude } = pos.coords;
 
+				try {
+					const res = await fetch(
+						`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
+					);
+
+					const data = await res.json();
+
+					const city =
+						data.address.city ||
+						data.address.town ||
+						data.address.village;
+
+					resolve(city);
+				} catch (err) {
+					reject(err);
+				}
+			},
+			reject,
+			{ enableHighAccuracy: true, timeout: 5000 },
+		);
+	});
+}
+
+// -------------------- IP FALLBACK --------------------
+async function getIPLocation() {
 	const res = await fetch(
 		"https://api.ipdata.co?api-key=2b4cb62ac6f29b072111dd7abcdef8c0f3cac6a88b2c9f3fb6519fd8",
 	);
-
 	const data = await res.json();
-
-	setCachedCity(data);
-
-	console.log("From API:", data.city);
-
-	return data;
+	return data.city;
 }
 
-getCity();
+// -------------------- MAIN PIPELINE --------------------
+async function getUserCity() {
+	// 1. CACHE
+	const cached = getCache();
+	if (cached) {
+		console.log("Cache:", cached);
+		return cached;
+	}
+
+	// 2. GPS
+	try {
+		const gpsCity = await getGPSLocation();
+		console.log("GPS:", gpsCity);
+
+		setCache(gpsCity);
+		return gpsCity;
+	} catch (e) {
+		console.log("GPS failed, fallback to IP");
+	}
+
+	// 3. IP fallback
+	try {
+		const ipCity = await getIPLocation();
+		console.log("IP:", ipCity);
+
+		setCache(ipCity);
+		return ipCity;
+	} catch (e) {
+		console.log("All location methods failed");
+		return null;
+	}
+}
+
+getUserCity();
 
 /* ===================== CONFIG & CONSTANTS ===================== */
 

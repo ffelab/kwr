@@ -802,9 +802,6 @@ function setMotionListeners() {
 
 		if (isShaking && max < RESET_THRESHOLD) {
 			isShaking = false;
-			setTimeout(() => {
-				showClue();
-			}, 3000);
 		}
 	});
 }
@@ -925,13 +922,9 @@ function fillRandomField() {
 	const { row: r, col: c, correctLetter } = chosen;
 
 	const cell = grid[r][c];
-	cell.style.color = "blue";
 	cell.letter = correctLetter;
 	cell.letterEl.textContent = correctLetter;
 	schummelzaehler++;
-	setTimeout(() => {
-		cell.style.color = "var(--primary-text-color)";
-	}, 3000);
 }
 
 if (display.textContent === "")

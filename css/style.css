@@ -171,7 +171,8 @@ details {
 }
 
 #Switch,
-#Backspace {
+#Backspace,
+#cmd {
 	background-color: var(--primary-bg-color);
 	color: var(--primary-text-color);
 }

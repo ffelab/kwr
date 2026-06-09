@@ -797,15 +797,14 @@ function setMotionListeners() {
 			fillRandomField();
 			btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 			display.textContent = "Schummeln aktiviert!";
+			savePuzzle();
+		}
+
+		if (isShaking && max < RESET_THRESHOLD) {
+			isShaking = false;
 			setTimeout(() => {
 				showClue();
 			}, 3000);
-			savePuzzle(); // persist
-		}
-
-		// Reset when device is calm again
-		if (isShaking && max < RESET_THRESHOLD) {
-			isShaking = false;
 		}
 	});
 }

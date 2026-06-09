@@ -85,7 +85,7 @@ const puzzleData = {
 			},
 		},
 		SENKRECHT: {
-			1: { c: "Bauplan fürs Leben", l: "3", s: "GEN" },
+			1: { c: "Baustein fürs Leben", l: "3", s: "GEN" },
 			2: {
 				c: "Den 5 senkrecht \nursprüngliche Stimmungslage",
 				l: "8",
@@ -109,7 +109,7 @@ const puzzleData = {
 				s: "HULK",
 			},
 			8: {
-				c: "Gerade so: \nTemporal und dimensional",
+				c: "Gerade so: \nTemporal und räumlich",
 				l: "4",
 				s: "EBEN",
 			},

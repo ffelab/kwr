@@ -119,6 +119,7 @@ const { PUZZLE_ID, SIZE, MIN_WORD_LENGTH, BLACK_FIELDS, NUMBER_FIELDS, CLUES } =
 
 let schummelzaehler = 0;
 let permissionGranted = false;
+let solved = false;
 
 /* ===================== STATE ===================== */
 
@@ -190,6 +191,7 @@ function savePuzzle() {
 
 function loadPuzzle() {
 	const saved = localStorage.getItem(`kwr${PUZZLE_ID}`);
+
 	if (!saved) return;
 
 	const data = JSON.parse(saved);
@@ -395,6 +397,22 @@ function writeCell(value) {
 
 	if (checkAllSolved()) {
 		triggerWinAnimation();
+
+		solved = true;
+
+		const solvedPuzzle = {
+			grid: grid.map((row) => row.map((cell) => cell.letter || "")),
+			solved: solved,
+			schummelzaehler: schummelzaehler,
+		};
+		localStorage.setItem(
+			`finished${PUZZLE_ID}`,
+			JSON.stringify(solvedPuzzle),
+		);
+
+		const solution = localStorage.getItem(`finished${PUZZLE_ID}`);
+		const dataSolution = JSON.parse(solution);
+		console.log(dataSolution);
 	} else {
 		moveNext();
 	}
@@ -779,7 +797,9 @@ function setMotionListeners() {
 			fillRandomField();
 			btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 			display.textContent = "Schummeln aktiviert!";
-
+			setTimeout(() => {
+				showClue();
+			}, 3000);
 			savePuzzle(); // persist
 		}
 
@@ -906,9 +926,13 @@ function fillRandomField() {
 	const { row: r, col: c, correctLetter } = chosen;
 
 	const cell = grid[r][c];
+	cell.style.color = "blue";
 	cell.letter = correctLetter;
 	cell.letterEl.textContent = correctLetter;
 	schummelzaehler++;
+	setTimeout(() => {
+		cell.style.color = "var(--primary-text-color)";
+	}, 3000);
 }
 
 if (display.textContent === "")

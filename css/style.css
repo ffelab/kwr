@@ -170,6 +170,12 @@ details {
 	}
 }
 
+#Switch,
+#Backspace {
+	background-color: var(--primary-bg-color);
+	color: var(--primary-text-color);
+}
+
 .keyboard-wrapper {
 	margin-bottom: 1dvh;
 	width: 95dvw;

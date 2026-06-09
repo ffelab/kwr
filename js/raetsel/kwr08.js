@@ -63,12 +63,12 @@ const puzzleData = {
 		WAAGERECHT: {
 			3: { c: "", l: "4", s: "CODE" },
 			5: {
-				c: "Browseranleitung: Haufenweise musste lesen",
+				c: "Browseranleitung: Haufenweise Text musste lesen",
 				l: "4",
 				s: "HTML",
 			},
 			6: {
-				c: "Objekt der Koyoten-Begierde: Der absolute Renner",
+				c: "Objekt der Cartoon-Koyoten-Begierde: Der absolute Renner",
 				l: "10",
 				s: "ROADRUNNER",
 			},

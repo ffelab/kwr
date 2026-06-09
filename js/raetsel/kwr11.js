@@ -49,7 +49,11 @@ const puzzleData = {
 		},
 		SENKRECHT: {
 			1: { c: "", l: "4", s: "IRRE" },
-			2: { c: "Wer auf seins achtet ", l: "9", s: "AEUSSERES" },
+			2: {
+				c: "Wer auf seins achtet, lässt sich sehen",
+				l: "9",
+				s: "AEUSSERES",
+			},
 			3: { c: "", l: "9", s: "MUNDARTEN" },
 			4: { c: "", l: "4", s: "FCKW" },
 			6: { c: "", l: "4", s: "INKA" },

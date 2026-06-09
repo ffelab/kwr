@@ -931,6 +931,8 @@ function fillRandomField() {
 	const cell = grid[r][c];
 	cell.letter = correctLetter;
 	cell.letterEl.textContent = correctLetter;
+	cell.letter.style.color = "blue";
+	cell.letterEl.style.color = "blue";
 	schummelzaehler++;
 }
 

@@ -797,6 +797,11 @@ function setMotionListeners() {
 			fillRandomField();
 			btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 			display.textContent = "Schummeln aktiviert!";
+			setTimeout(() => {
+				if (!solved && state.current.row !== null) {
+					showClue();
+				}
+			}, 3000);
 			savePuzzle();
 		}
 

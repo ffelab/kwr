@@ -126,7 +126,7 @@ const puzzleData = {
 				s: "SWAG",
 			},
 			2: {
-				c: "Attribut aus der Trickkiste für System oder Verteidiger",
+				c: "Attribut aus der Trickkiste gegen System oder Verteidiger",
 				l: "10",
 				s: "GEDRIBBELT",
 			},

@@ -360,7 +360,6 @@ function checkErrors() {
 				}
 				if (current && current !== expected) {
 					cell.el.classList.add("incorrect");
-					schummelzaehler++;
 				}
 
 				if (dir === "WAAGERECHT") c++;
@@ -368,16 +367,16 @@ function checkErrors() {
 			}
 		}
 	}
+
 	if (errorTimeout) clearTimeout(errorTimeout);
 
 	errorTimeout = setTimeout(() => {
 		for (let r = 0; r < SIZE; r++) {
 			for (let c = 0; c < SIZE; c++) {
 				setTimeout(() => {
-					grid[r][c].el.classList.add("fadeout");
 					grid[r][c].el.classList.remove("incorrect");
 					grid[r][c].el.classList.remove("correct");
-				}, 500);
+				}, 300);
 			}
 		}
 	}, 1500);
@@ -804,6 +803,11 @@ checkButton.addEventListener("touchstart", () => {
 	pressTimer = setTimeout(() => {
 		checkErrors();
 
+		display.textContent =
+			"Click auf ein Feld für den Rätselhinweis. Click nochmal\num die Richtung zu ändern";
+		display.style.color = "var(--between-dark-light)";
+
+		schummelzaehler++;
 		pressTimer = null;
 	}, 1000);
 });

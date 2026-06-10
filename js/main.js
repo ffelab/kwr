@@ -796,7 +796,7 @@ checkButton.addEventListener("touchstart", () => {
 		checkErrors();
 		schummelzaehler++;
 		pressTimer = null;
-	}, 3500);
+	}, 1000);
 });
 
 checkButton.addEventListener("touchend", () => {
@@ -806,7 +806,7 @@ checkButton.addEventListener("touchend", () => {
 		clearTimeout(pressTimer);
 		pressTimer = null;
 
-		if (pressDuration < 3500) {
+		if (pressDuration < 1000) {
 			display.style.color = "red";
 			display.textContent =
 				"Länger gedrückt halten um deine \nAntworten zu überprüfen. \nVorsicht: Zählt als Schummeln!";

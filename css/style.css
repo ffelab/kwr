@@ -346,7 +346,17 @@ details > p {
 
 .incorrect {
 	color: red;
-	transition: color 0.2s ease;
+	transition: color 0.3s ease;
+}
+
+.correct {
+	color: blue;
+	transition: color 0.3s ease;
+}
+
+.fadeout {
+	color: var(--primary-text-color);
+	transition: color 0.3s ease;
 }
 
 @media (min-width: 470px) {

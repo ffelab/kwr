@@ -320,6 +320,7 @@ function checkErrors() {
 	for (let r = 0; r < SIZE; r++) {
 		for (let c = 0; c < SIZE; c++) {
 			grid[r][c].el.classList.remove("incorrect");
+			grid[r][c].el.classList.remove("correct");
 		}
 	}
 	for (const dir of ["WAAGERECHT", "SENKRECHT".toUpperCase()]) {
@@ -354,8 +355,12 @@ function checkErrors() {
 				const current = cell.letter || "";
 				const expected = solution[i];
 
+				if (current === expected) {
+					cell.el.classList.add("correct");
+				}
 				if (current && current !== expected) {
 					cell.el.classList.add("incorrect");
+					schummelzaehler++;
 				}
 
 				if (dir === "WAAGERECHT") c++;
@@ -368,10 +373,14 @@ function checkErrors() {
 	errorTimeout = setTimeout(() => {
 		for (let r = 0; r < SIZE; r++) {
 			for (let c = 0; c < SIZE; c++) {
-				grid[r][c].el.classList.remove("incorrect");
+				setTimeout(() => {
+					grid[r][c].el.classList.add("fadeout");
+					grid[r][c].el.classList.remove("incorrect");
+					grid[r][c].el.classList.remove("correct");
+				}, 500);
 			}
 		}
-	}, 2000);
+	}, 1500);
 }
 
 function getRandomColor() {
@@ -794,7 +803,7 @@ checkButton.addEventListener("touchstart", () => {
 
 	pressTimer = setTimeout(() => {
 		checkErrors();
-		schummelzaehler++;
+
 		pressTimer = null;
 	}, 1000);
 });

@@ -166,9 +166,9 @@ const puzzleData = {
 				s: "SPUR",
 			},
 			16: {
-				c: "Servus Gegenpol",
+				c: "Ausgezeichnete bekommen den weiter westlich",
 				l: "4",
-				s: "MOIN",
+				s: "PRIX",
 			},
 		},
 	},

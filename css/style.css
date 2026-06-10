@@ -329,6 +329,10 @@ details > p {
 	animation: cellBlink 0.4s ease-in-out 5;
 }
 
+.cheated {
+	color: blue;
+}
+
 @media (min-width: 470px) {
 	#rätsel-container {
 		border: solid var(--primary-text-color) 2px;

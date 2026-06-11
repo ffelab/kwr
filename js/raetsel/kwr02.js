@@ -61,7 +61,7 @@ const puzzleData = {
 	],
 	CLUES: {
 		WAAGERECHT: {
-			3: { c: "", l: "4", s: "CODE" },
+			3: { c: "hinweis", l: "4", s: "CODE" },
 			5: {
 				c: "Browseranleitung: Haufenweise Text musste lesen",
 				l: "4",
@@ -72,16 +72,16 @@ const puzzleData = {
 				l: "10",
 				s: "ROADRUNNER",
 			},
-			7: { c: "", l: "8", s: "DAEMPFER" },
-			9: { c: "", l: "8", s: "MONITORE" },
+			7: { c: "hinweis", l: "8", s: "DAEMPFER" },
+			9: { c: "hinweis", l: "8", s: "MONITORE" },
 		},
 		SENKRECHT: {
-			1: { c: "", l: "5", s: "ACCRA" },
-			2: { c: "", l: "5", s: "FLORA" },
-			4: { c: "", l: "9", s: "ERDBEEREN" },
-			5: { c: "", l: "9", s: "HANDYFOTO" },
-			5: { c: "", l: "4", s: "DARM" },
-			6: { c: "", l: "4", s: "REBE" },
+			1: { c: "hinweis", l: "5", s: "ACCRA" },
+			2: { c: "hinweis", l: "5", s: "FLORA" },
+			4: { c: "hinweis", l: "9", s: "ERDBEEREN" },
+			5: { c: "hinweis", l: "9", s: "HANDYFOTO" },
+			5: { c: "hinweis", l: "4", s: "DARM" },
+			6: { c: "hinweis", l: "4", s: "REBE" },
 		},
 	},
 };

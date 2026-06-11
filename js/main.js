@@ -318,7 +318,7 @@ function checkAllSolved() {
 function checkErrors() {
 	clearHighlight();
 
-	for (const dir of ["WAAGERECHT", "SENKRECHT".toUpperCase()]) {
+	for (const dir of ["WAAGERECHT", "SENKRECHT"]) {
 		for (const number in CLUES[dir]) {
 			const entry = CLUES[dir][number];
 			const solution = entry.s;

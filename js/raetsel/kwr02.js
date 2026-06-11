@@ -80,8 +80,8 @@ const puzzleData = {
 			2: { c: "hinweis", l: "5", s: "FLORA" },
 			4: { c: "hinweis", l: "9", s: "ERDBEEREN" },
 			5: { c: "hinweis", l: "9", s: "HANDYFOTO" },
-			5: { c: "hinweis", l: "4", s: "DARM" },
-			6: { c: "hinweis", l: "4", s: "REBE" },
+			7: { c: "hinweis", l: "4", s: "DARM" },
+			8: { c: "hinweis", l: "4", s: "REBE" },
 		},
 	},
 };

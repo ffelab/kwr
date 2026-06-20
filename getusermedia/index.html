@@ -68,9 +68,10 @@
 
 			#canvas {
 				display: block;
-				max-width: 100%;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
 				flex-shrink: 0;
-				height: auto;
 			}
 
 			#start-btn {
@@ -92,7 +93,7 @@
 			#id-display {
 				flex-shrink: 0;
 				width: 96dvw;
-				min-height: 32dvh;
+				min-height: 28dvh;
 				max-width: 480px;
 				background: var(--primary-bg-color);
 				font-size: 2.4dvh;
@@ -113,6 +114,7 @@
 				text-align: center;
 				color: var(--primary-text-color);
 				transition: color 0.2s;
+				white-space: pre-wrap;
 			}
 			#id-value.empty {
 				color: var(--between-dark-light);
@@ -125,7 +127,7 @@
 		</style>
 		<script>
 			var clues = [
-				"→ Zwischen Aus und Ehen ist der Lyrik keine Absicht\n\n↓ Browseranleitung: Haufenweise Text musste lesen",
+				"→ Zwischen Aus und Ehen ist der Lyrik-Baustein keine Absicht \n\n↓ Browseranleitung: Haufenweise Text musst'e lesen",
 				"Capital city of Australia, often confused with Sydney",
 				"The only mammal capable of sustained flight, known for echolocation and nocturnal hunting",
 				"Ancient wonder of the world located in Egypt, built as a tomb for Pharaoh Khufu around 2560 BC, and the oldest of the seven wonders still largely intact today",

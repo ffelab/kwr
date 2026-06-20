@@ -151,8 +151,8 @@
 				var constraints = {
 					video: {
 						facingMode: { exact: "environment" },
-						width: { ideal: 1920 },
-						height: { ideal: 1080 },
+						width: { ideal: 960 },
+						height: { ideal: 540 },
 					},
 				};
 
@@ -271,7 +271,7 @@
 
 				// Border
 				context.strokeStyle = "#676cfd";
-				context.lineWidth = Math.max(2, canvas.width / 320);
+				context.lineWidth = Math.max(3, canvas.width / 100);
 				context.beginPath();
 				for (var j = 0; j < corners.length; j++) {
 					var c = corners[j];

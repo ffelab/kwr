@@ -92,7 +92,7 @@
 			#id-display {
 				flex-shrink: 0;
 				width: 96dvw;
-				min-height: 12dvh;
+				min-height: 32dvh;
 				max-width: 480px;
 				background: var(--primary-bg-color);
 				font-size: 2.4dvh;
@@ -125,7 +125,7 @@
 		</style>
 		<script>
 			var clues = [
-				"A feline pet",
+				"1W: A feline pet",
 				"Capital city of Australia, often confused with Sydney",
 				"The only mammal capable of sustained flight, known for echolocation and nocturnal hunting",
 				"Ancient wonder of the world located in Egypt, built as a tomb for Pharaoh Khufu around 2560 BC, and the oldest of the seven wonders still largely intact today",
@@ -267,8 +267,7 @@
 			function drawMarker(marker) {
 				var corners = marker.corners;
 
-				// Outline
-				context.strokeStyle = "#4f4";
+				context.strokeStyle = "var(--darker-highlight-color)";
 				context.lineWidth = Math.max(2, canvas.width / 320);
 				context.beginPath();
 				for (var j = 0; j < corners.length; j++) {
@@ -291,10 +290,11 @@
 					x = Math.min(x, corners[k].x);
 					y = Math.min(y, corners[k].y);
 				}
-				var fontSize = Math.max(16, canvas.width / 40);
-				context.font = "bold " + fontSize + "px 'Courier New'";
+				var fontSize = Math.max(18, canvas.width / 20);
+				context.font = "bold " + fontSize + "px 'JetBrainsMono'";
 				context.fillStyle = "#fa0";
-				context.fillText("#" + marker.id, x, Math.max(y - 6, fontSize));
+				let clueNum = marker.id + 1;
+				context.fillText(clueNum, x, Math.max(y - 6, fontSize));
 			}
 
 			function updateDisplay() {

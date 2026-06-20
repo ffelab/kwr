@@ -53,31 +53,43 @@
 					.getUserMedia({
 						video: {
 							facingMode: "environment",
+							width: { ideal: 640 },
+							height: { ideal: 480 },
 						},
 					})
-					.then(function (stream) {
-						if ("srcObject" in video) {
-							video.srcObject = stream;
-						} else {
-							video.src = window.URL.createObjectURL(stream);
-						}
+					.then((stream) => {
+						video.srcObject = stream;
 					})
-					.catch(function (err) {
-						console.log(err.name + ": " + err.message);
-					});
+					.catch((err) => console.error(err));
 
 				detector = new AR.Detector();
 
 				requestAnimationFrame(tick);
 			}
 
+			video.addEventListener("loadedmetadata", () => {
+				canvas.width = video.videoWidth;
+				canvas.height = video.videoHeight;
+			});
+
 			function tick() {
 				requestAnimationFrame(tick);
 
 				if (video.readyState === video.HAVE_ENOUGH_DATA) {
-					snapshot();
+					// Grab current frame (not visible to user)
+					context.drawImage(video, 0, 0, canvas.width, canvas.height);
+					imageData = context.getImageData(
+						0,
+						0,
+						canvas.width,
+						canvas.height,
+					);
 
-					var markers = detector.detect(imageData);
+					// Clear overlay BEFORE drawing markers
+					context.clearRect(0, 0, canvas.width, canvas.height);
+
+					const markers = detector.detect(imageData);
+
 					drawCorners(markers);
 					drawId(markers);
 				}
@@ -156,13 +168,23 @@
 			<div style="margin: 10px">
 				<strong>-= Augmented Reality Marker Detector =-</strong>
 			</div>
-			<video
-				id="video"
-				autoplay
-				playsinline
-				style="width: 640px; height: 480px"
-			></video>
-			<!-- <canvas id="canvas" style="width: 640px; height: 480px"></canvas> -->
+			<div style="position: relative; width: 640px; height: 480px">
+				<video
+					id="video"
+					autoplay
+					playsinline
+					style="
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+					"
+				></video>
+
+				<canvas id="canvas" style="position: absolute; top: 0; left: 0">
+				</canvas>
+			</div>
 			<div style="margin: 15px">
 				<strong
 					>Powered by

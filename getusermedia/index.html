@@ -3,9 +3,9 @@
 	<head>
 		<title>Augmented Reality Marker Detector</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<script type="text/javascript" src="libs/polyfill.js"></script>
-		<script type="text/javascript" src="cv.js"></script>
-		<script type="text/javascript" src="aruco.js"></script>
+		<script type="text/javascript" src="../js/libs/polyfill.js"></script>
+		<script type="text/javascript" src="../js/cv.js"></script>
+		<script type="text/javascript" src="../js/aruco.js"></script>
 		<style>
 			body {
 				font-family: monospace;
@@ -56,66 +56,140 @@
 				color: #555;
 				font-size: 0.95em;
 			}
+			#debug {
+				margin-top: 10px;
+				width: 100%;
+				max-width: 720px;
+				background: #000;
+				border: 1px solid #f80;
+				border-radius: 6px;
+				padding: 8px 12px;
+				box-sizing: border-box;
+				font-size: 0.75em;
+				color: #f80;
+				max-height: 200px;
+				overflow-y: auto;
+			}
+			#debug h3 {
+				margin: 0 0 4px 0;
+				color: #fa0;
+				font-size: 0.9em;
+			}
 			a {
 				color: #7af;
+			}
+			#start-btn {
+				margin-top: 10px;
+				padding: 12px 30px;
+				font-size: 1em;
+				background: #2a6;
+				color: white;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
 			}
 		</style>
 		<script>
 			var video, canvas, context, imageData, detector;
+			var tickStarted = false;
 
-			function onLoad() {
-				video = document.getElementById("video");
-				canvas = document.getElementById("canvas");
-				context = canvas.getContext("2d");
+			function log(msg) {
+				var el = document.getElementById("debug-log");
+				var line = document.createElement("div");
+				line.textContent =
+					"[" + new Date().toLocaleTimeString() + "] " + msg;
+				el.appendChild(line);
+				el.scrollTop = el.scrollHeight;
+			}
 
-				// Native resolution — will be updated once the camera stream is known
-				canvas.width = 1280;
-				canvas.height = 720;
+			function startCamera() {
+				document.getElementById("start-btn").style.display = "none";
+				log("Requesting back camera...");
 
 				navigator.mediaDevices
 					.getUserMedia({
 						video: {
-							facingMode: { exact: "environment" }, // back camera
+							facingMode: { exact: "environment" },
 							width: { ideal: 1280 },
 							height: { ideal: 720 },
 						},
 					})
 					.then(function (stream) {
-						video.srcObject = stream;
-
-						// Once metadata is available, match canvas to actual stream resolution
-						video.addEventListener("loadedmetadata", function () {
-							canvas.width = video.videoWidth;
-							canvas.height = video.videoHeight;
-						});
+						log("Got stream: " + stream.getVideoTracks()[0].label);
+						attachStream(stream);
 					})
 					.catch(function (err) {
-						console.warn(
-							"Back camera unavailable, falling back: " +
+						log(
+							"Back camera failed: " +
+								err.name +
+								" - " +
 								err.message,
 						);
-						// Fallback: any available camera
+						log("Trying any camera...");
 						return navigator.mediaDevices
 							.getUserMedia({ video: true })
 							.then(function (stream) {
-								video.srcObject = stream;
-								video.addEventListener(
-									"loadedmetadata",
-									function () {
-										canvas.width = video.videoWidth;
-										canvas.height = video.videoHeight;
-									},
+								log(
+									"Fallback stream: " +
+										stream.getVideoTracks()[0].label,
+								);
+								attachStream(stream);
+							})
+							.catch(function (err2) {
+								log(
+									"ERROR: " +
+										err2.name +
+										" - " +
+										err2.message,
 								);
 							});
 					});
+			}
 
-				detector = new AR.Detector();
-				requestAnimationFrame(tick);
+			function attachStream(stream) {
+				video.srcObject = stream;
+				log("Stream attached to video element");
+
+				video.addEventListener("loadedmetadata", function () {
+					log(
+						"Metadata loaded: " +
+							video.videoWidth +
+							"x" +
+							video.videoHeight,
+					);
+					canvas.width = video.videoWidth;
+					canvas.height = video.videoHeight;
+				});
+
+				video.addEventListener("canplay", function () {
+					log("Video canplay event fired");
+				});
+
+				video.addEventListener("playing", function () {
+					log("Video is NOW PLAYING - starting AR tick");
+					if (!tickStarted) {
+						tickStarted = true;
+						requestAnimationFrame(tick);
+					}
+				});
+
+				video
+					.play()
+					.then(function () {
+						log("video.play() resolved");
+					})
+					.catch(function (e) {
+						log(
+							"video.play() failed: " +
+								e.name +
+								" - " +
+								e.message,
+						);
+					});
 			}
 
 			function tick() {
 				requestAnimationFrame(tick);
-
 				if (video.readyState === video.HAVE_ENOUGH_DATA) {
 					snapshot();
 					var markers = detector.detect(imageData);
@@ -138,10 +212,8 @@
 			function drawCorners(markers) {
 				var corners, corner, i, j;
 				context.lineWidth = 3;
-
 				for (i = 0; i !== markers.length; ++i) {
 					corners = markers[i].corners;
-
 					context.strokeStyle = "red";
 					context.beginPath();
 					for (j = 0; j !== corners.length; ++j) {
@@ -152,7 +224,6 @@
 					}
 					context.stroke();
 					context.closePath();
-
 					context.strokeStyle = "green";
 					context.strokeRect(
 						corners[0].x - 2,
@@ -168,12 +239,10 @@
 				context.strokeStyle = "blue";
 				context.lineWidth = 1;
 				context.font = "bold 20px monospace";
-
 				for (i = 0; i !== markers.length; ++i) {
 					corners = markers[i].corners;
 					x = Infinity;
 					y = Infinity;
-
 					for (j = 0; j !== corners.length; ++j) {
 						corner = corners[j];
 						x = Math.min(x, corner.x);
@@ -189,17 +258,24 @@
 					el.textContent = "No markers detected";
 					el.className = "empty";
 				} else {
-					var ids = markers
+					el.textContent = markers
 						.map(function (m) {
 							return "#" + m.id;
 						})
 						.join("   ");
-					el.textContent = ids;
 					el.className = "";
 				}
 			}
 
-			window.onload = onLoad;
+			window.onload = function () {
+				video = document.getElementById("video");
+				canvas = document.getElementById("canvas");
+				context = canvas.getContext("2d");
+				canvas.width = 1280;
+				canvas.height = 720;
+				detector = new AR.Detector();
+				log("Page loaded. Tap 'Start Camera' to begin.");
+			};
 		</script>
 	</head>
 	<body>
@@ -212,10 +288,16 @@
 			style="display: none"
 		></video>
 		<canvas id="canvas"></canvas>
+		<button id="start-btn" onclick="startCamera()">▶ Start Camera</button>
 
 		<div id="marker-display">
 			<h3>Detected Marker IDs</h3>
 			<div id="marker-ids" class="empty">No markers detected</div>
+		</div>
+
+		<div id="debug">
+			<h3>Debug Log</h3>
+			<div id="debug-log"></div>
 		</div>
 
 		<div style="margin: 15px; font-size: 0.8em">

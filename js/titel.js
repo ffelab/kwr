@@ -394,6 +394,11 @@ function getRandomCoordinates() {
 const targetIndex = 7;
 const targetContainer = containers[targetIndex];
 
+targetContainer.innerHTML = "";
+
+const randomBlackFields = getRandomCoordinates();
+
+grids[targetIndex] = buildGrid(targetContainer, randomBlackFields);
 setInterval(() => {
 	targetContainer.innerHTML = "";
 

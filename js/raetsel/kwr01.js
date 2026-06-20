@@ -69,23 +69,27 @@ const puzzleData = {
 				s: "KEN",
 			},
 			23: {
-				c: "Sollte EIGENTLICH häufiger am Turing test scheitern als ich",
+				c: "Sollte EIGENTLICH häufiger an CAPTCHA scheitern als ich",
 				l: "3",
 				s: "BOT",
 			},
 			24: {
-				c: "Steht kurz im Code: Damit kann wirklich keiner rechnen",
+				c: "Hier eine missliche Lage, anderswo nicht",
 				l: "3",
-				s: "NAN",
+				s: "NOT",
 			},
 			25: {
-				c: "Software für Leute \nohne Angst vor Commitments",
+				c: "Software für Leute \nohne Angst vor Commitments: In der IT wirds ekelhaft",
 				l: "3",
 				s: "GIT",
 			},
 		},
 		SENKRECHT: {
-			1: { c: "Baustein fürs Leben", l: "3", s: "GEN" },
+			1: {
+				c: "Forschung and dem einen oder anderen mag ein Schritt ... Nobelpreis sein",
+				l: "3",
+				s: "GEN",
+			},
 			2: {
 				c: "Den 5 senkrecht \nursprüngliche Stimmungslage",
 				l: "8",
@@ -109,7 +113,7 @@ const puzzleData = {
 				s: "HULK",
 			},
 			8: {
-				c: "Gerade so: \nTemporal und räumlich",
+				c: "Gerade so: \nZeitlich und räumlich",
 				l: "4",
 				s: "EBEN",
 			},

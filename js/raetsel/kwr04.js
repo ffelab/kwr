@@ -1,7 +1,7 @@
 const puzzleData = {
 	PUZZLE_ID: "04",
 	SIZE: 10,
-	MIN_WORD_LENGTH: 3,
+	MIN_WORD_LENGTH: 2,
 	BLACK_FIELDS: [
 		[0, 4],
 		[0, 5],
@@ -30,8 +30,32 @@ const puzzleData = {
 	],
 	CLUES: {
 		WAAGERECHT: {
-			1: { c: "", l: "", s: "" },
+			1: { c: "", l: "4", s: "BAND" },
+			3: { c: "", l: "4", s: "BURG" },
+			6: { c: "", l: "2", s: "FZ" },
+			8: { c: "", l: "6", s: "TRAUEN" },
+			9: { c: "", l: "3", s: "BIZ" },
+			10: { c: "", l: "2", s: "VR" },
+			11: { c: "", l: "3", s: "ORT" },
+			12: { c: "", l: "6", s: "LAEUSE" },
+			15: { c: "", l: "8", s: "BOULETTE" },
+			17: { c: "", l: "2", s: "AC" },
+			19: { c: "", l: "10", s: "BREMSKEGEL" },
+			22: { c: "", l: "10", s: "ERDNUSSMUS" },
 		},
-		SENKRECHT: {},
+		SENKRECHT: {
+			1: { c: "", l: "5", s: "BAMBI" },
+			2: { c: "", l: "8", s: "NUTZLOSE" },
+			4: { c: "", l: "8", s: "UNNOETIG" },
+			5: { c: "", l: "5", s: "GRETA" },
+			6: { c: "", l: "7", s: "FAVELAS" },
+			7: { c: "", l: "7", s: "ZURUECK" },
+			13: { c: "", l: "2", s: "AU" },
+			14: { c: "", l: "2", s: "ST" },
+			16: { c: "", l: "4", s: "EBBE" },
+			18: { c: "", l: "4", s: "PLUS" },
+			20: { c: "", l: "3", s: "MON" },
+			21: { c: "", l: "3", s: "EIS" },
+		},
 	},
 };

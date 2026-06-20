@@ -444,6 +444,7 @@ function writeCell(value) {
 	savePuzzle();
 
 	if (checkAllSolved()) {
+		// REMOVE "!" AFTER EDITING!
 		triggerWinAnimation();
 
 		solved = true;

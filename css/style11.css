@@ -92,7 +92,7 @@ body.dark {
 	align-items: center;
 	justify-content: center;
 	border: 1.8px solid var(--primary-text-color);
-	font-size: min(1.6rem, calc(94dvw / 16));
+	font-size: min(1.6rem, calc(94dvw / 18));
 	font-weight: 600;
 	cursor: pointer;
 	background: var(--primary-bg-color);

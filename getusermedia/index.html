@@ -103,21 +103,12 @@
 				gap: 12px;
 			}
 
-			#id-label {
-				font-size: clamp(0.6em, 2vw, 0.75em);
-				color: var(--primary-text-color);
-				text-transform: uppercase;
-				letter-spacing: 0.12em;
-				white-space: nowrap;
-			}
-
 			#id-value {
-				font-size: clamp(1.6em, 7vw, 2.4em);
-				font-weight: bold;
+				font-size: min(1.6rem, calc(94dvw / 16));
+				text-align: center;
 				color: var(--primary-text-color);
 				letter-spacing: 0.05em;
 				transition: color 0.2s;
-				text-align: right;
 			}
 			#id-value.empty {
 				color: var(--between-dark-light);

@@ -1,11 +1,65 @@
+<!doctype html>
 <html>
 	<head>
 		<title>Augmented Reality Marker Detector</title>
-
-		<script src="../js/libs/polyfill.js"></script>
-		<script src="../js/cv.js"></script>
-		<script src="../js/aruco.js"></script>
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script type="text/javascript" src="libs/polyfill.js"></script>
+		<script type="text/javascript" src="cv.js"></script>
+		<script type="text/javascript" src="aruco.js"></script>
+		<style>
+			body {
+				font-family: monospace;
+				background: #111;
+				color: #eee;
+				margin: 0;
+				padding: 10px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			h2 {
+				font-size: 1em;
+				margin: 10px 0;
+				color: #aef;
+			}
+			#canvas {
+				width: 100%;
+				max-width: 720px;
+				height: auto;
+				display: block;
+				border: 2px solid #444;
+			}
+			#marker-display {
+				margin-top: 12px;
+				width: 100%;
+				max-width: 720px;
+				background: #222;
+				border: 1px solid #555;
+				border-radius: 6px;
+				padding: 10px 14px;
+				box-sizing: border-box;
+			}
+			#marker-display h3 {
+				margin: 0 0 6px 0;
+				font-size: 0.85em;
+				color: #888;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+			#marker-ids {
+				font-size: 1.4em;
+				color: #4f4;
+				min-height: 1.6em;
+				word-break: break-all;
+			}
+			#marker-ids.empty {
+				color: #555;
+				font-size: 0.95em;
+			}
+			a {
+				color: #7af;
+			}
+		</style>
 		<script>
 			var video, canvas, context, imageData, detector;
 
@@ -14,32 +68,48 @@
 				canvas = document.getElementById("canvas");
 				context = canvas.getContext("2d");
 
-				detector = new AR.Detector();
+				// Native resolution — will be updated once the camera stream is known
+				canvas.width = 1280;
+				canvas.height = 720;
 
-				// Fix camera (back camera + good resolution)
 				navigator.mediaDevices
 					.getUserMedia({
 						video: {
-							facingMode: "environment",
+							facingMode: { exact: "environment" }, // back camera
 							width: { ideal: 1280 },
 							height: { ideal: 720 },
 						},
 					})
-					.catch(() => {
-						return navigator.mediaDevices.getUserMedia({
-							video: true,
-						});
-					})
 					.then(function (stream) {
 						video.srcObject = stream;
+
+						// Once metadata is available, match canvas to actual stream resolution
+						video.addEventListener("loadedmetadata", function () {
+							canvas.width = video.videoWidth;
+							canvas.height = video.videoHeight;
+						});
+					})
+					.catch(function (err) {
+						console.warn(
+							"Back camera unavailable, falling back: " +
+								err.message,
+						);
+						// Fallback: any available camera
+						return navigator.mediaDevices
+							.getUserMedia({ video: true })
+							.then(function (stream) {
+								video.srcObject = stream;
+								video.addEventListener(
+									"loadedmetadata",
+									function () {
+										canvas.width = video.videoWidth;
+										canvas.height = video.videoHeight;
+									},
+								);
+							});
 					});
 
-				// IMPORTANT: set correct canvas resolution from camera
-				video.addEventListener("loadedmetadata", function () {
-					canvas.width = video.videoWidth;
-					canvas.height = video.videoHeight;
-				});
-
+				detector = new AR.Detector();
 				requestAnimationFrame(tick);
 			}
 
@@ -47,111 +117,109 @@
 				requestAnimationFrame(tick);
 
 				if (video.readyState === video.HAVE_ENOUGH_DATA) {
-					// draw current frame for detection
-					context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-					imageData = context.getImageData(
-						0,
-						0,
-						canvas.width,
-						canvas.height,
-					);
-
-					const markers = detector.detect(imageData);
-
+					snapshot();
+					var markers = detector.detect(imageData);
+					drawCorners(markers);
+					drawId(markers);
 					updateMarkerDisplay(markers);
+				}
+			}
 
-					drawMarkers(markers);
+			function snapshot() {
+				context.drawImage(video, 0, 0, canvas.width, canvas.height);
+				imageData = context.getImageData(
+					0,
+					0,
+					canvas.width,
+					canvas.height,
+				);
+			}
+
+			function drawCorners(markers) {
+				var corners, corner, i, j;
+				context.lineWidth = 3;
+
+				for (i = 0; i !== markers.length; ++i) {
+					corners = markers[i].corners;
+
+					context.strokeStyle = "red";
+					context.beginPath();
+					for (j = 0; j !== corners.length; ++j) {
+						corner = corners[j];
+						context.moveTo(corner.x, corner.y);
+						corner = corners[(j + 1) % corners.length];
+						context.lineTo(corner.x, corner.y);
+					}
+					context.stroke();
+					context.closePath();
+
+					context.strokeStyle = "green";
+					context.strokeRect(
+						corners[0].x - 2,
+						corners[0].y - 2,
+						4,
+						4,
+					);
+				}
+			}
+
+			function drawId(markers) {
+				var corners, corner, x, y, i, j;
+				context.strokeStyle = "blue";
+				context.lineWidth = 1;
+				context.font = "bold 20px monospace";
+
+				for (i = 0; i !== markers.length; ++i) {
+					corners = markers[i].corners;
+					x = Infinity;
+					y = Infinity;
+
+					for (j = 0; j !== corners.length; ++j) {
+						corner = corners[j];
+						x = Math.min(x, corner.x);
+						y = Math.min(y, corner.y);
+					}
+					context.strokeText(markers[i].id, x, y);
 				}
 			}
 
 			function updateMarkerDisplay(markers) {
-				const display = document.getElementById("markerDisplay");
-
-				if (!markers.length) {
-					display.innerText = "No marker detected";
-					return;
-				}
-
-				const ids = markers.map((m) => m.id);
-				display.innerText = "Detected marker IDs: " + ids.join(", ");
-			}
-
-			function drawMarkers(markers) {
-				context.lineWidth = 3;
-				context.font = "20px monospace";
-
-				for (let i = 0; i < markers.length; i++) {
-					const corners = markers[i].corners;
-
-					// draw outline
-					context.strokeStyle = "red";
-					context.beginPath();
-
-					for (let j = 0; j < corners.length; j++) {
-						const c1 = corners[j];
-						const c2 = corners[(j + 1) % corners.length];
-
-						context.moveTo(c1.x, c1.y);
-						context.lineTo(c2.x, c2.y);
-					}
-
-					context.stroke();
-
-					// draw ID position
-					let x = Infinity;
-					let y = Infinity;
-
-					for (let j = 0; j < corners.length; j++) {
-						x = Math.min(x, corners[j].x);
-						y = Math.min(y, corners[j].y);
-					}
-
-					context.fillStyle = "blue";
-					context.fillText(markers[i].id, x, y);
+				var el = document.getElementById("marker-ids");
+				if (markers.length === 0) {
+					el.textContent = "No markers detected";
+					el.className = "empty";
+				} else {
+					var ids = markers
+						.map(function (m) {
+							return "#" + m.id;
+						})
+						.join("   ");
+					el.textContent = ids;
+					el.className = "";
 				}
 			}
 
 			window.onload = onLoad;
 		</script>
 	</head>
+	<body>
+		<h2>-= Augmented Reality Marker Detector =-</h2>
+		<video
+			id="video"
+			autoplay
+			playsinline
+			muted
+			style="display: none"
+		></video>
+		<canvas id="canvas"></canvas>
 
-	<body style="font-family: monospace; text-align: center">
-		<div style="margin: 10px">
-			<strong>-= Augmented Reality Marker Detector =-</strong>
+		<div id="marker-display">
+			<h3>Detected Marker IDs</h3>
+			<div id="marker-ids" class="empty">No markers detected</div>
 		</div>
 
-		<div
-			style="
-				position: relative;
-				width: 640px;
-				height: 480px;
-				margin: auto;
-			"
-		>
-			<video
-				id="video"
-				autoplay
-				playsinline
-				style="position: absolute; width: 100%; height: 100%"
-			></video>
-
-			<canvas
-				id="canvas"
-				style="position: absolute; width: 100%; height: 100%"
-			></canvas>
-		</div>
-
-		<div
-			id="markerDisplay"
-			style="
-				margin-top: 10px;
-				font-size: 20px;
-				font-weight: bold;
-				color: green;
-			"
-		>
-			No marker detected
+		<div style="margin: 15px; font-size: 0.8em">
+			Powered by <a href="http://code.google.com/p/js-aruco/">js-aruco</a>
 		</div>
 	</body>
 </html>

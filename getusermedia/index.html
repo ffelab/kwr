@@ -129,17 +129,24 @@
 			}
 		</style>
 		<script>
+			var clues = [
+				"A feline pet",
+				"Capital city of Australia, often confused with Sydney",
+				"The only mammal capable of sustained flight, known for echolocation and nocturnal hunting",
+				"Ancient wonder of the world located in Egypt, built as a tomb for Pharaoh Khufu around 2560 BC, and the oldest of the seven wonders still largely intact today",
+			];
+
 			var video, canvas, context, imageData, detector;
 			var tickStarted = false;
 
 			// --- Stable center-focus ID detection ---
-			var confirmedId = null; // the currently displayed ID
-			var candidateId = null; // ID we're seeing consistently
-			var candidateSeen = 0; // how many frames in a row we've seen it
-			var lostFrames = 0; // how many frames since we last saw anything
+			var confirmedId = null;
+			var candidateId = null;
+			var candidateSeen = 0;
+			var lostFrames = 0;
 
-			var CONFIRM_FRAMES = 6; // frames needed to switch to a new ID
-			var LOST_FRAMES = 18; // frames of nothing before clearing display
+			var CONFIRM_FRAMES = 6;
+			var LOST_FRAMES = 18;
 
 			function startCamera() {
 				document.getElementById("start-btn").style.display = "none";
@@ -232,7 +239,6 @@
 				updateDisplay();
 			}
 
-			// Returns the single marker closest to the canvas center
 			function pickCenterMarker(markers) {
 				if (!markers || markers.length === 0) return null;
 
@@ -299,11 +305,10 @@
 			function updateDisplay() {
 				var el = document.getElementById("id-value");
 				if (confirmedId !== null) {
-					el.textContent = "#" + confirmedId;
+					el.textContent = clues[confirmedId];
 					el.className = "locked";
 				} else if (candidateId !== null) {
-					// Show candidate dimly while building confidence
-					el.textContent = "#" + candidateId + "…";
+					el.textContent = clues[candidateId] + "…";
 					el.className = "";
 				} else {
 					el.textContent = "Point at a marker";
@@ -336,7 +341,7 @@
 		<button id="start-btn" onclick="startCamera()">▶ Start Camera</button>
 
 		<div id="id-display">
-			<span id="id-label">Detected ID</span>
+			<!-- <span id="id-label">Detected ID</span> -->
 			<span id="id-value" class="empty">Point at a marker</span>
 		</div>
 	</body>

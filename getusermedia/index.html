@@ -6,9 +6,9 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 		/>
-		<script type="text/javascript" src="libs/polyfill.js"></script>
-		<script type="text/javascript" src="cv.js"></script>
-		<script type="text/javascript" src="aruco.js"></script>
+		<script type="text/javascript" src="../js/libs/polyfill.js"></script>
+		<script type="text/javascript" src="../js/cv.js"></script>
+		<script type="text/javascript" src="../js/aruco.js"></script>
 		<style>
 			*,
 			*::before,
@@ -60,7 +60,6 @@
 			}
 
 			#start-btn {
-				flex-shrink: 0;
 				padding: 10px 28px;
 				font-size: 1em;
 				font-family: "Courier New", monospace;
@@ -70,8 +69,6 @@
 				border-radius: 6px;
 				cursor: pointer;
 				letter-spacing: 0.1em;
-				width: 100%;
-				max-width: 480px;
 			}
 			#start-btn:active {
 				background: #2a5a3a;
@@ -120,25 +117,28 @@
 			var video, canvas, context, imageData, detector;
 			var tickStarted = false;
 
-			var confirmedId = null;
-			var candidateId = null;
-			var candidateSeen = 0;
-			var lostFrames = 0;
+			// --- Stable center-focus ID detection ---
+			var confirmedId = null; // the currently displayed ID
+			var candidateId = null; // ID we're seeing consistently
+			var candidateSeen = 0; // how many frames in a row we've seen it
+			var lostFrames = 0; // how many frames since we last saw anything
 
-			var CONFIRM_FRAMES = 6;
-			var LOST_FRAMES = 18;
+			var CONFIRM_FRAMES = 6; // frames needed to switch to a new ID
+			var LOST_FRAMES = 18; // frames of nothing before clearing display
 
 			function startCamera() {
 				document.getElementById("start-btn").style.display = "none";
 
+				var constraints = {
+					video: {
+						facingMode: { exact: "environment" },
+						width: { ideal: 1920 },
+						height: { ideal: 1080 },
+					},
+				};
+
 				navigator.mediaDevices
-					.getUserMedia({
-						video: {
-							facingMode: { exact: "environment" },
-							width: { ideal: 1920 },
-							height: { ideal: 1080 },
-						},
-					})
+					.getUserMedia(constraints)
 					.catch(function () {
 						return navigator.mediaDevices.getUserMedia({
 							video: { facingMode: "environment" },
@@ -150,27 +150,28 @@
 						});
 					})
 					.then(attachStream)
-					.catch(function () {
+					.catch(function (err) {
 						document.getElementById("id-value").textContent =
 							"Camera error";
 						document.getElementById("id-value").className = "empty";
-						document.getElementById("start-btn").style.display =
-							"block";
 					});
 			}
 
 			function attachStream(stream) {
 				video.srcObject = stream;
+
 				video.addEventListener("loadedmetadata", function () {
 					canvas.width = video.videoWidth;
 					canvas.height = video.videoHeight;
 				});
+
 				video.addEventListener("playing", function () {
 					if (!tickStarted) {
 						tickStarted = true;
 						requestAnimationFrame(tick);
 					}
 				});
+
 				video.play().catch(function () {});
 			}
 
@@ -192,14 +193,18 @@
 				if (best !== null) {
 					lostFrames = 0;
 					drawMarker(best);
+
 					if (best.id === candidateId) {
 						candidateSeen++;
 					} else {
 						candidateId = best.id;
 						candidateSeen = 1;
 					}
-					if (candidateSeen >= CONFIRM_FRAMES)
+
+					// Only switch confirmed ID after seeing consistently
+					if (candidateSeen >= CONFIRM_FRAMES) {
 						confirmedId = candidateId;
+					}
 				} else {
 					lostFrames++;
 					if (lostFrames >= LOST_FRAMES) {
@@ -212,12 +217,15 @@
 				updateDisplay();
 			}
 
+			// Returns the single marker closest to the canvas center
 			function pickCenterMarker(markers) {
 				if (!markers || markers.length === 0) return null;
-				var cx = canvas.width / 2,
-					cy = canvas.height / 2;
-				var best = null,
-					bestDist = Infinity;
+
+				var cx = canvas.width / 2;
+				var cy = canvas.height / 2;
+				var best = null;
+				var bestDist = Infinity;
+
 				for (var i = 0; i < markers.length; i++) {
 					var corners = markers[i].corners;
 					var mx = 0,
@@ -228,6 +236,7 @@
 					}
 					mx /= corners.length;
 					my /= corners.length;
+
 					var dist = Math.sqrt(
 						(mx - cx) * (mx - cx) + (my - cy) * (my - cy),
 					);
@@ -241,19 +250,25 @@
 
 			function drawMarker(marker) {
 				var corners = marker.corners;
+
+				// Outline
 				context.strokeStyle = "#4f4";
 				context.lineWidth = Math.max(2, canvas.width / 320);
 				context.beginPath();
 				for (var j = 0; j < corners.length; j++) {
-					var c = corners[j],
-						next = corners[(j + 1) % corners.length];
+					var c = corners[j];
+					var next = corners[(j + 1) % corners.length];
 					context.moveTo(c.x, c.y);
 					context.lineTo(next.x, next.y);
 				}
 				context.stroke();
 				context.closePath();
+
+				// Corner dot
 				context.fillStyle = "#fa0";
 				context.fillRect(corners[0].x - 3, corners[0].y - 3, 6, 6);
+
+				// ID label on canvas
 				var x = Infinity,
 					y = Infinity;
 				for (var k = 0; k < corners.length; k++) {
@@ -272,6 +287,7 @@
 					el.textContent = "#" + confirmedId;
 					el.className = "locked";
 				} else if (candidateId !== null) {
+					// Show candidate dimly while building confidence
 					el.textContent = "#" + candidateId + "…";
 					el.className = "";
 				} else {

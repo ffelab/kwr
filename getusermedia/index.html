@@ -53,8 +53,6 @@
 					.getUserMedia({
 						video: {
 							facingMode: "environment",
-							width: { ideal: 640 },
-							height: { ideal: 480 },
 						},
 					})
 					.catch(() => {
@@ -186,7 +184,7 @@
 			<div style="margin: 10px">
 				<strong>-= Augmented Reality Marker Detector =-</strong>
 			</div>
-			<div style="position: relative; width: 640px; height: 480px">
+			<div style="position: relative; width: 100dvw; height: 100dvh">
 				<video
 					id="video"
 					autoplay

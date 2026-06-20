@@ -269,6 +269,7 @@
 			function drawMarker(marker) {
 				var corners = marker.corners;
 
+				// Border
 				context.strokeStyle = "#676cfd";
 				context.lineWidth = Math.max(2, canvas.width / 320);
 				context.beginPath();
@@ -286,17 +287,20 @@
 				context.fillRect(corners[0].x - 3, corners[0].y - 3, 6, 6);
 
 				// ID label on canvas
-				var x = Infinity,
-					y = Infinity;
-				for (var k = 0; k < corners.length; k++) {
-					x = Math.min(x, corners[k].x);
-					y = Math.min(y, corners[k].y);
-				}
 				var fontSize = Math.max(24, canvas.width / 10);
 				context.font = "bold " + fontSize + "px 'JetBrainsMono'";
 				context.fillStyle = "#252cff";
-				let clueNum = marker.id + 1;
-				context.fillText(clueNum, x, Math.max(y - 6, fontSize));
+				var clueNum = marker.id + 1;
+
+				var xMax = -Infinity,
+					ySum = 0;
+				for (var k = 0; k < corners.length; k++) {
+					xMax = Math.max(xMax, corners[k].x);
+					ySum += corners[k].y;
+				}
+				var yCenter = ySum / corners.length;
+
+				context.fillText(clueNum, xMax + 8, yCenter + fontSize * 0.35);
 			}
 
 			function updateDisplay() {

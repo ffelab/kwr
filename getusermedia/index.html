@@ -1,205 +1,184 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Augmented Reality Marker Detector</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>AR Marker Detector</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
 		<script type="text/javascript" src="../js/libs/polyfill.js"></script>
 		<script type="text/javascript" src="../js/cv.js"></script>
 		<script type="text/javascript" src="../js/aruco.js"></script>
 		<style>
-			body {
-				font-family: monospace;
-				background: #111;
-				color: #eee;
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
 				margin: 0;
-				padding: 10px;
+				padding: 0;
+			}
+
+			body {
+				font-family: "Courier New", monospace;
+				background: #0d0d0d;
+				color: #eee;
+				height: 100dvh;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+				justify-content: space-between;
+				padding: 10px;
+				gap: 8px;
+				overflow: hidden;
 			}
+
 			h2 {
-				font-size: 1em;
-				margin: 10px 0;
-				color: #aef;
-			}
-			#canvas {
-				width: 100%;
-				max-width: 720px;
-				height: auto;
-				display: block;
-				border: 2px solid #444;
-			}
-			#marker-display {
-				margin-top: 12px;
-				width: 100%;
-				max-width: 720px;
-				background: #222;
-				border: 1px solid #555;
-				border-radius: 6px;
-				padding: 10px 14px;
-				box-sizing: border-box;
-			}
-			#marker-display h3 {
-				margin: 0 0 6px 0;
-				font-size: 0.85em;
-				color: #888;
+				font-size: clamp(0.65em, 2.5vw, 0.85em);
+				color: #556;
+				letter-spacing: 0.1em;
 				text-transform: uppercase;
-				letter-spacing: 1px;
+				flex-shrink: 0;
 			}
-			#marker-ids {
-				font-size: 1.4em;
-				color: #4f4;
-				min-height: 1.6em;
-				word-break: break-all;
-			}
-			#marker-ids.empty {
-				color: #555;
-				font-size: 0.95em;
-			}
-			#debug {
-				margin-top: 10px;
+
+			#canvas-wrap {
+				flex: 1 1 auto;
+				min-height: 0;
 				width: 100%;
-				max-width: 720px;
-				background: #000;
-				border: 1px solid #f80;
-				border-radius: 6px;
-				padding: 8px 12px;
-				box-sizing: border-box;
-				font-size: 0.75em;
-				color: #f80;
-				max-height: 200px;
-				overflow-y: auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
-			#debug h3 {
-				margin: 0 0 4px 0;
-				color: #fa0;
-				font-size: 0.9em;
+
+			#canvas {
+				display: block;
+				max-width: 100%;
+				max-height: 100%;
+				width: auto;
+				height: auto;
+				border-radius: 10px;
+				border: 1px solid #222;
 			}
-			a {
-				color: #7af;
-			}
+
 			#start-btn {
-				margin-top: 10px;
-				padding: 12px 30px;
+				padding: 10px 28px;
 				font-size: 1em;
-				background: #2a6;
-				color: white;
-				border: none;
+				font-family: "Courier New", monospace;
+				background: #1a3a2a;
+				color: #4f4;
+				border: 1px solid #4f4;
 				border-radius: 6px;
 				cursor: pointer;
+				letter-spacing: 0.1em;
+			}
+			#start-btn:active {
+				background: #2a5a3a;
+			}
+
+			#id-display {
+				flex-shrink: 0;
+				width: 100%;
+				max-width: 480px;
+				background: #111;
+				border: 1px solid #222;
+				border-radius: 10px;
+				padding: 10px 16px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 12px;
+			}
+
+			#id-label {
+				font-size: clamp(0.6em, 2vw, 0.75em);
+				color: #445;
+				text-transform: uppercase;
+				letter-spacing: 0.12em;
+				white-space: nowrap;
+			}
+
+			#id-value {
+				font-size: clamp(1.6em, 7vw, 2.4em);
+				font-weight: bold;
+				color: #4f4;
+				letter-spacing: 0.05em;
+				transition: color 0.2s;
+				text-align: right;
+			}
+			#id-value.empty {
+				color: #333;
+				font-size: clamp(0.8em, 3vw, 1em);
+				font-weight: normal;
+			}
+			#id-value.locked {
+				color: #fa0;
 			}
 		</style>
 		<script>
 			var video, canvas, context, imageData, detector;
 			var tickStarted = false;
 
-			function log(msg) {
-				var el = document.getElementById("debug-log");
-				var line = document.createElement("div");
-				line.textContent =
-					"[" + new Date().toLocaleTimeString() + "] " + msg;
-				el.appendChild(line);
-				el.scrollTop = el.scrollHeight;
-			}
+			// --- Stable center-focus ID detection ---
+			var confirmedId = null; // the currently displayed ID
+			var candidateId = null; // ID we're seeing consistently
+			var candidateSeen = 0; // how many frames in a row we've seen it
+			var lostFrames = 0; // how many frames since we last saw anything
+
+			var CONFIRM_FRAMES = 6; // frames needed to switch to a new ID
+			var LOST_FRAMES = 18; // frames of nothing before clearing display
 
 			function startCamera() {
 				document.getElementById("start-btn").style.display = "none";
-				log("Requesting back camera...");
+
+				var constraints = {
+					video: {
+						facingMode: { exact: "environment" },
+						width: { ideal: 1920 },
+						height: { ideal: 1080 },
+					},
+				};
 
 				navigator.mediaDevices
-					.getUserMedia({
-						video: {
-							facingMode: { exact: "environment" },
-							width: { ideal: 1280 },
-							height: { ideal: 720 },
-						},
+					.getUserMedia(constraints)
+					.catch(function () {
+						return navigator.mediaDevices.getUserMedia({
+							video: { facingMode: "environment" },
+						});
 					})
-					.then(function (stream) {
-						log("Got stream: " + stream.getVideoTracks()[0].label);
-						attachStream(stream);
+					.catch(function () {
+						return navigator.mediaDevices.getUserMedia({
+							video: true,
+						});
 					})
+					.then(attachStream)
 					.catch(function (err) {
-						log(
-							"Back camera failed: " +
-								err.name +
-								" - " +
-								err.message,
-						);
-						log("Trying any camera...");
-						return navigator.mediaDevices
-							.getUserMedia({ video: true })
-							.then(function (stream) {
-								log(
-									"Fallback stream: " +
-										stream.getVideoTracks()[0].label,
-								);
-								attachStream(stream);
-							})
-							.catch(function (err2) {
-								log(
-									"ERROR: " +
-										err2.name +
-										" - " +
-										err2.message,
-								);
-							});
+						document.getElementById("id-value").textContent =
+							"Camera error";
+						document.getElementById("id-value").className = "empty";
 					});
 			}
 
 			function attachStream(stream) {
 				video.srcObject = stream;
-				log("Stream attached to video element");
 
 				video.addEventListener("loadedmetadata", function () {
-					log(
-						"Metadata loaded: " +
-							video.videoWidth +
-							"x" +
-							video.videoHeight,
-					);
 					canvas.width = video.videoWidth;
 					canvas.height = video.videoHeight;
 				});
 
-				video.addEventListener("canplay", function () {
-					log("Video canplay event fired");
-				});
-
 				video.addEventListener("playing", function () {
-					log("Video is NOW PLAYING - starting AR tick");
 					if (!tickStarted) {
 						tickStarted = true;
 						requestAnimationFrame(tick);
 					}
 				});
 
-				video
-					.play()
-					.then(function () {
-						log("video.play() resolved");
-					})
-					.catch(function (e) {
-						log(
-							"video.play() failed: " +
-								e.name +
-								" - " +
-								e.message,
-						);
-					});
+				video.play().catch(function () {});
 			}
 
 			function tick() {
 				requestAnimationFrame(tick);
-				if (video.readyState === video.HAVE_ENOUGH_DATA) {
-					snapshot();
-					var markers = detector.detect(imageData);
-					drawCorners(markers);
-					drawId(markers);
-					updateMarkerDisplay(markers);
-				}
-			}
+				if (video.readyState !== video.HAVE_ENOUGH_DATA) return;
 
-			function snapshot() {
 				context.drawImage(video, 0, 0, canvas.width, canvas.height);
 				imageData = context.getImageData(
 					0,
@@ -207,63 +186,113 @@
 					canvas.width,
 					canvas.height,
 				);
-			}
 
-			function drawCorners(markers) {
-				var corners, corner, i, j;
-				context.lineWidth = 3;
-				for (i = 0; i !== markers.length; ++i) {
-					corners = markers[i].corners;
-					context.strokeStyle = "red";
-					context.beginPath();
-					for (j = 0; j !== corners.length; ++j) {
-						corner = corners[j];
-						context.moveTo(corner.x, corner.y);
-						corner = corners[(j + 1) % corners.length];
-						context.lineTo(corner.x, corner.y);
+				var markers = detector.detect(imageData);
+				var best = pickCenterMarker(markers);
+
+				if (best !== null) {
+					lostFrames = 0;
+					drawMarker(best);
+
+					if (best.id === candidateId) {
+						candidateSeen++;
+					} else {
+						candidateId = best.id;
+						candidateSeen = 1;
 					}
-					context.stroke();
-					context.closePath();
-					context.strokeStyle = "green";
-					context.strokeRect(
-						corners[0].x - 2,
-						corners[0].y - 2,
-						4,
-						4,
-					);
-				}
-			}
 
-			function drawId(markers) {
-				var corners, corner, x, y, i, j;
-				context.strokeStyle = "blue";
-				context.lineWidth = 1;
-				context.font = "bold 20px monospace";
-				for (i = 0; i !== markers.length; ++i) {
-					corners = markers[i].corners;
-					x = Infinity;
-					y = Infinity;
-					for (j = 0; j !== corners.length; ++j) {
-						corner = corners[j];
-						x = Math.min(x, corner.x);
-						y = Math.min(y, corner.y);
+					// Only switch confirmed ID after seeing consistently
+					if (candidateSeen >= CONFIRM_FRAMES) {
+						confirmedId = candidateId;
 					}
-					context.strokeText(markers[i].id, x, y);
-				}
-			}
-
-			function updateMarkerDisplay(markers) {
-				var el = document.getElementById("marker-ids");
-				if (markers.length === 0) {
-					el.textContent = "No markers detected";
-					el.className = "empty";
 				} else {
-					el.textContent = markers
-						.map(function (m) {
-							return "#" + m.id;
-						})
-						.join("   ");
+					lostFrames++;
+					if (lostFrames >= LOST_FRAMES) {
+						confirmedId = null;
+						candidateId = null;
+						candidateSeen = 0;
+					}
+				}
+
+				updateDisplay();
+			}
+
+			// Returns the single marker closest to the canvas center
+			function pickCenterMarker(markers) {
+				if (!markers || markers.length === 0) return null;
+
+				var cx = canvas.width / 2;
+				var cy = canvas.height / 2;
+				var best = null;
+				var bestDist = Infinity;
+
+				for (var i = 0; i < markers.length; i++) {
+					var corners = markers[i].corners;
+					var mx = 0,
+						my = 0;
+					for (var j = 0; j < corners.length; j++) {
+						mx += corners[j].x;
+						my += corners[j].y;
+					}
+					mx /= corners.length;
+					my /= corners.length;
+
+					var dist = Math.sqrt(
+						(mx - cx) * (mx - cx) + (my - cy) * (my - cy),
+					);
+					if (dist < bestDist) {
+						bestDist = dist;
+						best = markers[i];
+					}
+				}
+				return best;
+			}
+
+			function drawMarker(marker) {
+				var corners = marker.corners;
+
+				// Outline
+				context.strokeStyle = "#4f4";
+				context.lineWidth = Math.max(2, canvas.width / 320);
+				context.beginPath();
+				for (var j = 0; j < corners.length; j++) {
+					var c = corners[j];
+					var next = corners[(j + 1) % corners.length];
+					context.moveTo(c.x, c.y);
+					context.lineTo(next.x, next.y);
+				}
+				context.stroke();
+				context.closePath();
+
+				// Corner dot
+				context.fillStyle = "#fa0";
+				context.fillRect(corners[0].x - 3, corners[0].y - 3, 6, 6);
+
+				// ID label on canvas
+				var x = Infinity,
+					y = Infinity;
+				for (var k = 0; k < corners.length; k++) {
+					x = Math.min(x, corners[k].x);
+					y = Math.min(y, corners[k].y);
+				}
+				var fontSize = Math.max(16, canvas.width / 40);
+				context.font = "bold " + fontSize + "px 'Courier New'";
+				context.fillStyle = "#fa0";
+				context.fillText("#" + marker.id, x, Math.max(y - 6, fontSize));
+			}
+
+			function updateDisplay() {
+				var el = document.getElementById("id-value");
+				if (confirmedId !== null) {
+					el.textContent = "#" + confirmedId;
+					el.className = "locked";
+				} else if (candidateId !== null) {
+					// Show candidate dimly while building confidence
+					el.textContent = "#" + candidateId + "…";
 					el.className = "";
+				} else {
+					el.textContent = "Point at a marker";
+					el.className = "empty";
 				}
 			}
 
@@ -274,34 +303,29 @@
 				canvas.width = 1280;
 				canvas.height = 720;
 				detector = new AR.Detector();
-				log("Page loaded. Tap 'Start Camera' to begin.");
 			};
 		</script>
 	</head>
 	<body>
-		<h2>-= Augmented Reality Marker Detector =-</h2>
-		<video
-			id="video"
-			autoplay
-			playsinline
-			muted
-			style="display: none"
-		></video>
-		<canvas id="canvas"></canvas>
-		<button id="start-btn" onclick="startCamera()">▶ Start Camera</button>
+		<h2>AR Marker Detector</h2>
 
-		<div id="marker-display">
-			<h3>Detected Marker IDs</h3>
-			<div id="marker-ids" class="empty">No markers detected</div>
+		<div id="canvas-wrap">
+			<video
+				id="video"
+				autoplay
+				playsinline
+				muted
+				style="display: none"
+			></video>
+			<canvas id="canvas"></canvas>
+			<button id="start-btn" onclick="startCamera()">
+				▶ Start Camera
+			</button>
 		</div>
 
-		<div id="debug">
-			<h3>Debug Log</h3>
-			<div id="debug-log"></div>
-		</div>
-
-		<div style="margin: 15px; font-size: 0.8em">
-			Powered by <a href="http://code.google.com/p/js-aruco/">js-aruco</a>
+		<div id="id-display">
+			<span id="id-label">Detected ID</span>
+			<span id="id-value" class="empty">Point at a marker</span>
 		</div>
 	</body>
 </html>

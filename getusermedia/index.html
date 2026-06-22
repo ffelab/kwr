@@ -373,6 +373,7 @@
 					}
 				}
 
+				drawCenterCrosshair();
 				updateDisplay();
 			}
 
@@ -404,6 +405,43 @@
 					}
 				}
 				return best;
+			}
+
+			function drawCenterCrosshair() {
+				var cx = canvas.width / 2;
+				var cy = canvas.height / 2;
+				var arm = Math.max(16, canvas.width / 48);
+				var gap = Math.max(5, canvas.width / 192);
+				var lw = Math.max(1.5, canvas.width / 480);
+
+				// "difference" blend mode: subtracts the drawn colour from whatever
+				// is already on the canvas. Drawing white (#fff) inverts the pixels
+				// beneath, so dark areas become light and light areas become dark —
+				// the crosshair is always visible regardless of background.
+				context.save();
+				context.globalCompositeOperation = "difference";
+				context.strokeStyle = "#ffffff";
+				context.lineWidth = lw;
+				context.lineCap = "round";
+
+				context.beginPath();
+				context.moveTo(cx - arm, cy);
+				context.lineTo(cx - gap, cy);
+				context.moveTo(cx + gap, cy);
+				context.lineTo(cx + arm, cy);
+				context.moveTo(cx, cy - arm);
+				context.lineTo(cx, cy - gap);
+				context.moveTo(cx, cy + gap);
+				context.lineTo(cx, cy + arm);
+				context.stroke();
+
+				// tiny centre dot
+				context.beginPath();
+				context.arc(cx, cy, lw * 1.4, 0, Math.PI * 2);
+				context.fillStyle = "#ffffff";
+				context.fill();
+
+				context.restore();
 			}
 
 			function drawMarker(marker) {

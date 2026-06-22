@@ -446,10 +446,10 @@
 			function updateDisplay() {
 				var el = document.getElementById("id-value");
 				if (confirmedId !== null) {
-					el.textContent = clues[confirmedId];
+					el.textContent = clues.confirmedId;
 					el.className = "locked";
 				} else if (candidateId !== null) {
-					el.textContent = clues[candidateId];
+					el.textContent = clues.candidateId;
 					el.className = "";
 				} else {
 					el.textContent = "Point at a marker";

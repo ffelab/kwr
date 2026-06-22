@@ -64,6 +64,8 @@
 				justify-content: center;
 				align-items: center;
 				overflow: hidden;
+				/* Show pointer so it's clear it's tappable */
+				cursor: crosshair;
 			}
 
 			#canvas {
@@ -93,7 +95,6 @@
 			#id-display {
 				flex-shrink: 0;
 				width: 96dvw;
-				/* min-height: 20dvh; */
 				max-width: 480px;
 				background: var(--primary-bg-color);
 				font-size: 2.4dvh;
@@ -285,6 +286,13 @@
 			var CONFIRM_FRAMES = 6;
 			var LOST_FRAMES = 18;
 
+			// --- Tap-to-select state ---
+			// tapPoint: canvas-space {x, y} of the last tap, or null for center mode
+			var tapPoint = null;
+			// How many frames to stay in tap mode after no new tap
+			var TAP_MODE_FRAMES = 60;
+			var tapFramesLeft = 0;
+
 			function startCamera() {
 				document.getElementById("start-btn").style.display = "none";
 
@@ -334,6 +342,44 @@
 				video.play().catch(function () {});
 			}
 
+			// Convert a pointer/touch event position (relative to the canvas element)
+			// into canvas pixel coordinates, accounting for CSS scaling.
+			function eventToCanvasPoint(e) {
+				var wrap = document.getElementById("canvas-wrap");
+				var rect = canvas.getBoundingClientRect();
+
+				var clientX, clientY;
+				if (e.touches) {
+					clientX = e.touches[0].clientX;
+					clientY = e.touches[0].clientY;
+				} else {
+					clientX = e.clientX;
+					clientY = e.clientY;
+				}
+
+				// The canvas element is scaled by CSS (object-fit: cover).
+				// Map from CSS pixels → canvas pixels.
+				var scaleX = canvas.width / rect.width;
+				var scaleY = canvas.height / rect.height;
+
+				return {
+					x: (clientX - rect.left) * scaleX,
+					y: (clientY - rect.top) * scaleY,
+				};
+			}
+
+			function onCanvasTap(e) {
+				e.preventDefault();
+				tapPoint = eventToCanvasPoint(e);
+				tapFramesLeft = TAP_MODE_FRAMES;
+
+				// Reset detection so the new tap takes effect immediately
+				confirmedId = null;
+				candidateId = null;
+				candidateSeen = 0;
+				lostFrames = 0;
+			}
+
 			function tick() {
 				requestAnimationFrame(tick);
 				if (video.readyState !== video.HAVE_ENOUGH_DATA) return;
@@ -347,7 +393,27 @@
 				);
 
 				var markers = detector.detect(imageData);
-				var best = pickCenterMarker(markers);
+
+				// Decide pick origin: tap point (if still active) or canvas center
+				var pickX, pickY;
+				if (tapPoint !== null && tapFramesLeft > 0) {
+					pickX = tapPoint.x;
+					pickY = tapPoint.y;
+					tapFramesLeft--;
+					if (tapFramesLeft <= 0) {
+						tapPoint = null;
+					}
+				} else {
+					pickX = canvas.width / 2;
+					pickY = canvas.height / 2;
+				}
+
+				var best = pickNearestMarker(markers, pickX, pickY);
+
+				// Draw crosshair at the active pick point (only while in tap mode)
+				if (tapPoint !== null) {
+					drawCrosshair(pickX, pickY);
+				}
 
 				if (best !== null) {
 					lostFrames = 0;
@@ -360,7 +426,6 @@
 						candidateSeen = 1;
 					}
 
-					// Only switch confirmed ID after seeing consistently
 					if (candidateSeen >= CONFIRM_FRAMES) {
 						confirmedId = candidateId;
 					}
@@ -376,11 +441,9 @@
 				updateDisplay();
 			}
 
-			function pickCenterMarker(markers) {
+			function pickNearestMarker(markers, cx, cy) {
 				if (!markers || markers.length === 0) return null;
 
-				var cx = canvas.width / 2;
-				var cy = canvas.height / 2;
 				var best = null;
 				var bestDist = Infinity;
 
@@ -404,6 +467,24 @@
 					}
 				}
 				return best;
+			}
+
+			function drawCrosshair(x, y) {
+				var size = Math.max(20, canvas.width / 40);
+				context.strokeStyle = "#ff2529";
+				context.lineWidth = Math.max(2, canvas.width / 200);
+				context.beginPath();
+				context.moveTo(x - size, y);
+				context.lineTo(x + size, y);
+				context.moveTo(x, y - size);
+				context.lineTo(x, y + size);
+				context.stroke();
+
+				// Small circle
+				context.beginPath();
+				context.arc(x, y, size * 0.4, 0, Math.PI * 2);
+				context.strokeStyle = "#ff2529";
+				context.stroke();
 			}
 
 			function drawMarker(marker) {
@@ -464,6 +545,14 @@
 				canvas.width = 1280;
 				canvas.height = 720;
 				detector = new AR.Detector();
+
+				// Tap / click on the canvas to pick a marker by position
+				canvas.addEventListener("click", onCanvasTap, {
+					passive: false,
+				});
+				canvas.addEventListener("touchstart", onCanvasTap, {
+					passive: false,
+				});
 			};
 		</script>
 	</head>
@@ -482,7 +571,6 @@
 		<button id="start-btn" onclick="startCamera()">▶ Start Camera</button>
 
 		<div id="id-display">
-			<!-- <span id="id-label">Detected ID</span> -->
 			<span id="id-value" class="empty">Point at a marker</span>
 		</div>
 	</body>

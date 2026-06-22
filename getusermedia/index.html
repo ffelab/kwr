@@ -112,7 +112,7 @@
 				gap: 12px;
 			}
 			#id-display.start {
-				min-height: 25dvh;
+				min-height: 20dvh;
 			}
 
 			#id-value {
@@ -492,7 +492,7 @@
 					el.textContent = clues[candidateId + 1];
 					el.className = "";
 				} else {
-					el.textContent = "Point at a marker";
+					el.textContent = "Scan [■] für Hinweise";
 					el.className = "empty";
 				}
 			}
@@ -508,6 +508,7 @@
 		</script>
 	</head>
 	<body>
+		<div class="howto"></div>
 		<div id="canvas-wrap">
 			<video
 				id="video"
@@ -519,11 +520,11 @@
 			<canvas id="canvas"></canvas>
 		</div>
 
-		<button id="start-btn" onclick="startCamera()">▶ Start Camera</button>
+		<button id="start-btn" onclick="startCamera()">Scan starten</button>
 
 		<div id="id-display">
 			<!-- <span id="id-label">Detected ID</span> -->
-			<span id="id-value" class="empty">Point at a marker</span>
+			<span id="id-value" class="empty">Scan [■] für Hinweise</span>
 		</div>
 	</body>
 </html>

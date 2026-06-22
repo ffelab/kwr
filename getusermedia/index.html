@@ -64,6 +64,9 @@
 				justify-content: center;
 				align-items: center;
 				overflow: hidden;
+				transition:
+					height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+					flex-basis 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 			}
 
 			#canvas {
@@ -381,7 +384,7 @@
 				if (!markers || markers.length === 0) return null;
 
 				var cx = canvas.width / 2;
-				var cy = canvas.height / 2;
+				var cy = canvas.height / 2 - canvas.height * 0.08;
 				var best = null;
 				var bestDist = Infinity;
 
@@ -409,7 +412,7 @@
 
 			function drawCenterCrosshair() {
 				var cx = canvas.width / 2;
-				var cy = canvas.height / 2;
+				var cy = canvas.height / 2 - canvas.height * 0.08;
 				var arm = Math.max(16, canvas.width / 48);
 				var lw = Math.max(1.5, canvas.width / 480);
 				var r = arm * 0.8;

@@ -289,11 +289,11 @@
 			var candidateId = null;
 			var candidateSeen = 0;
 			var lostFrames = 0;
-			var display = document.getElementById("id-display");
 			var CONFIRM_FRAMES = 6;
 			var LOST_FRAMES = 18;
 
 			function startCamera() {
+				var display = document.getElementById("id-display");
 				document.getElementById("start-btn").style.display = "none";
 				display.classList.add("start");
 

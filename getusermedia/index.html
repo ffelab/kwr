@@ -78,7 +78,7 @@
 			}
 
 			#start-btn {
-				min-height: 10dvw;
+				min-height: 11dvh;
 				padding: 10px 20px;
 				width: 100%;
 				font-size: min(1.6rem, calc(94dvw / 16));
@@ -97,7 +97,7 @@
 			#id-display {
 				flex-shrink: 0;
 				width: 96dvw;
-				min-height: 10dvw;
+				min-height: 11dvh;
 				max-width: 480px;
 				background: var(--primary-bg-color);
 				font-size: 2.4dvh;
@@ -285,12 +285,13 @@
 			var candidateId = null;
 			var candidateSeen = 0;
 			var lostFrames = 0;
-
+			var display = document.getElementById("id-display");
 			var CONFIRM_FRAMES = 6;
 			var LOST_FRAMES = 18;
 
 			function startCamera() {
 				document.getElementById("start-btn").style.display = "none";
+				display.style.height = "25dvh";
 
 				var constraints = {
 					video: {

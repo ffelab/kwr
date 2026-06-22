@@ -78,32 +78,36 @@ const puzzleData = {
 	],
 	CLUES: {
 		WAAGERECHT: {
-			3: { c: "", l: "", s: "EHEMALIGER" },
-			4: { c: "Türkisches Gewässer", l: "", s: "SU" },
-			5: { c: "Der Bär mit ", l: "", s: "PU" },
+			3: { c: "", l: "10", s: "EHEMALIGER" },
+			4: { c: "Türkisches Gewässer", l: "2", s: "SU" },
+			5: {
+				c: "Treudoofer Bär aus dem Hundert-Morgen-Wald",
+				l: "2",
+				s: "PU",
+			},
 			10: {
 				c: "Dieser König erscheint dem Knaben in windiger Nacht",
-				l: "",
+				l: "3",
 				s: "ERL",
 			},
 			11: { c: "", l: "", s: "AAA" },
 		},
 		SENKRECHT: {
 			1: {
-				c: "Zwischen Aus und Ehen ist der Lyrik keine Absicht",
-				l: "",
+				c: "Zwischen Aus und Ehen ist das Lyrik-Element keine Absicht",
+				l: "4",
 				s: "VERS",
 			},
-			2: { c: "", l: "", s: "GRAU" },
+			2: { c: "", l: "4", s: "GRAU" },
 			6: {
 				c: "Diese ist im Englischen keine Behauptung",
-				l: "",
+				l: "5",
 				s: "THESE",
 			},
 			7: { c: "", l: "", s: "AAAAA" },
 			8: {
 				c: "Führen manche großartig im Kleidungs-Schilde",
-				l: "",
+				l: "2",
 				s: "XL",
 			},
 			9: { c: "", l: "", s: "AA" },

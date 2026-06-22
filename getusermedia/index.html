@@ -90,6 +90,9 @@
 				border-radius: 2px;
 				cursor: pointer;
 			}
+			#start-btn.start {
+				min-height: 25dvh;
+			}
 			#start-btn:active {
 				background: var(--primary-highlight-color);
 			}
@@ -291,8 +294,7 @@
 
 			function startCamera() {
 				document.getElementById("start-btn").style.display = "none";
-				display.style.height = "25dvh";
-
+				display.classList.add("start");
 				var constraints = {
 					video: {
 						facingMode: { exact: "environment" },

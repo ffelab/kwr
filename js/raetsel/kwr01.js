@@ -113,7 +113,7 @@ const puzzleData = {
 				s: "HULK",
 			},
 			8: {
-				c: "Gerade so: \nZeitlich und räumlich",
+				c: "Zwischen neulich und jetzt, jenseits von zerklüftet und buckelig",
 				l: "4",
 				s: "EBEN",
 			},

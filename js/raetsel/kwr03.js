@@ -77,10 +77,14 @@ const puzzleData = {
 				l: "6",
 				s: "INTERN",
 			},
-			16: { c: "Schon vorbei, glatt verpasst", l: "4", s: "EBEN" },
+			16: {
+				c: `Ist doch glatt was anderes als „vor Langem”`,
+				l: "4",
+				s: "EBEN",
+			},
 			18: { c: "Alle Kompasse führen dahin", l: "7", s: "NORDPOL" },
 			19: {
-				c: "Redaktionelle Dusselei,\ntierisch peinlich",
+				c: "Wasser-Land-Luft-, aber \nbloß nicht Zeitungswesen!",
 				l: "4",
 				s: "ENTE",
 			},
@@ -102,7 +106,7 @@ const puzzleData = {
 			10: {
 				c: "Mal künstlich handschriftlich, mal szenisch anweisend,\nmal ausführlich programmiert",
 				l: "6",
-				s: "SCRIPT",
+				s: "SKRIPT",
 			},
 			12: { c: "Naturtalent kann es sich sparen", l: "5", s: "UEBEN" },
 			13: {

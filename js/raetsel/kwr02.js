@@ -63,7 +63,7 @@ const puzzleData = {
 		WAAGERECHT: {
 			3: { c: "hinweis", l: "4", s: "CODE" },
 			5: {
-				c: "Browseranleitung: Haufenweise Text musste lesen",
+				c: "Browseranleitung: Haufenweise Text musst'e lesen",
 				l: "4",
 				s: "HTML",
 			},

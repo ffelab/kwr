@@ -83,7 +83,11 @@ const puzzleData = {
 			14: { c: "", l: "5", s: "STROM" },
 			15: { c: "", l: "5", s: "REICH" },
 			17: { c: "Fürs Schnürchen wie ein Türchen", l: "4", s: "OESE" },
-			18: { c: "", l: "4", s: "EROS" },
+			18: {
+				c: "Alter ermunternder Junge, trifft stets knapp neben die Lunge",
+				l: "4",
+				s: "EROS",
+			},
 		},
 	},
 };

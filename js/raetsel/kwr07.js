@@ -90,7 +90,7 @@ const puzzleData = {
 				l: "3",
 				s: "ERL",
 			},
-			11: { c: "", l: "", s: "AAA" },
+			11: { c: "Wen braucht wen zum Umkehren?", l: "3", s: "DEN" },
 		},
 		SENKRECHT: {
 			1: {

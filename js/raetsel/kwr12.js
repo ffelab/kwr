@@ -115,24 +115,44 @@ const puzzleData = {
 				s: "ELO",
 			},
 			5: {
-				c: "Schmückt mancher 10 senkrecht Stirn",
+				c: "",
 				l: "6",
 				s: "ESZETT",
+			},
+			6: {
+				c: "",
+				l: "8",
+				s: "JAEGERIN",
+			},
+			8: {
+				c: "",
+				l: "8",
+				s: "FOTOGRAF",
 			},
 			10: {
 				c: "Deren Garten namensgebend für Mutterstadt am Neckar",
 				l: "6",
 				s: "STUTEN",
 			},
+			12: {
+				c: "Druckverfahren dieses Buchs",
+				l: "6",
+				s: "OFFSET",
+			},
 			19: {
 				c: "Kurzer Titel längerer Auf-die-Beine-Prozedur",
 				l: "4",
 				s: "REHA",
 			},
-			19: {
+			20: {
 				c: "In die Fehre integriert ergänzt es die Farbe in Bauhaus-Klees Grundlagen",
 				l: "4",
 				s: "ORML",
+			},
+			21: {
+				c: "",
+				l: "4",
+				s: "OVAL",
 			},
 			22: {
 				c: "Das Kommen und Gehen am Strand",
@@ -143,6 +163,11 @@ const puzzleData = {
 				c: "Soll sicher funktionieren: Zahlen zum Zahlen",
 				l: "3",
 				s: "TAN",
+			},
+			25: {
+				c: "",
+				l: "3",
+				s: "SIR",
 			},
 		},
 	},

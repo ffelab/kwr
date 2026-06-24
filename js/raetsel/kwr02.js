@@ -61,7 +61,11 @@ const puzzleData = {
 	],
 	CLUES: {
 		WAAGERECHT: {
-			3: { c: "hinweis", l: "4", s: "CODE" },
+			3: {
+				c: "Wird geschrieben oder geknackt",
+				l: "4",
+				s: "CODE",
+			},
 			5: {
 				c: "Browseranleitung: Haufenweise Text musst'e lesen",
 				l: "4",
@@ -73,25 +77,37 @@ const puzzleData = {
 				s: "ROADRUNNER",
 			},
 			7: {
-				c: "Euphoriebremse – oder bloß Lautstärkeschwächer",
+				c: "Euphoriebremse, oder bloß Lautstärkeschwächer",
 				l: "8",
 				s: "DAEMPFER",
 			},
 			9: {
-				c: "Monikas Pforten? Kleine bilden zuweilen 5 senkrechts ab",
+				c: "Handliche bilden zuweilen 5 senkrechts ab",
 				l: "8",
 				s: "MONITORE",
 			},
 		},
 		SENKRECHT: {
-			1: { c: "hinweis", l: "5", s: "ACCRA" },
+			1: {
+				c: "Hauptstadt im Land, das die Kolonisatoren einst „Gold Coast“ nannten",
+				l: "5",
+				s: "ACCRA",
+			},
 			2: {
 				c: "Klingt blumig, die gesamten Chlorophylle",
 				l: "5",
 				s: "FLORA",
 			},
-			4: { c: "hinweis", l: "9", s: "ERDBEEREN" },
-			5: { c: "Aufnahme aus Dayton-Hof", l: "9", s: "HANDYFOTO" },
+			4: {
+				c: "Vervollständigen Feuersamen, Wasserfrüchte, Luftobst",
+				l: "9",
+				s: "ERDBEEREN",
+			},
+			5: {
+				c: "Aufnahme versteckt im Dayton-Hof",
+				l: "9",
+				s: "HANDYFOTO",
+			},
 			7: { c: "Passt zu Stadt wie zu 2 senkrecht", l: "4", s: "DARM" },
 			8: {
 				c: "Tankt im Sommer die Sonne, die man später schluckweise schmeckt",

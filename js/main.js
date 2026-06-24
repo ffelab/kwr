@@ -443,8 +443,8 @@ function writeCell(value) {
 	cell.letterEl.textContent = value;
 	savePuzzle();
 
-	if (checkAllSolved()) {
-		// REMOVE "!" AFTER EDITING!
+	if (!checkAllSolved()) {
+		// REMOVE "!" AFTER EDITING! Uncomment
 		triggerWinAnimation();
 
 		solved = true;
@@ -609,7 +609,7 @@ function getCurrentClue() {
 	let clue = getWordStart(state.direction);
 
 	if (!clue) {
-		toggleDirection(); //UN-UNCOMMENT AFTER EDITING!!!!
+		// toggleDirection(); //UN-UNCOMMENT AFTER EDITING!!!!
 		clue = getWordStart(state.direction);
 	}
 

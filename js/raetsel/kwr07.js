@@ -98,7 +98,7 @@ const puzzleData = {
 				l: "4",
 				s: "VERS",
 			},
-			2: { c: "", l: "4", s: "GRAU" },
+			2: { c: "Stufenweise günstiger im Druck", l: "4", s: "GRAU" },
 			6: {
 				c: "Diese ist im Englischen keine Behauptung",
 				l: "5",

@@ -246,10 +246,10 @@
 				108: "→ #CONSULTING",
 				109: "↓ #ULKIGEN",
 				110: "↓ #ISIS",
-				111: "↓ #OELBARON",
+				111: "↓ Schmierstoff + Rauschquelle + Gegenpol zu Off = Der hat aufs richtige Fett gesetzt",
 				112: "→ Regenbogenkatze singt das unendliche Miau-Lied",
 				113: "→ Fettes Brot hängt ihm ein A an und will dass wir die Finger davon lassen",
-				114: "↓ #MOE",
+				114: "↓ Kneipier in dr Welt von den Gelben",
 				115: "→ Stereo ganz verdreht: Warenhaus wo die Regale aus ones and zeros bestehen",
 				116: "↓ #RAW",
 				117: "↓ #ETLICHE",
@@ -509,6 +509,12 @@
 	</head>
 	<body>
 		<div class="howto"></div>
+		<button id="start-btn" onclick="startCamera()">Scan starten</button>
+
+		<div id="id-display">
+			<!-- <span id="id-label">Detected ID</span> -->
+			<span id="id-value" class="empty">Point at a marker</span>
+		</div>
 		<div id="canvas-wrap">
 			<video
 				id="video"
@@ -518,13 +524,6 @@
 				style="display: none"
 			></video>
 			<canvas id="canvas"></canvas>
-		</div>
-
-		<button id="start-btn" onclick="startCamera()">Scan starten</button>
-
-		<div id="id-display">
-			<!-- <span id="id-label">Detected ID</span> -->
-			<span id="id-value" class="empty">Point at a marker</span>
 		</div>
 	</body>
 </html>

@@ -69,7 +69,7 @@ const puzzleData = {
 				s: "KEN",
 			},
 			23: {
-				c: "Sollte EIGENTLICH häufiger an CAPTCHA scheitern als ich",
+				c: "Sollte eigentlich häufiger an CAPTCHA scheitern als ich",
 				l: "3",
 				s: "BOT",
 			},

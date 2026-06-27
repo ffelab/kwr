@@ -4,8 +4,8 @@
 }
 
 @font-face {
-	font-family: "Editorial";
-	src: url(./fonts/Baskerville.ttc);
+	font-family: "Italic";
+	src: url(./fonts/JetBrainsMono-VariableFont_wght.ttf);
 }
 
 /* :root {
@@ -108,7 +108,7 @@ body.dark {
 	overflow: hidden;
 }
 .letter {
-	font-family: "Editorial";
+	font-family: "Italic";
 
 	font-size: min(1.6rem, calc(94dvw / 10));
 }

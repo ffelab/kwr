@@ -1,27 +1,3 @@
-function loadPuzzleFromStorage(index) {
-	const key = `finished${String(index).padStart(2, "0")}`;
-	const raw = localStorage.getItem(key);
-
-	if (!raw) return [];
-
-	const parsed = JSON.parse(raw);
-	return gridToBlackFields(parsed.grid);
-}
-
-function gridToBlackFields(grid) {
-	const result = [];
-
-	for (let r = 0; r < grid.length; r++) {
-		for (let c = 0; c < grid[r].length; c++) {
-			if (grid[r][c] === "") {
-				result.push([r, c]);
-			}
-		}
-	}
-
-	return result;
-}
-
 SIZE = 10;
 
 const BLACK_FIELDS1 = [

@@ -385,30 +385,29 @@
 					canvas.height,
 				);
 
-				var markers = detector.detect(imageData);
-				var best = pickCenterMarker(markers);
+				if (!locked) {
+					var markers = detector.detect(imageData);
+					var best = pickCenterMarker(markers);
 
-				if (best !== null) {
-					lostFrames = 0;
-					drawMarker(best);
-
-					if (best.id === candidateId) {
-						candidateSeen++;
+					if (best !== null) {
+						lostFrames = 0;
+						drawMarker(best);
+						if (best.id === candidateId) {
+							candidateSeen++;
+						} else {
+							candidateId = best.id;
+							candidateSeen = 1;
+						}
+						if (candidateSeen >= CONFIRM_FRAMES) {
+							confirmedId = candidateId;
+						}
 					} else {
-						candidateId = best.id;
-						candidateSeen = 1;
-					}
-
-					// Only switch confirmed ID after seeing consistently
-					if (candidateSeen >= CONFIRM_FRAMES) {
-						confirmedId = candidateId;
-					}
-				} else {
-					lostFrames++;
-					if (lostFrames >= LOST_FRAMES) {
-						confirmedId = null;
-						candidateId = null;
-						candidateSeen = 0;
+						lostFrames++;
+						if (lostFrames >= LOST_FRAMES) {
+							confirmedId = null;
+							candidateId = null;
+							candidateSeen = 0;
+						}
 					}
 				}
 
@@ -512,6 +511,26 @@
 				context.fillText(clueNum, xMax + 8, yCenter + fontSize * 0.35);
 			}
 
+			var locked = false;
+			var lockedClue = null;
+
+			holdBtn.addEventListener("pointerdown", function () {
+				if (locked) {
+					// unlock
+					locked = false;
+					lockedClue = null;
+					holdBtn.style.backgroundColor = "var(--primary-text-color)";
+				} else {
+					// lock on current clue if there is one
+					if (confirmedId !== null) {
+						locked = true;
+						lockedClue = confirmedId;
+						holdBtn.style.backgroundColor =
+							"var(--primary-highlight-color)";
+					}
+				}
+			});
+
 			function updateDisplay() {
 				var el = document.getElementById("id-value");
 
@@ -523,7 +542,7 @@
 
 				if (confirmedId !== null) {
 					el.textContent = clues[confirmedId + 1];
-					el.className = ""; // not blue unless locked
+					el.className = "";
 				} else if (candidateId !== null) {
 					el.textContent = clues[candidateId + 1];
 					el.className = "";
@@ -541,32 +560,6 @@
 				canvas.height = 720;
 				detector = new AR.Detector();
 			};
-
-			var locked = false;
-			var lockedClue = null;
-
-			var holdBtn = document.getElementById("hold-btn");
-
-			holdBtn.addEventListener("pointerdown", function () {
-				if (confirmedId !== null) {
-					locked = true;
-					lockedClue = confirmedId;
-					holdBtn.style.backgroundColor =
-						"var(--primary-highlight-color)";
-				}
-			});
-
-			holdBtn.addEventListener("pointerup", function () {
-				locked = false;
-				lockedClue = null;
-				holdBtn.style.backgroundColor = "var(--primary-text-color)";
-			});
-
-			holdBtn.addEventListener("pointercancel", function () {
-				locked = false;
-				lockedClue = null;
-				holdBtn.style.backgroundColor = "var(--primary-text-color)";
-			});
 		</script>
 	</head>
 	<body>

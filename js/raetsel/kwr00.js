@@ -58,14 +58,14 @@ const puzzleData = {
 	CLUES: {
 		WAAGERECHT: {
 			1: {
-				c: "Spontaner Zusammenbruch: Der ... brachten ihn ...",
+				c: "Spontaner Zusammenbruch: \nDer ... brachten ihn ...",
 				l: "6",
 				s: "ZUFALL",
 			},
 			5: { c: "Anredlich männlich", l: "2", s: "ER" },
 			6: { c: "Dreifach Ausruf des Erstaunens", l: "2", s: "EI" },
 			7: {
-				c: "Die Konsole steuerte zum bewegten Spiel bei",
+				c: "Die Konsole steuerte \nzum bewegten Spiel bei",
 				l: "3",
 				s: "WII",
 			},
@@ -81,15 +81,19 @@ const puzzleData = {
 				s: "SI",
 			},
 			13: {
-				c: "Kommt wiederholt in Meditation vor, gesprochen und auf Yogi-Merch",
+				c: "Kommt wiederholt in \nMeditation vor, gesprochen \nund auf Yogi-Merch",
 				l: "2",
 				s: "OM",
 			},
-			14: { c: "Gehört zu hier wie wann zu dann", l: "2", s: "DA" },
+			14: { c: "Gehört zu hier, wie wann zu dann", l: "2", s: "DA" },
 			16: { c: "Mich nennt man so anderswo", l: "2", s: "ME" },
-			17: { c: "Der job von 20 waagerecht", l: "10", s: "ENCRYPTION" },
+			17: {
+				c: "Job von der 20 waagerecht machine",
+				l: "10",
+				s: "ENCRYPTION",
+			},
 			20: {
-				c: "Die Maschine gab alliierten Codebreakern Rätsel auf",
+				c: "Die gab alliierten \nCodebreakern Rätsel auf",
 				l: "6",
 				s: "ENIGMA",
 			},
@@ -101,20 +105,24 @@ const puzzleData = {
 				s: "ZEIGER",
 			},
 			2: { c: "Vorm Opa noch älter", l: "2", s: "UR" },
-			3: { c: "Der in Spanien ist kurze Bach-Stadt", l: "2", s: "LE" },
+			3: {
+				c: "Der in Marseille \nist kurze Bach-Stadt",
+				l: "2",
+				s: "LE",
+			},
 			4: {
 				c: "Mit Verlaub: James hatte die zum Töten",
 				l: "6",
 				s: "LIZENZ",
 			},
 			7: {
-				c: "Jeder Mensch ... zustimmen: die ist unantastbar",
+				c: "Jeder Mensch ... zustimmen: \nDie ist unantastbar",
 				l: "6",
 				s: "WUERDE",
 			},
 			10: { c: "Exklusiv für die Harten", l: "6", s: "GARTEN" },
 			11: {
-				c: "Richtet den Kartenblick nach unten rechts",
+				c: "Richtet den Kartenblick \nnach unten rechts",
 				l: "2",
 				s: "SO",
 			},
@@ -124,7 +132,7 @@ const puzzleData = {
 				l: "2",
 				s: "AN",
 			},
-			16: { c: "Beide Hälften vom Kind Ende-Roman", l: "2", s: "MO" },
+			16: { c: "Beide Hälften vom \nEnde-Roman-Kind", l: "2", s: "MO" },
 			18: {
 				c: "Spitzname vom ikonischen Freiheitskämpfer",
 				l: "3",

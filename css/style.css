@@ -3,6 +3,11 @@
 	src: url(./fonts/JetBrainsMono-VariableFont_wght.ttf);
 }
 
+@font-face {
+	font-family: "Italic";
+	src: url(./fonts/HALTimezone-Regular-1.woff);
+}
+
 /* :root {
 	--primary-bg-color: rgb(0, 0, 0);
 	--lighter-bg-color: rgb(36, 36, 40);
@@ -92,7 +97,7 @@ body.dark {
 	align-items: center;
 	justify-content: center;
 	border: 1.8px solid var(--primary-text-color);
-	font-size: min(1.6rem, calc(94dvw / 16));
+	/* font-size: min(1.6rem, calc(94dvw / 16)); */
 	font-weight: 600;
 	cursor: pointer;
 	background: var(--primary-bg-color);
@@ -100,6 +105,12 @@ body.dark {
 	webkit-user-select: none; /* Safari */
 	-ms-user-select: none; /* old Edge/IE */
 	user-select: none; /* modern browsers */
+	overflow: hidden;
+}
+.letter {
+	font-family: "JetBrainsMono";
+
+	font-size: min(1.6rem, calc(94dvw / 16));
 }
 
 .box.black {
@@ -122,11 +133,11 @@ body.dark {
 .box.active::after {
 	content: "";
 	position: absolute;
-	width: 2.2px;
+	width: 2.5px;
 	height: 55%;
 	background: white;
 	border: none;
-	left: 22%;
+	left: 15%;
 	top: 20%;
 
 	animation: blink 1s step-end infinite;
@@ -231,19 +242,20 @@ details {
 }
 
 #hinweis {
-	font-family: "JetBrainsMono";
-	font-weight: 700;
+	font-family: "Italic";
+	font-weight: 600;
 	width: min(calc(40px * 11), 94vw);
 	line-height: 3.5dvh;
 	text-align: center;
 	width: 97%;
 	vertical-align: baseline;
-	font-size: 2.4dvh;
+	font-size: 2.6dvh;
 	color: var(--between-dark-light);
 
 	white-space: pre-line;
 }
 .hinweis-arrow {
+	display: none;
 	color: var(--between-dark-light);
 	width: fit-content;
 	height: fit-content;

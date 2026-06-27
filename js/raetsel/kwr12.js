@@ -135,7 +135,7 @@ const puzzleData = {
 				s: "STUTEN",
 			},
 			12: {
-				c: "Druckverfahren dieses Buchs",
+				c: "Druckverfahren dieses Buchs (eigentlich)",
 				l: "6",
 				s: "OFFSET",
 			},

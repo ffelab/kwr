@@ -33,9 +33,13 @@ const puzzleData = {
 
 	CLUES: {
 		WAAGERECHT: {
-			2: { c: "Gehört zu Wasser wie Kabel zu Strom", l: "4", s: "ROHR" },
+			2: {
+				c: "Gehört zu Wasser \nwie Kabel zu Strom",
+				l: "4",
+				s: "ROHR",
+			},
 			7: {
-				c: "Bietet jenen eine Plattform, die nach 3 senkrecht wollen",
+				c: "Bietet jenen eine Plattform, \ndie nach 3 senkrecht wollen",
 				l: "10",
 				s: "HEBEBUEHNE",
 			},
@@ -79,14 +83,14 @@ const puzzleData = {
 				s: "NOT",
 			},
 			25: {
-				c: "Software für Leute \nohne Angst vor Commitments: In der IT wirds ekelhaft",
+				c: "Software für Leute ohne \nAngst vor Commitments: \nIn der IT wirds ekelhaft",
 				l: "3",
 				s: "GIT",
 			},
 		},
 		SENKRECHT: {
 			1: {
-				c: "Forschung and dem einen oder anderen mag ein Schritt ... Nobelpreis sein",
+				c: "Forschung an dem einen oder anderen mag ein Schritt ... Nobelpreis sein",
 				l: "3",
 				s: "GEN",
 			},

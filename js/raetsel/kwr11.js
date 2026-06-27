@@ -37,7 +37,11 @@ const puzzleData = {
 	],
 	CLUES: {
 		WAAGERECHT: {
-			5: { c: "", l: "10", s: "FREISPRUCH" },
+			5: {
+				c: "Hat alles was der Surferchip hat: Wenn der Vorwurf abprallt",
+				l: "10",
+				s: "FREISPRUCH",
+			},
 			8: {
 				c: "Radio ohne Ecken und Kanten? Information und Unterhaltung solidarisch finanziert!",
 				l: "8",
@@ -55,12 +59,12 @@ const puzzleData = {
 				s: "SAHARA",
 			},
 			16: {
-				c: "Mit der macht nicht nur Louis dicke Backen",
+				c: "Ihre Mehrzahl kommt pompös mit Pauken daher",
 				l: "8",
 				s: "TROMPETE",
 			},
 			19: {
-				c: "Ihr Geschäftsmodell: Flotte Fahrt",
+				c: "Ihr Geschäftsmodell: Flotte Fahrt voraus",
 				l: "8",
 				s: "REEDEREI",
 			},
@@ -69,7 +73,7 @@ const puzzleData = {
 				l: "4",
 				s: "BOSS",
 			},
-			21: { c: "", l: "4", s: "ONCE" },
+			21: { c: "Ist vorweg zu lesen im fairytale", l: "4", s: "ONCE" },
 		},
 		SENKRECHT: {
 			1: {
@@ -88,12 +92,24 @@ const puzzleData = {
 				s: "MUNDARTEN",
 			},
 			4: { c: "Kurzer Ozon-Killer ausm Kühlschrank", l: "4", s: "FCKW" },
-			6: { c: "waren Höchstkultur", l: "4", s: "INKA" },
+			6: {
+				c: "Höchstkultur: Ihr 15 senkrecht erstreckte ich von Quito bis Santiago",
+				l: "4",
+				s: "INKA",
+			},
 			7: { c: "Fließt im gleichnamigen Pott", l: "4", s: "RUHR" },
-			12: { c: "Das letzte hat keine Taschen", l: "4", s: "HEMD" },
+			12: {
+				c: "Das letzte von Hans Albers hat keine Taschen",
+				l: "4",
+				s: "HEMD",
+			},
 			13: { c: "Anderorts auch Alm", l: "4", s: "ALPE" },
-			14: { c: "", l: "5", s: "STROM" },
-			15: { c: "", l: "5", s: "REICH" },
+			14: {
+				c: "Höchst spannend: Fließt auch mald in Fischers Netz",
+				l: "5",
+				s: "STROM",
+			},
+			15: { c: "Klingt-nach-Gliedmaß Gegenteil", l: "5", s: "REICH" },
 			17: { c: "Fürs Schnürchen wie ein Türchen", l: "4", s: "OESE" },
 			18: {
 				c: "Alter ermunternder Junge, trifft stets knapp neben die Lunge",

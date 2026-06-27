@@ -30,7 +30,7 @@ const puzzleData = {
 	],
 	CLUES: {
 		WAAGERECHT: {
-			1: { c: "", l: "4", s: "BAND" },
+			1: { c: "Das verbindet, die musiziert", l: "4", s: "BAND" },
 			3: { c: "", l: "4", s: "BURG" },
 			6: { c: "", l: "2", s: "FZ" },
 			8: { c: "", l: "6", s: "TRAUEN" },
@@ -44,8 +44,16 @@ const puzzleData = {
 			},
 			15: { c: "", l: "8", s: "BOULETTE" },
 			17: { c: "", l: "2", s: "AC" },
-			19: { c: "", l: "10", s: "BREMSKEGEL" },
-			22: { c: "", l: "10", s: "ERDNUSSMUS" },
+			19: {
+				c: "Entschleunigt die Kugel auf der langen Bahn? Geometrisches Bauteil in Kfz-Anhalter",
+				l: "10",
+				s: "BREMSKEGEL",
+			},
+			22: {
+				c: "Anders als sein Butter-Pendant ohne extra Zucker aufm Marmeladenbrot",
+				l: "10",
+				s: "ERDNUSSMUS",
+			},
 		},
 		SENKRECHT: {
 			1: {
@@ -59,23 +67,43 @@ const puzzleData = {
 				s: "NUTZLOSE",
 			},
 			4: { c: "", l: "8", s: "UNNOETIG" },
-			5: { c: "", l: "5", s: "GRETA" },
-			6: { c: "", l: "7", s: "FAVELAS" },
+			5: {
+				c: "Die Frau hat was anderes im Kopf als Minos' Land",
+				l: "5",
+				s: "GRETA",
+			},
+			6: {
+				c: "In Brasiliens Marginalen informell gesiedelt",
+				l: "7",
+				s: "FAVELAS",
+			},
 			7: { c: "Richtungsweisend für Heimkehrende", l: "7", s: "ZURUECK" },
-			13: { c: "", l: "2", s: "AU" },
+			13: {
+				c: "Schmerz-Ausruf: Nimmt vor Fragen erhöhte Position ein",
+				l: "2",
+				s: "AU",
+			},
 			14: {
 				c: "Macht Pauli zur Heiligen oder Quartier",
 				l: "2",
 				s: "ST",
 			},
-			16: { c: "", l: "4", s: "EBBE" },
-			18: { c: "", l: "4", s: "PLUS" },
+			16: { c: "Bei Zeiten der Rückzug der Meere", l: "4", s: "EBBE" },
+			18: {
+				c: "Summa summarum positiv: Die mit den Kleinen Preisen",
+				l: "4",
+				s: "PLUS",
+			},
 			20: {
 				c: "Dieser Tag ist verhasst, diese Tage aufbauend",
 				l: "3",
 				s: "MON",
 			},
-			21: { c: "", l: "3", s: "EIS" },
+			21: {
+				c: "Die Kugel für den Sommer, den Zapfen für den Winter",
+				l: "3",
+				s: "EIS",
+			},
 		},
 	},
 };

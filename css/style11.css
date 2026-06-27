@@ -5,7 +5,7 @@
 
 @font-face {
 	font-family: "Italic";
-	src: url(./fonts/JetBrainsMono-VariableFont_wght.ttf);
+	src: url(./fonts/HALTimezone-Regular-1.woff);
 }
 
 /* :root {
@@ -108,9 +108,9 @@ body.dark {
 	overflow: hidden;
 }
 .letter {
-	font-family: "Italic";
+	font-family: "JetBrainsMono";
 
-	font-size: min(1.6rem, calc(94dvw / 10));
+	font-size: min(1.6rem, calc(94dvw / 17));
 }
 
 .box.black {
@@ -242,14 +242,14 @@ details {
 }
 
 #hinweis {
-	font-family: "Editorial";
+	font-family: "Italic";
 	font-weight: 700;
 	width: min(calc(40px * 11), 94vw);
 	line-height: 3.5dvh;
 	text-align: center;
 	width: 97%;
 	vertical-align: baseline;
-	font-size: 2.4dvh;
+	font-size: 2.6dvh;
 	color: var(--between-dark-light);
 
 	white-space: pre-line;

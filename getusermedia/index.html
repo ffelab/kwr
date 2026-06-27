@@ -13,7 +13,11 @@
 		<style>
 			@font-face {
 				font-family: "Italic";
-				src: url(./fonts/PPKyoto-Medium.otf);
+				src: url(./css/fonts/HALTimezone-Regular-1.woff);
+			}
+			@font-face {
+				font-family: "JetBrainsMono";
+				src: url(./css/fonts/JetBrainsMono-VariableFont_wght.ttf);
 			}
 
 			:root {
@@ -58,30 +62,38 @@
 				border: 1.8px solid var(--primary-text-color);
 				border-radius: 2px;
 				flex: 1 1 auto;
-				min-height: 0;
 				width: 100%;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				overflow: hidden;
 				background-color: var(--primary-text-color);
-				transition:
-					height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-					flex-basis 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 			}
 
 			#canvas {
 				display: block;
-				width: 101%;
-				height: 101%;
+				width: 94dvw;
+				height: 94dvw;
 				object-fit: cover;
 				flex-shrink: 0;
 			}
 
-			#start-btn {
-				min-height: 11dvh;
-				padding: 10px 20px;
-				width: 100%;
+			@keyframes glow {
+				50% {
+					box-shadow: 0 0 1px 0.2px var(--primary-bg-color);
+					opacity: 0.3;
+				}
+			}
+
+			#start-btn,
+			#hold-btn {
+				margin: 15vw 0;
+				border: solid var(--primary-bg-color) 1.8px;
+				font-size: min(1.6rem, calc(94dvw / 16));
+				padding: 1dvw 3dvw;
+				animation: glow 1s ease-in-out infinite;
+				box-shadow: 0 0 0.2px 0px var(--primary-bg-color);
+
 				font-size: min(1.6rem, calc(94dvw / 16));
 				font-family: "JetBrainsMono", monospace;
 				font-weight: 700;
@@ -91,6 +103,22 @@
 				border-radius: 2px;
 				cursor: pointer;
 			}
+			#hold-btn {
+				aspect-ratio: 1/1;
+				width: 31dvw;
+				margin: 5vw 0;
+				display: none;
+				border-radius: 50%;
+				padding: 0;
+				animation: none;
+				background-color: var(--primary-text-color);
+				color: var(--primary-bg-color);
+				border: none;
+				font-size: 15dvw;
+				webkit-user-select: none !important; /* Safari */
+				-ms-user-select: none; /* old Edge/IE */
+				user-select: none; /* modern browsers */
+			}
 
 			#start-btn:active {
 				background: var(--primary-highlight-color);
@@ -99,7 +127,7 @@
 			#id-display {
 				flex-shrink: 0;
 				width: 96dvw;
-				min-height: 11dvh;
+				min-height: 20dvh;
 				max-width: 480px;
 				background: var(--primary-bg-color);
 				font-size: 2.4dvh;
@@ -296,6 +324,7 @@
 			function startCamera() {
 				var display = document.getElementById("id-display");
 				document.getElementById("start-btn").style.display = "none";
+				document.getElementById("hold-btn").style.display = "block";
 				display.classList.add("start");
 
 				var constraints = {
@@ -485,9 +514,16 @@
 
 			function updateDisplay() {
 				var el = document.getElementById("id-value");
+
+				if (locked && lockedClue !== null) {
+					el.textContent = clues[lockedClue + 1];
+					el.className = "locked";
+					return;
+				}
+
 				if (confirmedId !== null) {
 					el.textContent = clues[confirmedId + 1];
-					el.className = "locked";
+					el.className = ""; // not blue unless locked
 				} else if (candidateId !== null) {
 					el.textContent = clues[candidateId + 1];
 					el.className = "";
@@ -505,15 +541,37 @@
 				canvas.height = 720;
 				detector = new AR.Detector();
 			};
+
+			var locked = false;
+			var lockedClue = null;
+
+			var holdBtn = document.getElementById("hold-btn");
+
+			holdBtn.addEventListener("pointerdown", function () {
+				if (confirmedId !== null) {
+					locked = true;
+					lockedClue = confirmedId;
+					holdBtn.style.backgroundColor =
+						"var(--primary-highlight-color)";
+				}
+			});
+
+			holdBtn.addEventListener("pointerup", function () {
+				locked = false;
+				lockedClue = null;
+				holdBtn.style.backgroundColor = "var(--primary-text-color)";
+			});
+
+			holdBtn.addEventListener("pointercancel", function () {
+				locked = false;
+				lockedClue = null;
+				holdBtn.style.backgroundColor = "var(--primary-text-color)";
+			});
 		</script>
 	</head>
 	<body>
 		<div class="howto"></div>
 
-		<div id="id-display">
-			<!-- <span id="id-label">Detected ID</span> -->
-			<span id="id-value" class="empty">Point at a marker</span>
-		</div>
 		<div id="canvas-wrap">
 			<video
 				id="video"
@@ -524,6 +582,11 @@
 			></video>
 			<canvas id="canvas"></canvas>
 		</div>
+		<div id="id-display">
+			<!-- <span id="id-label">Detected ID</span> -->
+			<span id="id-value" class="empty">Point at a marker</span>
+		</div>
 		<button id="start-btn" onclick="startCamera()">Scan starten</button>
+		<button id="hold-btn"></button>
 	</body>
 </html>

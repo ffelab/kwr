@@ -828,24 +828,23 @@ checkButton.addEventListener("pointerup", () => {
 	clearTimeout(checkHoldTimer);
 	let { row, col } = state.current;
 	display.textContent =
-		"Click auf ein Feld für den Rätselhinweis. Click nochmal\num die Richtung zu ändern";
+		"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
 	display.style.color = "var(--between-dark-light)";
 
 	if (!checkActive) {
-		display.textContent =
-			"Knopf länger gedrückt halten um Antworten zu prüfen. Vorsicht: zählt als Schummeln!";
-		display.style.color = "var(--primary-warning-color)";
+		display.textContent = `Halte ? länger gedrückt um Antworten zu prüfen. Vorsicht: zählt als Schummeln!`;
+		display.style.color = "var(--primary-highlight-color)";
 
-		// setTimeout(() => {
-		// 	if (state.current.row !== null) {
-		// 		showClue();
-		// 		display.style.color = "var(--primary-text-color)";
-		// 	} else {
-		// 		display.textContent =
-		// 			"Click auf ein Feld für den Rätselhinweis. Click nochmal\num die Richtung zu ändern";
-		// 		display.style.color = "var(--between-dark-light)";
-		// 	}
-		// }, 3500);
+		setTimeout(() => {
+			if (state.current.row !== null) {
+				showClue();
+				display.style.color = "var(--primary-text-color)";
+			} else {
+				display.textContent =
+					"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
+				display.style.color = "var(--between-dark-light)";
+			}
+		}, 3500);
 
 		return;
 	}
@@ -854,7 +853,7 @@ checkButton.addEventListener("pointerup", () => {
 	restoreGridState(checkPreviewState);
 
 	display.textContent =
-		"Click auf ein Feld für den Rätselhinweis. Click nochmal\num die Richtung zu ändern";
+		"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
 	display.style.color = "var(--between-dark-light)";
 	if (state.current.row) setActive(row, col);
 });
@@ -1077,4 +1076,374 @@ function fillRandomField() {
 
 if (display.textContent === "")
 	display.textContent =
-		"Click auf ein Feld für den Rätselhinweis. Click nochmal\num die Richtung zu ändern";
+		"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
+
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+document.getElementById("start").addEventListener("click", async () => {
+	document.getElementById("titel-wrapper").style.opacity = "0";
+	document.getElementById("titel-wrapper").style.pointerEvents = "none";
+	body.classList.remove("dark");
+
+	await delay(1500);
+	document.getElementById("screen").style.opacity = "0";
+});
+
+// ─── Field definitions (unchanged) ───────────────────────────────────────────
+
+const Titel_FIELDS1 = [
+	[0, 0],
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[1, 0],
+	[1, 4],
+	[2, 0],
+	[2, 1],
+	[2, 2],
+	[2, 3],
+	[3, 0],
+	[3, 2],
+	[4, 0],
+	[4, 3],
+	[4, 4],
+];
+const Titel_FIELDS2 = [
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[1, 0],
+	[1, 4],
+	[2, 0],
+	[2, 1],
+	[2, 2],
+	[2, 3],
+	[2, 4],
+	[3, 0],
+	[3, 4],
+	[4, 0],
+	[4, 4],
+];
+const Titel_FIELDS3 = [
+	[0, 0],
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[0, 4],
+	[1, 0],
+	[2, 0],
+	[2, 1],
+	[2, 2],
+	[2, 3],
+	[3, 0],
+	[4, 0],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+	[4, 4],
+];
+const Titel_FIELDS4 = [
+	[0, 0],
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[0, 4],
+	[1, 2],
+	[2, 2],
+	[3, 2],
+	[4, 2],
+];
+const Titel_FIELDS5 = [
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[0, 4],
+	[1, 0],
+	[2, 1],
+	[2, 2],
+	[2, 3],
+	[3, 4],
+	[4, 0],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+];
+const Titel_FIELDS6 = [
+	[0, 0],
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[0, 4],
+	[1, 0],
+	[2, 0],
+	[2, 1],
+	[2, 2],
+	[2, 3],
+	[3, 0],
+	[4, 0],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+	[4, 4],
+];
+const Titel_FIELDS7 = [
+	[0, 0],
+	[1, 0],
+	[2, 0],
+	[3, 0],
+	[4, 0],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+	[4, 4],
+];
+const Titel_FIELDS8 = [
+	[0, 0],
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[0, 4],
+	[1, 0],
+	[1, 1],
+	[1, 2],
+	[1, 3],
+	[1, 4],
+	[2, 0],
+	[2, 1],
+	[2, 2],
+	[2, 3],
+	[2, 4],
+	[3, 0],
+	[3, 1],
+	[3, 2],
+	[3, 3],
+	[3, 4],
+	[4, 0],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+	[4, 4],
+];
+const Titel_FIELDS9 = [
+	[0, 0],
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[1, 0],
+	[1, 4],
+	[2, 0],
+	[2, 1],
+	[2, 2],
+	[2, 3],
+	[3, 0],
+	[3, 4],
+	[4, 0],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+];
+const Titel_FIELDS10 = [
+	[0, 0],
+	[1, 0],
+	[2, 0],
+	[3, 0],
+	[4, 0],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+	[4, 4],
+];
+const Titel_FIELDS11 = [
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[1, 0],
+	[1, 4],
+	[2, 0],
+	[2, 4],
+	[3, 0],
+	[3, 4],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+];
+const Titel_FIELDS12 = [
+	[0, 1],
+	[0, 2],
+	[0, 3],
+	[0, 4],
+	[1, 0],
+	[2, 0],
+	[2, 2],
+	[2, 3],
+	[2, 4],
+	[3, 0],
+	[3, 4],
+	[4, 1],
+	[4, 2],
+	[4, 3],
+];
+
+const TitelFieldsList = [
+	Titel_FIELDS1,
+	Titel_FIELDS2,
+	Titel_FIELDS3,
+	Titel_FIELDS4,
+	Titel_FIELDS5,
+	Titel_FIELDS6,
+	Titel_FIELDS7,
+	Titel_FIELDS8,
+	Titel_FIELDS9,
+	Titel_FIELDS10,
+	Titel_FIELDS11,
+	Titel_FIELDS12,
+];
+
+// ─── Setup ────────────────────────────────────────────────────────────────────
+
+const NUM = 12;
+const wrapper = document.getElementById("titel-wrapper");
+
+// Each container gets a flat array of 25 cell elements
+const cells = [];
+
+for (let i = 0; i < NUM; i++) {
+	const container = document.getElementById(`titel-container${i + 1}`);
+	container.innerHTML = "";
+	const containerCells = [];
+
+	for (let r = 0; r < 5; r++) {
+		for (let c = 0; c < 5; c++) {
+			const cell = document.createElement("div");
+			cell.className = "titel-box";
+			// all cells start completely hidden
+			cell.style.opacity = "0";
+			cell.style.border = "";
+			container.appendChild(cell);
+			containerCells.push({ el: cell, r, c });
+		}
+	}
+
+	cells.push(containerCells);
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function isTarget(i, r, c) {
+	return TitelFieldsList[i].some(([tr, tc]) => tr === r && tc === c);
+}
+
+// Show a specific cell as "on"
+function cellOn(cell) {
+	cell.el.style.opacity = "1";
+	cell.el.style.background = "var(--primary-bg-color)";
+	cell.el.style.border = "2px solid var(--primary-bg-color)";
+}
+
+// Hide a cell completely
+function cellOff(cell) {
+	cell.el.style.opacity = "0";
+	cell.el.style.border = "";
+}
+
+// ─── Animation ────────────────────────────────────────────────────────────────
+
+// All target cells across all containers, shuffled
+function getAllTargetCells() {
+	const all = [];
+	for (let i = 0; i < NUM; i++) {
+		for (const cell of cells[i]) {
+			if (isTarget(i, cell.r, cell.c)) {
+				all.push({ i, cell });
+			}
+		}
+	}
+	// shuffle
+	for (let k = all.length - 1; k > 0; k--) {
+		const j = Math.floor(Math.random() * (k + 1));
+		[all[k], all[j]] = [all[j], all[k]];
+	}
+	return all;
+}
+
+function runSequence() {
+	wrapper.style.transition = "";
+	wrapper.style.opacity = "1";
+	wrapper.style.display = "flex";
+
+	for (let i = 0; i < NUM; i++) {
+		for (const cell of cells[i]) cellOff(cell);
+	}
+
+	// ALL cells participate in flickering
+	const allCells = [];
+	for (let i = 0; i < NUM; i++) {
+		for (const cell of cells[i]) {
+			allCells.push({ i, cell, target: isTarget(i, cell.r, cell.c) });
+		}
+	}
+
+	const targets = allCells.filter((c) => c.target);
+	const total = targets.length;
+
+	const TOTAL_DURATION = 5000;
+	const TICK = 140;
+	const totalTicks = Math.floor(TOTAL_DURATION / TICK);
+
+	// Each target cell gets its own random lock tick
+	const lockTick = targets.map(() =>
+		Math.floor(totalTicks * (0.4 + Math.random() * 0.6)),
+	);
+
+	const lockedIn = new Array(total).fill(false);
+
+	let tick = 0;
+
+	const interval = setInterval(() => {
+		const t = tick / totalTicks;
+
+		// Lock in target cells whose time has come
+		for (let idx = 0; idx < total; idx++) {
+			if (!lockedIn[idx] && tick >= lockTick[idx]) {
+				lockedIn[idx] = true;
+				cellOn(targets[idx].cell);
+			}
+		}
+
+		// All cells not yet locked in flicker randomly
+		// Density grows from near-zero to fairly active, then tapers off
+		// as more cells lock in (so the image "wins" gradually)
+		const flickerDensity = Math.sin(t * Math.PI) * 0.4;
+
+		for (const { cell, target, i } of allCells) {
+			// Skip locked-in cells
+			const targetIdx = targets.findIndex((tc) => tc.cell === cell);
+			if (targetIdx !== -1 && lockedIn[targetIdx]) continue;
+
+			if (Math.random() < flickerDensity) {
+				cellOn(cell);
+			} else {
+				cellOff(cell);
+			}
+		}
+
+		tick++;
+
+		if (tick > totalTicks) {
+			clearInterval(interval);
+
+			// Final state: only target cells on, everything else off
+			for (const { cell, target } of allCells) {
+				const targetIdx = targets.findIndex((tc) => tc.cell === cell);
+				if (targetIdx !== -1) {
+					cellOn(cell);
+				} else {
+					cellOff(cell);
+				}
+			}
+
+			document.getElementById("start-container").style.opacity = "1";
+		}
+	}, TICK);
+}
+
+runSequence();

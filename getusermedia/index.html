@@ -13,11 +13,11 @@
 		<style>
 			@font-face {
 				font-family: "Italic";
-				src: url(../css/fonts/HALTimezone-Regular-1.woff);
+				src: url(./css/fonts/HALTimezone-Regular-1.woff);
 			}
 			@font-face {
 				font-family: "JetBrainsMono";
-				src: url(../css/fonts/JetBrainsMono-VariableFont_wght.ttf);
+				src: url(./css/fonts/JetBrainsMono-VariableFont_wght.ttf);
 			}
 
 			:root {
@@ -118,6 +118,7 @@
 				webkit-user-select: none !important; /* Safari */
 				-ms-user-select: none; /* old Edge/IE */
 				user-select: none; /* modern browsers */
+				touch-action: none;
 			}
 
 			#start-btn:active {
@@ -514,16 +515,9 @@
 
 			function updateDisplay() {
 				var el = document.getElementById("id-value");
-
-				if (locked && lockedClue !== null) {
-					el.textContent = clues[lockedClue + 1];
-					el.className = "locked";
-					return;
-				}
-
 				if (confirmedId !== null) {
 					el.textContent = clues[confirmedId + 1];
-					el.className = ""; // not blue unless locked
+					el.className = "locked";
 				} else if (candidateId !== null) {
 					el.textContent = clues[candidateId + 1];
 					el.className = "";
@@ -541,35 +535,6 @@
 				canvas.height = 720;
 				detector = new AR.Detector();
 			};
-
-			var locked = false;
-			var lockedClue = null;
-
-			var holdBtn = document.getElementById("hold-btn");
-
-			holdBtn.addEventListener("pointerdown", function () {
-				e.preventDefault();
-				if (confirmedId !== null) {
-					locked = true;
-					lockedClue = confirmedId;
-					holdBtn.style.backgroundColor =
-						"var(--primary-highlight-color)";
-				}
-			});
-
-			holdBtn.addEventListener("pointerup", function () {
-				e.preventDefault();
-				locked = false;
-				lockedClue = null;
-				holdBtn.style.backgroundColor = "var(--primary-text-color)";
-			});
-
-			holdBtn.addEventListener("pointercancel", function () {
-				e.preventDefault();
-				locked = false;
-				lockedClue = null;
-				holdBtn.style.backgroundColor = "var(--primary-text-color)";
-			});
 		</script>
 	</head>
 	<body>

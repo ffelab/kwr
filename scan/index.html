@@ -590,6 +590,7 @@
 			}
 
 			function holdStart() {
+				if (confirmedId === null && candidateId === null) return;
 				isHeld = true;
 				lockedId = confirmedId !== null ? confirmedId : candidateId;
 
@@ -609,6 +610,7 @@
 				}
 
 				var lockedNum = document.getElementById("lockedNum");
+				let num = lockedId + 1;
 				lockedNum.textContent = lockedId + 1;
 				lockedNum.style.opacity = "1";
 			}

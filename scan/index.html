@@ -197,23 +197,24 @@
 				color: var(--primary-text-color);
 			}
 			#lockedNum {
-				position: absolute;
-				top: 47%;
-				left: 78%;
+				position: fixed;
+				/* transform: translate(-6vw, -17vw); */
 				z-index: 999;
-				height: 80px;
-				width: 80px;
-				border-radius: 50%;
+				height: fit-content;
+				width: fit-content;
+				padding: 1vw 5vw;
+				border-radius: 2px;
+				/* border-radius: 50%; */
 				background-color: var(--darker-highlight-color);
 				color: var(--primary-bg-color);
-				font-size: 2rem;
+				font-size: 5rem;
 				font-weight: 700;
-				text-align: center;
+				text-align: left;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				transform: rotate(4deg);
-				opacity: 0;
+				/* transform: rotate(4deg); */
+				opacity: 1;
 			}
 		</style>
 		<script>
@@ -706,6 +707,7 @@
 		<div class="howto"></div>
 
 		<div id="canvas-wrap">
+			<div id="lockedNum">200</div>
 			<video
 				id="video"
 				autoplay
@@ -726,6 +728,5 @@
 				<button id="hold-btn"></button>
 			</div>
 		</div>
-		<div id="lockedNum"></div>
 	</body>
 </html>

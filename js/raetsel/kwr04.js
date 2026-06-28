@@ -37,7 +37,7 @@ const puzzleData = {
 				s: "BURG",
 			},
 			8: {
-				c: "Es ist gleich falsch, Allen oder Keinem zu ... (Seneca)",
+				c: "„Es ist gleich falsch, Allen oder Keinem zu ...“ (Seneca)",
 				l: "6",
 				s: "TRAUEN",
 			},
@@ -46,19 +46,23 @@ const puzzleData = {
 				l: "3",
 				s: "BIZ",
 			},
-			11: { c: "", l: "3", s: "ORT" },
-			12: {
+			10: { c: "Der Platz am Ende jeder Antwort", l: "3", s: "ORT" },
+			11: {
 				c: "Für die sind ein Bart schon ein großer Wald",
 				l: "6",
 				s: "LAEUSE",
 			},
-			15: { c: "", l: "8", s: "BOULETTE" },
-			19: {
+			12: {
+				c: "Das Kügelchen ist nämlich weit über die Grenzen Frankreichs hinaus bekannt",
+				l: "8",
+				s: "BOULETTE",
+			},
+			15: {
 				c: "Entschleunigt die Kugel auf der langen Bahn? Geometrisches Bauteil in Kfz-Anhalter",
 				l: "10",
 				s: "BREMSKEGEL",
 			},
-			22: {
+			18: {
 				c: "Anders als sein Butter-Pendant ohne extra Zucker aufm Marmeladenbrot",
 				l: "10",
 				s: "ERDNUSSMUS",
@@ -75,9 +79,13 @@ const puzzleData = {
 				l: "8",
 				s: "NUTZLOSE",
 			},
-			4: { c: "", l: "8", s: "UNNOETIG" },
+			4: {
+				c: "„Dass in der Kirche gepredigt wird, macht deswegen die Blitzableiter auf ihnen nicht ...“ (Lichtenberg)",
+				l: "8",
+				s: "UNNOETIG",
+			},
 			5: {
-				c: "Die Frau hat was anderes im Kopf als Minos' Land",
+				c: "Schwedischer Star der Freitags-Futurist*innen",
 				l: "5",
 				s: "GRETA",
 			},
@@ -87,28 +95,18 @@ const puzzleData = {
 				s: "FAVELAS",
 			},
 			7: { c: "Richtungsweisend für Heimkehrende", l: "7", s: "ZURUECK" },
-			13: {
-				c: "Schmerz-Ausruf: Nimmt vor Fragen erhöhte Position ein",
-				l: "2",
-				s: "AU",
-			},
+			13: { c: "Bei Zeiten der Rückzug der Meere", l: "4", s: "EBBE" },
 			14: {
-				c: "Macht Pauli zur Heiligen oder Quartier",
-				l: "2",
-				s: "ST",
-			},
-			16: { c: "Bei Zeiten der Rückzug der Meere", l: "4", s: "EBBE" },
-			18: {
-				c: "Summa summarum positiv: Die mit den Kleinen Preisen",
+				c: "Summa summarum positiv: Die mit den kleinen Preisen",
 				l: "4",
 				s: "PLUS",
 			},
-			20: {
+			16: {
 				c: "Dieser Tag ist verhasst, diese Tage aufbauend",
 				l: "3",
 				s: "MON",
 			},
-			21: {
+			17: {
 				c: "Die Kugel für den Sommer, den Zapfen für den Winter",
 				l: "3",
 				s: "EIS",

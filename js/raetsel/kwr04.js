@@ -1,7 +1,7 @@
 const puzzleData = {
 	PUZZLE_ID: "04",
 	SIZE: 10,
-	MIN_WORD_LENGTH: 2,
+	MIN_WORD_LENGTH: 3,
 	BLACK_FIELDS: [
 		[0, 4],
 		[0, 5],
@@ -31,11 +31,27 @@ const puzzleData = {
 	CLUES: {
 		WAAGERECHT: {
 			1: { c: "Das verbindet, die musiziert", l: "4", s: "BAND" },
-			3: { c: "", l: "4", s: "BURG" },
-			6: { c: "", l: "2", s: "FZ" },
-			8: { c: "", l: "6", s: "TRAUEN" },
-			9: { c: "", l: "3", s: "BIZ" },
-			10: { c: "", l: "2", s: "VR" },
+			3: {
+				c: "Hochschulnamensgebendes Gemäuer auf dem Giebichenstein",
+				l: "4",
+				s: "BURG",
+			},
+			6: { c: "Notiert einen starken Ton", l: "2", s: "FZ" },
+			8: {
+				c: "Es ist gleich falsch, Allen oder Keinem zu ... (Seneca)",
+				l: "6",
+				s: "TRAUEN",
+			},
+			9: {
+				c: "Geschäftlicher Spitzname z.B. nach der Show",
+				l: "3",
+				s: "BIZ",
+			},
+			10: {
+				c: "Kürzel für die Realität aus der Brille",
+				l: "2",
+				s: "VR",
+			},
 			11: { c: "", l: "3", s: "ORT" },
 			12: {
 				c: "Für die sind ein Bart schon ein großer Wald",
@@ -62,7 +78,7 @@ const puzzleData = {
 				s: "BAMBI",
 			},
 			2: {
-				c: "Sind keine Nieten in der Gebrauchslotterie? ",
+				c: "Sind keine Nieten in der Gebrauchslotterie? Die Ohne-Zwecks!",
 				l: "8",
 				s: "NUTZLOSE",
 			},

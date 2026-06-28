@@ -80,8 +80,8 @@
 
 			#canvas {
 				display: block;
-				width: 94dvw;
-				height: 94dvw;
+				width: 95dvw;
+				height: 95dvw;
 				object-fit: cover;
 				flex-shrink: 0;
 				touch-action: none;
@@ -161,6 +161,7 @@
 			/* Locked display border highlight */
 			#id-display.held {
 				border-color: var(--darker-highlight-color);
+				color: var(--darker-highlight-color);
 			}
 
 			#id-value {
@@ -179,23 +180,23 @@
 				font-weight: normal;
 			}
 			#id-value.locked {
-				color: var(--darker-highlight-color);
+				color: var(--primary-text-color);
 			}
 		</style>
 		<script>
 			var clues = {
-				1: "→ So manche Kreaturen vor Indesign \n──────────────────────────────\n↓ Erbinfo ganz vorne mit dabei in italienischer Hafenstadt + Den gibt's in dick, dünn, blind + Der südlichste von Nordamerikas größten Seen = Das Pendant zur Police",
+				1: "→ So manche Kreaturen vor Indesign \n\n↓ Erbinfo ganz vorne mit dabei in italienischer Hafenstadt + Den gibt's in dick, dünn, blind + Der südlichste von Nordamerikas größten Seen = Das Pendant zur Police",
 				2: "↓ Möglicher Vorstand von Engel, Bischof und Gebirge",
 				3: "↓ Atmen wird überbewertet wenn die der Wespe nachstrebt",
 				4: "↓ Knapp hinter Mercedes: Auto mit Geltungsdrang",
 				5: "↓ Entfernt: Liegt verborgen im Chlorsee",
-				6: "→ Dieser Stoff ist der Knaller \n──────────────────────────────\n↓ Klingt lustig, sind mehr Wellness",
+				6: "→ Dieser Stoff ist der Knaller \n\n↓ Klingt lustig, sind mehr Wellness",
 				7: "↓ Die Four Tops gehen loco in Aca...",
 				8: "↓ Zufluchtsort für Schutzsuchende",
 				9: "↓ Gelispeltes Ohne-Zweck? Kann keine Spuren von Schalenfrüchten enthalten!",
 				10: "↓ Die Verbindung zwischen Sack und Rettung",
 				11: "↓ Chillige Wortwahl hätte man sonst streng genommen",
-				12: "→ In diese Berge geht man zum schlafen\n──────────────────────────────\n↓ Klingt nach User-Name, ist weltberühmte Halle-Persönlichkeit",
+				12: "→ In diese Berge geht man zum schlafen\n\n↓ Klingt nach User-Name, ist weltberühmte Halle-Persönlichkeit",
 				13: "→ Unter liebevollen Umständen Capitale",
 				14: "→ Anstoßend, wer den gibt",
 				15: "↓ Die Disziplin macht einen systematischen Deep Dive",
@@ -218,16 +219,16 @@
 				32: "↓ Eins von 16 in der Punschessenz",
 				33: "→ Ist der Rückwärts am Anfang von 113 senkrecht",
 				34: "→ Der Wolf erwacht zum full moon",
-				35: "→ Frau aus Fluten + 14ter von 26 + Erste Silbensilbe = Nützliches Ding \n──────────────────────────────\n↓ Nichtinvasive Tapetenwechselweise",
+				35: "→ Frau aus Fluten + 14ter von 26 + Erste Silbensilbe = Nützliches Ding \n\n↓ Nichtinvasive Tapetenwechselweise",
 				36: "↓ Geschwollenes Wort ist gleich ungleich",
 				37: "→ Paukschänke? Wissensaneignung möglich!",
 				38: "↓ Hat seinen Ursprung in Süßkramgebacke oder Insektenattacke",
-				39: "→ Die hinzubestellte Soße trägt nicht nur Farben vom Schlagbaum \n──────────────────────────────\n↓ Dieser Man: Automaten-Großmaul, Geisterjäger, Kirschenliebhaber",
-				40: "→ Klingt deftig, ist schwäbische Marmelade \n──────────────────────────────\n↓ Kurz vor San Andreas: Ein schwerer Autodiebstahl",
+				39: "→ Die hinzubestellte Soße trägt nicht nur Farben vom Schlagbaum \n\n↓ Dieser Man: Automaten-Großmaul, Geisterjäger, Kirschenliebhaber",
+				40: "→ Klingt deftig, ist schwäbische Marmelade \n\n↓ Kurz vor San Andreas: Ein schwerer Autodiebstahl",
 				41: "↓ Gegenpol zum Haben",
 				42: "→ Aufmerksamkeitsaufforderung: ... 12 waagerecht!",
 				43: "↓ Kurz angewandt: 79 waagerecht in Karlsruhe",
-				44: "→ Rheinischer Liebesbeweis vorm Haus? Schlappen-Monopol! \n──────────────────────────────\n↓ Trägt auf, wer Teint-Täuschung betreibt",
+				44: "→ Rheinischer Liebesbeweis vorm Haus? Schlappen-Monopol! \n\n↓ Trägt auf, wer Teint-Täuschung betreibt",
 				45: "↓ Begrenzt jeweils die beiden Köln-Seiten, egal ob gut oder schlecht",
 				46: "↓ Die wird reproduktiv vom Winde verweht",
 				47: "→ Kindeskindeskind",
@@ -272,7 +273,7 @@
 				86: "→ Gezinkter Entwirrer",
 				87: "↓ Abschließende Aktivität von Kletternden, Badenden, Hitzköpfigen",
 				88: "↓ Zeigt schließlich Wirkung, nach Schubkrafteinsatz",
-				89: "→ Das Kraut im Brotteig macht einen lustigen Sandwich\n──────────────────────────────\n↓ Notiert, wer das Zählen in der Escuela gelernt hat oder Hochofen beschreibt",
+				89: "→ Das Kraut im Brotteig macht einen lustigen Sandwich\n\n↓ Notiert, wer das Zählen in der Escuela gelernt hat oder Hochofen beschreibt",
 				90: "↓ Standortübergreifender Internetzugang an 79 waagerechts",
 				91: "↓ Passt zwischen Control und Command beim 125 senkrecht",
 				92: "→ Mehrfach kommen die in den Einkaufswagen bei Freunden des weißen Schimmels, einfach Kalbsinnerei",
@@ -305,7 +306,7 @@
 				119: "→ Nudeliges Ende der Gotteslästerung",
 				120: "→ Bedeutet einiges in zwei words",
 				121: "↓ #OZEANE",
-				122: "→ Blattbasierte Flüssigkeiten oder grasbasierte Abschlagsorte\n──────────────────────────────\n↓ #TAST",
+				122: "→ Blattbasierte Flüssigkeiten oder grasbasierte Abschlagsorte\n\n↓ #TAST",
 				123: "↓ #ECART",
 				124: "↓ Jene im Kopf vom musikalisch aktivsten Ed",
 				125: "↓ #APPLE",

@@ -196,26 +196,6 @@
 			#id-value.locked {
 				color: var(--primary-text-color);
 			}
-			#lockedNum {
-				position: fixed;
-				/* transform: translate(-6vw, -17vw); */
-				z-index: 999;
-				height: fit-content;
-				width: fit-content;
-				padding: 1vw 5vw;
-				border-radius: 2px;
-				/* border-radius: 50%; */
-				background-color: var(--darker-highlight-color);
-				color: var(--primary-bg-color);
-				font-size: 5rem;
-				font-weight: 700;
-				text-align: left;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				/* transform: rotate(4deg); */
-				opacity: 0;
-			}
 		</style>
 		<script>
 			var clues = {
@@ -380,6 +360,11 @@
 			var lockedId = null;
 			var lockedMarker = null;
 
+			var isHeld = false;
+			var lockedId = null;
+			var lockedMarker = null;
+			var frozenFrame = null;
+
 			function startCamera() {
 				var display = document.getElementById("id-display");
 				document.getElementById("start-btn").style.display = "none";
@@ -435,7 +420,13 @@
 				requestAnimationFrame(tick);
 				if (video.readyState !== video.HAVE_ENOUGH_DATA) return;
 
-				// Always draw the live camera frame
+				if (isHeld) {
+					if (frozenFrame !== null) {
+						context.drawImage(frozenFrame, 0, 0);
+					}
+					return;
+				}
+
 				context.drawImage(video, 0, 0, canvas.width, canvas.height);
 				imageData = context.getImageData(
 					0,
@@ -443,16 +434,6 @@
 					canvas.width,
 					canvas.height,
 				);
-
-				if (isHeld) {
-					// While held: redraw the locked marker overlay only, don't update state
-					if (lockedMarker !== null) {
-						drawMarker(lockedMarker);
-					}
-					drawCenterCrosshair();
-					// Display stays frozen — updateDisplay() not called
-					return;
-				}
 
 				// Normal scanning
 				var markers = detector.detect(imageData);
@@ -592,6 +573,12 @@
 
 			function holdStart() {
 				if (confirmedId === null && candidateId === null) return;
+
+				frozenFrame = document.createElement("canvas");
+				frozenFrame.width = canvas.width;
+				frozenFrame.height = canvas.height;
+				frozenFrame.getContext("2d").drawImage(canvas, 0, 0);
+
 				isHeld = true;
 				lockedId = confirmedId !== null ? confirmedId : candidateId;
 
@@ -609,17 +596,13 @@
 					el.textContent = clues[lockedId + 1];
 					el.className = "locked";
 				}
-
-				var lockedNum = document.getElementById("lockedNum");
-				let num = lockedId + 1;
-				lockedNum.textContent = lockedId + 1;
-				lockedNum.style.opacity = "1";
 			}
 
 			function holdEnd() {
 				isHeld = false;
 				lockedId = null;
 				lockedMarker = null;
+				frozenFrame = null;
 
 				var btn = document.getElementById("hold-btn");
 				btn.classList.remove("held");
@@ -629,10 +612,6 @@
 
 				var clue = document.getElementById("id-value");
 				clue.classList.remove("held");
-
-				var lockedNum = document.getElementById("lockedNum");
-				lockedNum.textContent = "";
-				lockedNum.style.opacity = "0";
 
 				// Resume live display immediately
 				updateDisplay();
@@ -707,7 +686,6 @@
 		<div class="howto"></div>
 
 		<div id="canvas-wrap">
-			<div id="lockedNum"></div>
 			<video
 				id="video"
 				autoplay

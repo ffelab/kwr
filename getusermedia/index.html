@@ -58,8 +58,8 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				justify-content: space-between;
-				padding: 2dvw;
+				justify-content: flex-start;
+				padding: 0 2dvw;
 				gap: 2dvw;
 				overflow: hidden;
 				touch-action: none;
@@ -68,8 +68,9 @@
 			#canvas-wrap {
 				border: 1.8px solid var(--primary-text-color);
 				border-radius: 2px;
-				flex: 1 1 auto;
+				/* flex: 1 1 auto; */
 				width: 100%;
+				aspect-ratio: 1/1;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -80,8 +81,8 @@
 
 			#canvas {
 				display: block;
-				width: 95dvw;
-				height: 95dvw;
+				width: 100%;
+				height: 100%;
 				object-fit: cover;
 				flex-shrink: 0;
 				touch-action: none;
@@ -94,15 +95,29 @@
 				}
 			}
 
+			#interface {
+				height: calc(100dvh - 96dvw - 4dvw);
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				gap: 2dvw;
+				flex: 1 1;
+			}
+
+			#button-wrapper {
+				height: 45%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
 			#start-btn,
 			#hold-btn {
-				margin: 15vw 0;
 				border: solid var(--primary-bg-color) 1.8px;
 				font-size: min(1.6rem, calc(94dvw / 16));
 				padding: 1dvw 3dvw;
 				animation: glow 1s ease-in-out infinite;
 				box-shadow: 0 0 0.2px 0px var(--primary-bg-color);
-
 				font-size: min(1.6rem, calc(94dvw / 16));
 				font-family: "JetBrainsMono", monospace;
 				font-weight: 700;
@@ -115,8 +130,7 @@
 			}
 			#hold-btn {
 				aspect-ratio: 1/1;
-				width: 31dvw;
-				margin: 5vw 0;
+				width: 27dvw;
 				display: none;
 				border-radius: 50%;
 				padding: 0;
@@ -124,7 +138,7 @@
 				background-color: var(--primary-text-color);
 				color: var(--primary-bg-color);
 				border: none;
-				font-size: 15dvw;
+				font-size: 10dvw;
 				touch-action: none;
 			}
 
@@ -141,13 +155,13 @@
 			#id-display {
 				flex-shrink: 0;
 				width: 96dvw;
-				min-height: 20dvh;
+				height: 50%;
 				max-width: 480px;
 				background: var(--primary-bg-color);
 				font-size: 2.4dvh;
 				border: 1.8px solid var(--primary-text-color);
 				border-radius: 2px;
-				padding: 10px 20px;
+				padding: 2dvw 4dvw;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
@@ -351,7 +365,6 @@
 				var display = document.getElementById("id-display");
 				document.getElementById("start-btn").style.display = "none";
 				document.getElementById("hold-btn").style.display = "block";
-				display.classList.add("start");
 
 				var constraints = {
 					video: {
@@ -677,10 +690,16 @@
 			></video>
 			<canvas id="canvas"></canvas>
 		</div>
-		<div id="id-display">
-			<span id="id-value" class="empty">Point at a marker</span>
+		<div id="interface">
+			<div id="id-display">
+				<span id="id-value" class="empty">Point at a marker</span>
+			</div>
+			<div id="button-wrapper">
+				<button id="start-btn" onclick="startCamera()">
+					Scan starten
+				</button>
+				<button id="hold-btn"></button>
+			</div>
 		</div>
-		<button id="start-btn" onclick="startCamera()">Scan starten</button>
-		<button id="hold-btn"></button>
 	</body>
 </html>

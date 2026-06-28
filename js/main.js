@@ -1078,14 +1078,10 @@ if (display.textContent === "")
 	display.textContent =
 		"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
 
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 document.getElementById("start").addEventListener("click", async () => {
 	document.getElementById("titel-wrapper").style.opacity = "0";
 	document.getElementById("titel-wrapper").style.pointerEvents = "none";
 	body.classList.remove("dark");
-
-	await delay(1500);
-	document.getElementById("screen").style.opacity = "0";
 });
 
 // ─── Field definitions (unchanged) ───────────────────────────────────────────

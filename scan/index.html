@@ -168,9 +168,6 @@
 				gap: 12px;
 				touch-action: none;
 			}
-			#id-display.start {
-				min-height: 20dvh;
-			}
 
 			/* Locked display border highlight */
 			#id-display.held {
@@ -178,9 +175,10 @@
 			}
 
 			#id-value {
+				font-family: "Italic";
 				width: 100%;
 				line-height: 3.5dvh;
-				font-size: 2.4dvh;
+				font-size: 2.6dvh;
 				font-weight: 700;
 				text-align: center;
 				color: var(--primary-text-color);
@@ -192,7 +190,7 @@
 			}
 			#id-value.empty {
 				color: var(--between-dark-light);
-				font-size: clamp(0.8em, 3vw, 1em);
+				font-size: clamp(1rem, 3vw, 1em);
 				font-weight: normal;
 			}
 			#id-value.locked {

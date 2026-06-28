@@ -37,12 +37,12 @@ const puzzleData = {
 				s: "BURG",
 			},
 			8: {
-				c: "„Es ist gleich falsch, Allen oder Keinem zu ...“ (Seneca)",
+				c: "„Es ist gleich falsch, \nAllen oder Keinem zu ...“ (Seneca)",
 				l: "6",
 				s: "TRAUEN",
 			},
 			9: {
-				c: "Geschäftlicher Spitzname z.B. nach der Show",
+				c: "Geschäftlicher Spitzname \nz.B. nach der Show",
 				l: "3",
 				s: "BIZ",
 			},
@@ -70,12 +70,12 @@ const puzzleData = {
 		},
 		SENKRECHT: {
 			1: {
-				c: "Waisenkitz aus dramatischem Kinderfilm",
+				c: "Waisenkitz aus \ndramatischem Kinderfilm",
 				l: "5",
 				s: "BAMBI",
 			},
 			2: {
-				c: "Sind keine Nieten in der Gebrauchslotterie? Die Ohne-Zwecks!",
+				c: "Sind keine Nieten in der Gebrauchslotterie? \nDie Ohne-Zwecks!",
 				l: "8",
 				s: "NUTZLOSE",
 			},
@@ -85,12 +85,12 @@ const puzzleData = {
 				s: "UNNOETIG",
 			},
 			5: {
-				c: "Schwedischer Star der Freitags-Futurist*innen",
+				c: "Schwedischer Star der \nFreitags-Futurist*innen",
 				l: "5",
 				s: "GRETA",
 			},
 			6: {
-				c: "In Brasiliens Marginalen informell gesiedelt",
+				c: "In Brasiliens Marginalen \ninformell gesiedelt",
 				l: "7",
 				s: "FAVELAS",
 			},

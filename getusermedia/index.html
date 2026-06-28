@@ -268,7 +268,7 @@
 				82: "↓ Die gegen Rechts steigern den Antifa-Altersdurchschnitt",
 				83: "→ Wannen-Schlitten der Bergrettung steckt im Kakianzug",
 				84: "Scheibt manche hin die mit da weiterunterschreibt",
-				85: "↓ Merkspruch für den Infektionsverlauf: „Es geht nicht weiter ohne ..."",
+				85: "↓ Merkspruch für den Infektionsverlauf: „Es geht nicht weiter ohne ...“",
 				86: "→ Gezinkter Entwirrer",
 				87: "↓ Abschließende Aktivität von Kletternden, Badenden, Hitzköpfigen",
 				88: "↓ Zeigt schließlich Wirkung, nach Schubkrafteinsatz",
@@ -282,7 +282,7 @@
 				96: "↓ Vermeintlicher Grund für morgiges Regenwetter",
 				97: "→ Finden sich irgendwo zwischen Jiaozi und Ravioli",
 				98: "→ Bringt die Kids von A nach B nach C",
-				99: "→ Traditioneller Baustoff wo der Spruch lautet: „Lieber den Spatz in der Hand als die Möwe auf dem Dach"",
+				99: "→ Traditioneller Baustoff wo der Spruch lautet: „Lieber den Spatz in der Hand als die Möwe auf dem Dach“",
 				100: "→ Markenname: Auf Elektro-Geräten",
 				101: "↓ Könnte Funkes Farb-Franchise nach 63 waagerecht dickköpfig erweitern",
 				102: "→ Klingt nach süßem Spitznamen vom DDErich",
@@ -402,7 +402,12 @@
 
 				// Always draw the live camera frame
 				context.drawImage(video, 0, 0, canvas.width, canvas.height);
-				imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+				imageData = context.getImageData(
+					0,
+					0,
+					canvas.width,
+					canvas.height,
+				);
 
 				if (isHeld) {
 					// While held: redraw the locked marker overlay only, don't update state
@@ -455,7 +460,8 @@
 
 				for (var i = 0; i < markers.length; i++) {
 					var corners = markers[i].corners;
-					var mx = 0, my = 0;
+					var mx = 0,
+						my = 0;
 					for (var j = 0; j < corners.length; j++) {
 						mx += corners[j].x;
 						my += corners[j].y;
@@ -464,7 +470,7 @@
 					my /= corners.length;
 
 					var dist = Math.sqrt(
-						(mx - cx) * (mx - cx) + (my - cy) * (my - cy)
+						(mx - cx) * (mx - cx) + (my - cy) * (my - cy),
 					);
 					if (dist < bestDist) {
 						bestDist = dist;
@@ -524,7 +530,8 @@
 				context.fillStyle = "#252cff";
 				var clueNum = marker.id + 1;
 
-				var xMax = -Infinity, ySum = 0;
+				var xMax = -Infinity,
+					ySum = 0;
 				for (var k = 0; k < corners.length; k++) {
 					xMax = Math.max(xMax, corners[k].x);
 					ySum += corners[k].y;
@@ -594,20 +601,32 @@
 				var btn = document.getElementById("hold-btn");
 
 				// Touch events for mobile
-				btn.addEventListener("touchstart", function (e) {
-					e.preventDefault();
-					holdStart();
-				}, { passive: false });
+				btn.addEventListener(
+					"touchstart",
+					function (e) {
+						e.preventDefault();
+						holdStart();
+					},
+					{ passive: false },
+				);
 
-				btn.addEventListener("touchend", function (e) {
-					e.preventDefault();
-					holdEnd();
-				}, { passive: false });
+				btn.addEventListener(
+					"touchend",
+					function (e) {
+						e.preventDefault();
+						holdEnd();
+					},
+					{ passive: false },
+				);
 
-				btn.addEventListener("touchcancel", function (e) {
-					e.preventDefault();
-					holdEnd();
-				}, { passive: false });
+				btn.addEventListener(
+					"touchcancel",
+					function (e) {
+						e.preventDefault();
+						holdEnd();
+					},
+					{ passive: false },
+				);
 
 				// Mouse events for desktop fallback
 				btn.addEventListener("mousedown", function (e) {

@@ -161,7 +161,6 @@
 			/* Locked display border highlight */
 			#id-display.held {
 				border-color: var(--darker-highlight-color);
-				color: var(--darker-highlight-color);
 			}
 
 			#id-value {
@@ -173,6 +172,9 @@
 				color: var(--primary-text-color);
 				transition: color 0.2s;
 				white-space: pre-wrap;
+			}
+			#id-value.held {
+				color: var(--darker-highlight-color);
 			}
 			#id-value.empty {
 				color: var(--between-dark-light);
@@ -568,6 +570,9 @@
 				var display = document.getElementById("id-display");
 				display.classList.add("held");
 
+				var clue = document.getElementById("id-value");
+				clue.classList.add("held");
+
 				// Freeze the display text immediately
 				var el = document.getElementById("id-value");
 				if (lockedId !== null) {
@@ -586,6 +591,9 @@
 
 				var display = document.getElementById("id-display");
 				display.classList.remove("held");
+
+				var clue = document.getElementById("id-value");
+				clue.classList.remove("held");
 
 				// Resume live display immediately
 				updateDisplay();

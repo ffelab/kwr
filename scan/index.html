@@ -196,6 +196,24 @@
 			#id-value.locked {
 				color: var(--primary-text-color);
 			}
+			#lockedNum {
+				position: absolute;
+				top: 47%;
+				left: 78%;
+				z-index: 999;
+				height: 80px;
+				width: 80px;
+				border-radius: 50%;
+				background-color: var(--darker-highlight-color);
+				color: var(--primary-bg-color);
+				font-size: 2rem;
+				font-weight: 700;
+				text-align: center;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				transform: rotate(4deg);
+			}
 		</style>
 		<script>
 			var clues = {
@@ -571,8 +589,6 @@
 			}
 
 			function holdStart() {
-				// Snapshot current confirmed (or candidate) id and marker geometry
-				// We don't have the marker object here, but we saved it in tick via lockedMarker
 				isHeld = true;
 				lockedId = confirmedId !== null ? confirmedId : candidateId;
 
@@ -585,12 +601,15 @@
 				var clue = document.getElementById("id-value");
 				clue.classList.add("held");
 
-				// Freeze the display text immediately
 				var el = document.getElementById("id-value");
 				if (lockedId !== null) {
 					el.textContent = clues[lockedId + 1];
 					el.className = "locked";
 				}
+
+				var lockedNum = document.getElementById("lockedNum");
+				lockedNum.textContent = lockedId + 1;
+				lockedNum.style.opacity = "1";
 			}
 
 			function holdEnd() {
@@ -606,6 +625,10 @@
 
 				var clue = document.getElementById("id-value");
 				clue.classList.remove("held");
+
+				var lockedNum = document.getElementById("lockedNum");
+				lockedNum.textContent = "";
+				lockedNum.style.opacity = "0";
 
 				// Resume live display immediately
 				updateDisplay();
@@ -700,5 +723,6 @@
 				<button id="hold-btn"></button>
 			</div>
 		</div>
+		<div id="lockedNum"></div>
 	</body>
 </html>

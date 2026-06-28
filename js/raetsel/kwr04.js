@@ -36,7 +36,6 @@ const puzzleData = {
 				l: "4",
 				s: "BURG",
 			},
-			6: { c: "Notiert einen starken Ton", l: "2", s: "FZ" },
 			8: {
 				c: "Es ist gleich falsch, Allen oder Keinem zu ... (Seneca)",
 				l: "6",
@@ -47,11 +46,6 @@ const puzzleData = {
 				l: "3",
 				s: "BIZ",
 			},
-			10: {
-				c: "Kürzel für die Realität aus der Brille",
-				l: "2",
-				s: "VR",
-			},
 			11: { c: "", l: "3", s: "ORT" },
 			12: {
 				c: "Für die sind ein Bart schon ein großer Wald",
@@ -59,7 +53,6 @@ const puzzleData = {
 				s: "LAEUSE",
 			},
 			15: { c: "", l: "8", s: "BOULETTE" },
-			17: { c: "", l: "2", s: "AC" },
 			19: {
 				c: "Entschleunigt die Kugel auf der langen Bahn? Geometrisches Bauteil in Kfz-Anhalter",
 				l: "10",

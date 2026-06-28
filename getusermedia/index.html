@@ -36,12 +36,18 @@
 				--darker-text-color: rgb(10, 20, 45);
 			}
 
+			/* Prevent all selection and callouts globally */
 			*,
 			*::before,
 			*::after {
 				box-sizing: border-box;
 				margin: 0;
 				padding: 0;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				-webkit-touch-callout: none;
+				-webkit-tap-highlight-color: transparent;
 			}
 
 			body {
@@ -56,6 +62,7 @@
 				padding: 2dvw;
 				gap: 2dvw;
 				overflow: hidden;
+				touch-action: none;
 			}
 
 			#canvas-wrap {
@@ -68,6 +75,7 @@
 				align-items: center;
 				overflow: hidden;
 				background-color: var(--primary-text-color);
+				touch-action: none;
 			}
 
 			#canvas {
@@ -76,6 +84,7 @@
 				height: 94dvw;
 				object-fit: cover;
 				flex-shrink: 0;
+				touch-action: none;
 			}
 
 			@keyframes glow {
@@ -102,6 +111,7 @@
 				border: 1.8px solid var(--darker-highlight-color);
 				border-radius: 2px;
 				cursor: pointer;
+				touch-action: none;
 			}
 			#hold-btn {
 				aspect-ratio: 1/1;
@@ -115,10 +125,13 @@
 				color: var(--primary-bg-color);
 				border: none;
 				font-size: 15dvw;
-				webkit-user-select: none !important; /* Safari */
-				-ms-user-select: none; /* old Edge/IE */
-				user-select: none; /* modern browsers */
 				touch-action: none;
+			}
+
+			/* Locked state for the hold button */
+			#hold-btn.held {
+				background-color: var(--darker-highlight-color);
+				color: var(--primary-bg-color);
 			}
 
 			#start-btn:active {
@@ -139,9 +152,15 @@
 				align-items: center;
 				justify-content: space-between;
 				gap: 12px;
+				touch-action: none;
 			}
 			#id-display.start {
 				min-height: 20dvh;
+			}
+
+			/* Locked display border highlight */
+			#id-display.held {
+				border-color: var(--darker-highlight-color);
 			}
 
 			#id-value {
@@ -249,7 +268,7 @@
 				82: "↓ Die gegen Rechts steigern den Antifa-Altersdurchschnitt",
 				83: "→ Wannen-Schlitten der Bergrettung steckt im Kakianzug",
 				84: "Scheibt manche hin die mit da weiterunterschreibt",
-				85: "↓ Merkspruch für den Infektionsverlauf: „Es geht nicht weiter ohne ...“",
+				85: "↓ Merkspruch für den Infektionsverlauf: „Es geht nicht weiter ohne ..."",
 				86: "→ Gezinkter Entwirrer",
 				87: "↓ Abschließende Aktivität von Kletternden, Badenden, Hitzköpfigen",
 				88: "↓ Zeigt schließlich Wirkung, nach Schubkrafteinsatz",
@@ -263,7 +282,7 @@
 				96: "↓ Vermeintlicher Grund für morgiges Regenwetter",
 				97: "→ Finden sich irgendwo zwischen Jiaozi und Ravioli",
 				98: "→ Bringt die Kids von A nach B nach C",
-				99: "→ Traditioneller Baustoff wo der Spruch lautet: „Lieber den Spatz in der Hand als die Möwe auf dem Dach“",
+				99: "→ Traditioneller Baustoff wo der Spruch lautet: „Lieber den Spatz in der Hand als die Möwe auf dem Dach"",
 				100: "→ Markenname: Auf Elektro-Geräten",
 				101: "↓ Könnte Funkes Farb-Franchise nach 63 waagerecht dickköpfig erweitern",
 				102: "→ Klingt nach süßem Spitznamen vom DDErich",
@@ -292,12 +311,10 @@
 				125: "↓ #APPLE",
 				126: "→ Zchneebälle für Leute mit dyzlexia",
 				127: "↓ #OWNER",
-
 				128: "→ Sam Altmans Labermaschine",
 				129: "↓ Einer von zwei Hinterhofjargonlern",
 				130: "↓ Umgestellte Handlung am Ende vom Schiffswettrennen",
 				131: "↓ Dem folgt Wan im Halbleiterland",
-				12: "→ Steckt im Herzen von Londons Strom, fließt von Westfalen bis zur Nordsee",
 				133: "↓ Kurz kaum zu unterscheiden: Abschiedsfloskel oder Transportoption?",
 				134: "→ Kommt nach Citybekanntschaft und vor Metropolenehe in der urbanen Liebesgeschichte",
 				135: "↓ Darauf stehen die Amis: Einer von Zehn",
@@ -321,6 +338,11 @@
 			var lostFrames = 0;
 			var CONFIRM_FRAMES = 6;
 			var LOST_FRAMES = 18;
+
+			// --- Hold/lock state ---
+			var isHeld = false;
+			var lockedId = null;
+			var lockedMarker = null;
 
 			function startCamera() {
 				var display = document.getElementById("id-display");
@@ -349,7 +371,7 @@
 						});
 					})
 					.then(attachStream)
-					.catch(function (err) {
+					.catch(function () {
 						document.getElementById("id-value").textContent =
 							"Camera error";
 						document.getElementById("id-value").className = "empty";
@@ -378,14 +400,21 @@
 				requestAnimationFrame(tick);
 				if (video.readyState !== video.HAVE_ENOUGH_DATA) return;
 
+				// Always draw the live camera frame
 				context.drawImage(video, 0, 0, canvas.width, canvas.height);
-				imageData = context.getImageData(
-					0,
-					0,
-					canvas.width,
-					canvas.height,
-				);
+				imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
+				if (isHeld) {
+					// While held: redraw the locked marker overlay only, don't update state
+					if (lockedMarker !== null) {
+						drawMarker(lockedMarker);
+					}
+					drawCenterCrosshair();
+					// Display stays frozen — updateDisplay() not called
+					return;
+				}
+
+				// Normal scanning
 				var markers = detector.detect(imageData);
 				var best = pickCenterMarker(markers);
 
@@ -400,7 +429,6 @@
 						candidateSeen = 1;
 					}
 
-					// Only switch confirmed ID after seeing consistently
 					if (candidateSeen >= CONFIRM_FRAMES) {
 						confirmedId = candidateId;
 					}
@@ -427,8 +455,7 @@
 
 				for (var i = 0; i < markers.length; i++) {
 					var corners = markers[i].corners;
-					var mx = 0,
-						my = 0;
+					var mx = 0, my = 0;
 					for (var j = 0; j < corners.length; j++) {
 						mx += corners[j].x;
 						my += corners[j].y;
@@ -437,7 +464,7 @@
 					my /= corners.length;
 
 					var dist = Math.sqrt(
-						(mx - cx) * (mx - cx) + (my - cy) * (my - cy),
+						(mx - cx) * (mx - cx) + (my - cy) * (my - cy)
 					);
 					if (dist < bestDist) {
 						bestDist = dist;
@@ -460,7 +487,6 @@
 				context.lineWidth = lw;
 				context.lineCap = "butt";
 
-				// Full crossing lines (no gap)
 				context.beginPath();
 				context.moveTo(cx - arm, cy);
 				context.lineTo(cx + arm, cy);
@@ -468,7 +494,6 @@
 				context.lineTo(cx, cy + arm);
 				context.stroke();
 
-				// Circle around centre
 				context.beginPath();
 				context.arc(cx, cy, r, 0, Math.PI * 2);
 				context.stroke();
@@ -479,7 +504,6 @@
 			function drawMarker(marker) {
 				var corners = marker.corners;
 
-				// Border
 				context.strokeStyle = "#676cfd";
 				context.lineWidth = Math.max(3, canvas.width / 100);
 				context.beginPath();
@@ -492,18 +516,15 @@
 				context.stroke();
 				context.closePath();
 
-				// Corner dot
 				context.fillStyle = "#676cfd";
 				context.fillRect(corners[0].x - 3, corners[0].y - 3, 6, 6);
 
-				// ID label on canvas
 				var fontSize = Math.max(24, canvas.width / 10);
 				context.font = "bold " + fontSize + "px 'JetBrainsMono'";
 				context.fillStyle = "#252cff";
 				var clueNum = marker.id + 1;
 
-				var xMax = -Infinity,
-					ySum = 0;
+				var xMax = -Infinity, ySum = 0;
 				for (var k = 0; k < corners.length; k++) {
 					xMax = Math.max(xMax, corners[k].x);
 					ySum += corners[k].y;
@@ -527,6 +548,41 @@
 				}
 			}
 
+			function holdStart() {
+				// Snapshot current confirmed (or candidate) id and marker geometry
+				// We don't have the marker object here, but we saved it in tick via lockedMarker
+				isHeld = true;
+				lockedId = confirmedId !== null ? confirmedId : candidateId;
+
+				var btn = document.getElementById("hold-btn");
+				btn.classList.add("held");
+
+				var display = document.getElementById("id-display");
+				display.classList.add("held");
+
+				// Freeze the display text immediately
+				var el = document.getElementById("id-value");
+				if (lockedId !== null) {
+					el.textContent = clues[lockedId + 1];
+					el.className = "locked";
+				}
+			}
+
+			function holdEnd() {
+				isHeld = false;
+				lockedId = null;
+				lockedMarker = null;
+
+				var btn = document.getElementById("hold-btn");
+				btn.classList.remove("held");
+
+				var display = document.getElementById("id-display");
+				display.classList.remove("held");
+
+				// Resume live display immediately
+				updateDisplay();
+			}
+
 			window.onload = function () {
 				video = document.getElementById("video");
 				canvas = document.getElementById("canvas");
@@ -534,6 +590,49 @@
 				canvas.width = 1280;
 				canvas.height = 720;
 				detector = new AR.Detector();
+
+				var btn = document.getElementById("hold-btn");
+
+				// Touch events for mobile
+				btn.addEventListener("touchstart", function (e) {
+					e.preventDefault();
+					holdStart();
+				}, { passive: false });
+
+				btn.addEventListener("touchend", function (e) {
+					e.preventDefault();
+					holdEnd();
+				}, { passive: false });
+
+				btn.addEventListener("touchcancel", function (e) {
+					e.preventDefault();
+					holdEnd();
+				}, { passive: false });
+
+				// Mouse events for desktop fallback
+				btn.addEventListener("mousedown", function (e) {
+					e.preventDefault();
+					holdStart();
+				});
+
+				btn.addEventListener("mouseup", function (e) {
+					e.preventDefault();
+					holdEnd();
+				});
+
+				btn.addEventListener("mouseleave", function (e) {
+					if (isHeld) holdEnd();
+				});
+
+				// Prevent any context menu on long-press anywhere
+				document.addEventListener("contextmenu", function (e) {
+					e.preventDefault();
+				});
+
+				// Prevent selection on the whole document
+				document.addEventListener("selectstart", function (e) {
+					e.preventDefault();
+				});
 			};
 		</script>
 	</head>
@@ -551,10 +650,9 @@
 			<canvas id="canvas"></canvas>
 		</div>
 		<div id="id-display">
-			<!-- <span id="id-label">Detected ID</span> -->
 			<span id="id-value" class="empty">Point at a marker</span>
 		</div>
 		<button id="start-btn" onclick="startCamera()">Scan starten</button>
-		<button id="hold-btn"></button>
+		<button id="hold-btn"></button>
 	</body>
 </html>

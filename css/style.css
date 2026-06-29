@@ -75,7 +75,7 @@
 	padding-bottom: 50dvw;
 	width: 100dvw;
 	gap: 3dvw;
-	background-color: var(--primary-text-color);
+	/* background-color: var(--primary-text-color); */
 }
 
 .titel-container {

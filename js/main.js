@@ -828,7 +828,7 @@ checkButton.addEventListener("pointerup", () => {
 	clearTimeout(checkHoldTimer);
 	let { row, col } = state.current;
 	display.textContent =
-		"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
+		"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
 	display.style.color = "var(--between-dark-light)";
 
 	if (!checkActive) {
@@ -841,7 +841,7 @@ checkButton.addEventListener("pointerup", () => {
 				display.style.color = "var(--primary-text-color)";
 			} else {
 				display.textContent =
-					"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
+					"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
 				display.style.color = "var(--between-dark-light)";
 			}
 		}, 3500);
@@ -853,7 +853,7 @@ checkButton.addEventListener("pointerup", () => {
 	restoreGridState(checkPreviewState);
 
 	display.textContent =
-		"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
+		"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
 	display.style.color = "var(--between-dark-light)";
 	if (state.current.row) setActive(row, col);
 });
@@ -1076,7 +1076,7 @@ function fillRandomField() {
 
 if (display.textContent === "")
 	display.textContent =
-		"Click auf ein Feld für den jeweiligen Hinweis oder swipe nach rechts oder links für den Nächsten";
+		"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
 
 document.getElementById("start").addEventListener("click", async () => {
 	document.getElementById("titel-wrapper").style.opacity = "0";

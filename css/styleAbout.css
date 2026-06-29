@@ -412,6 +412,8 @@ details > p {
 	height: 30dvh;
 }
 a.buch {
+	color: transparent;
+	pointer-events: none;
 	display: none;
 }
 
@@ -458,6 +460,7 @@ a.buch {
 	}
 	a.buch {
 		text-decoration: none;
+		pointer-events: all;
 		z-index: 1000;
 		display: block;
 		color: var(--primary-bg-color);

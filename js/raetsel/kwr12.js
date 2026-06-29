@@ -105,7 +105,7 @@ const puzzleData = {
 				s: "BLESSE",
 			},
 			3: {
-				c: "Ein ABschluss fürBall, Streich und Fahrt",
+				c: "Ein Abschluss für Ball, Streich und Fahrt",
 				l: "3",
 				s: "ABI",
 			},

@@ -78,7 +78,11 @@ const puzzleData = {
 	],
 	CLUES: {
 		WAAGERECHT: {
-			3: { c: "", l: "10", s: "EHEMALIGER" },
+			3: {
+				c: "Heiratsgezeichneter? Der ist nicht mehr aktuell!",
+				l: "10",
+				s: "EHEMALIGER",
+			},
 			4: { c: "Türkisches Gewässer", l: "2", s: "SU" },
 			5: {
 				c: "Treudoofer Bär aus dem Hundert-Morgen-Wald",
@@ -104,13 +108,17 @@ const puzzleData = {
 				l: "5",
 				s: "THESE",
 			},
-			7: { c: "", l: "", s: "AAAAA" },
+			7: {
+				c: "„Die Menschen gleichen einander in den Worten, aber an den ... kann man sie unterscheiden“ (Molière)",
+				l: "5",
+				s: "EINEN",
+			},
 			8: {
 				c: "Führen manche großartig im Kleidungs-Schilde",
 				l: "2",
 				s: "XL",
 			},
-			9: { c: "", l: "", s: "AA" },
+			9: { c: "Einfach scharf", l: "2", s: "HD" },
 		},
 	},
 };

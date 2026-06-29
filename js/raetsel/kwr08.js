@@ -131,7 +131,7 @@ const puzzleData = {
 				s: "GEDRIBBELT",
 			},
 			3: {
-				c: 'Sprichwörtlich: \n"Die Wunde ... den Finger, \nder Gedanke den Geist"',
+				c: "Sprichwörtlich: \n„Die Wunde ... den Finger, \nder Gedanke den Geist“",
 				l: "10",
 				s: "ENTZUENDET",
 			},

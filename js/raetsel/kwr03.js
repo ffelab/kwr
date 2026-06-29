@@ -68,7 +68,7 @@ const puzzleData = {
 				s: "ESEL",
 			},
 			11: {
-				c: `Herzensangelegenheit:\nBemisst die Schläge`,
+				c: `Herzensangelegenheit: \nBemisst die Schläge`,
 				l: "4",
 				s: "PULS",
 			},
@@ -78,7 +78,7 @@ const puzzleData = {
 				s: "INTERN",
 			},
 			16: {
-				c: `Ist doch glatt was anderes als „vor Langem”`,
+				c: `Ist doch glatt was anderes als „vor Langem“`,
 				l: "4",
 				s: "EBEN",
 			},

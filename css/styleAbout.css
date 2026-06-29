@@ -52,25 +52,13 @@ body {
 	font-family: "JetBrainsMono";
 	background-color: var(--primary-bg-color);
 }
-.animationtitel-num {
-	z-index: 1000;
-	font-size: 2.6rem;
-	color: var(--primary-text-color);
-	font-weight: 800;
-	width: fit-content;
-	height: fit-content;
-	position: fixed;
-	margin-left: 2vw;
-	opacity: 0;
-	/* transition: opacity 1s linear; */
-}
 
 #animationtitel-wrapper {
 	padding-top: 5vw;
 	position: absolute;
 	opacity: 1;
 	/* transition: opacity 1.5s ease-in; */
-
+	max-width: 500px;
 	z-index: 999;
 	display: flex;
 	flex-direction: row;
@@ -423,6 +411,9 @@ details > p {
 	justify-content: center;
 	height: 30dvh;
 }
+a.buch {
+	display: none;
+}
 
 @media (min-width: 470px) {
 	#raetsel-container {
@@ -434,15 +425,45 @@ details > p {
 	}
 	body {
 		justify-content: center;
-		/* gap: 5vw; */
+		overflow: hidden;
+	}
+	#animationtitel-wrapper {
+		transform: translateY(10%);
+		gap: 10px;
+		overflow: hidden;
+	}
+	.animationtitel-container {
+		margin: 5px;
 	}
 	#hinweis-liste {
 		display: block;
 	}
+	#start {
+		display: none;
+	}
+
+	#container-wrapper {
+		display: none;
+	}
+
+	#info {
+		display: none;
+	}
+
 	.keyboard-wrapper {
 		display: none;
 	}
 	button {
 		padding: 3px 7px;
+	}
+	a.buch {
+		text-decoration: none;
+		z-index: 1000;
+		display: block;
+		color: var(--primary-bg-color);
+		cursor: pointer;
+		transform: translateY(200px);
+		opacity: 0;
+		transition: opacity 3s ease;
 	}
 }

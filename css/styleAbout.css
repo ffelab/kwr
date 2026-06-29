@@ -223,8 +223,8 @@ details[open]::-webkit-scrollbar {
 details::details-content {
 	height: 0;
 	transition:
-		height 1s ease,
-		content-visibility 1s ease allow-discrete;
+		height 0.3s ease,
+		content-visibility 0.3s ease allow-discrete;
 	overflow-y: scroll;
 }
 details[open]::details-content {
@@ -271,7 +271,7 @@ details {
 		min-height: 3.5rem;
 		width: 93vw;
 		max-width: 600px;
-		padding: 1vw 3vw;
+		padding: 0vw 3vw;
 		& > p {
 			margin: 3vw 1vw 2vw 2vw;
 		}
@@ -279,7 +279,7 @@ details {
 }
 
 summary {
-	padding: 2vw;
+	padding: 3vw;
 	padding-top: 3vw;
 	display: flex;
 	width: 100%;

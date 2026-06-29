@@ -36,6 +36,7 @@
 	--primary-text-color: rgb(23, 23, 23);
 	/* --primary-text-color: rgb(44, 14, 176); */
 	--darker-text-color: rgb(10, 20, 45);
+	interpolate-size: allow-keywords;
 }
 
 * {
@@ -75,7 +76,7 @@
 	padding-bottom: 50dvw;
 	width: 100dvw;
 	gap: 3dvw;
-	/* background-color: var(--primary-text-color); */
+	background-color: var(--primary-text-color);
 }
 
 .titel-container {
@@ -248,6 +249,35 @@ details {
 	color: var(--primary-bg-color);
 	font-weight: bold;
 }
+
+details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+}
+details::-webkit-scrollbar {
+	/* display: none; */
+	scrollbar-width: thin;
+	scrollbar-color: var(--primary-bg-color) var(--primary-text-color);
+}
+details[open]::-webkit-scrollbar {
+	display: block;
+	scrollbar-width: thin;
+	scrollbar-color: var(--primary-bg-color) var(--primary-text-color);
+}
+details::details-content {
+	height: 0;
+	transition:
+		height 0.3s ease,
+		content-visibility 0.3s ease allow-discrete;
+	overflow-y: scroll;
+}
+details[open]::details-content {
+	/* max-height: 60dvh; */
+	height: auto;
+}
+
 #info > button,
 details {
 	border: solid 2.7px var(--primary-bg-color);
@@ -359,7 +389,7 @@ details {
 	flex-direction: column;
 	gap: 0.5rem;
 	align-items: center;
-	text-align: center;
+	text-align: left;
 	justify-content: flex-end;
 	background-color: rgba(0, 0, 0, 0.8);
 	color: var(--primary-text-color);
@@ -373,25 +403,66 @@ details {
 
 	& > .close-button,
 	details {
-		font-size: 1rem;
-
-		width: 93.5vw;
+		font-size: 1.3rem;
+		min-height: 3.2rem;
+		width: 93vw;
 		max-width: 600px;
-		padding: 3vw 3vw;
+		padding: 0vw 3vw;
 		& > p {
-			margin: 2vw 0;
+			margin: 1vw 1vw 0vw 2vw;
+			&.indent {
+				margin-bottom: 5vw;
+			}
+			&.schummeln {
+				margin-bottom: 5vw;
+			}
+
+			& > button {
+				margin: 0;
+				border: none;
+			}
 		}
 	}
 }
 
 summary {
+	padding: 3vw 2vw;
+
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
 	margin-right: auto;
 	margin-left: auto;
 	list-style-position: outside;
-	width: fit-content;
+	list-style-type: none;
+}
+summary::-webkit-details-marker {
+	display: none;
+}
+
+summary::after {
+	font-size: 2rem;
+	line-height: 1.6rem;
+	content: "+";
+	font-weight: bold;
+	text-align: right;
+}
+details[open] summary::after {
+	font-size: 2rem;
+	content: "–";
+	line-height: 1.6rem;
 }
 details > p {
-	font-weight: 400;
+	touch-action: auto;
+
+	margin: 0;
+	font-weight: normal;
+	font-family: "JetBrainsMono";
+	font-size: 1.1rem;
+}
+.indent {
+	text-indent: 8vw;
 }
 
 #btn_reqPermission {

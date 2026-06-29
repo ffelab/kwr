@@ -268,7 +268,7 @@ details {
 	& > .close-button,
 	details {
 		font-size: 1.3rem;
-		min-height: 3.5rem;
+		min-height: 3.2rem;
 		width: 93vw;
 		max-width: 600px;
 		padding: 0vw 3vw;
@@ -280,10 +280,10 @@ details {
 
 summary {
 	padding: 3vw;
-	padding-top: 3vw;
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	align-items: center;
 	margin-right: auto;
 	margin-left: auto;
 	list-style-position: outside;

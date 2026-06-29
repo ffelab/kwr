@@ -13,7 +13,7 @@ function mobileCheck() {
 	})(navigator.userAgent || navigator.vendor || window.opera);
 	return check;
 }
-if (!mobilecheck) window.location.href = "https://ffelab.github.io/kwr/";
+if (!mobileCheck) window.location.href = "https://ffelab.github.io/kwr/";
 
 function loadPuzzleFromStorage(index) {
 	const key = `finished${String(index).padStart(2, "0")}`;

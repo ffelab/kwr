@@ -36,6 +36,7 @@
 	--primary-text-color: rgb(23, 23, 23);
 	/* --primary-text-color: rgb(44, 14, 176); */
 	--darker-text-color: rgb(10, 20, 45);
+	interpolate-size: allow-keywords;
 }
 
 * {
@@ -43,6 +44,14 @@
 	margin: 0;
 	padding: 0;
 	touch-action: none;
+}
+
+html,
+body {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -74,7 +83,7 @@ body {
 	padding-bottom: 90dvh;
 	height: 100dvh;
 	width: 100dvw;
-	gap: 1dvw;
+	gap: 3dvw;
 	background-color: var(--primary-text-color);
 }
 
@@ -84,7 +93,7 @@ body {
 	border-radius: 2px;
 	margin-top: 1dvh;
 	display: grid;
-	grid-template-columns: repeat(5, min(15px, calc(94vw / 4)));
+	grid-template-columns: repeat(5, min(20px, calc(94vw / 3.5)));
 
 	background: var(--primary-text-color);
 }
@@ -93,7 +102,7 @@ body {
 	color: var(--primary-bg-color);
 	position: relative;
 	aspect-ratio: 1 / 1;
-	max-width: 15px;
+	max-width: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -139,9 +148,11 @@ body.dark {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transform: translateY(20dvh);
+	transform: translateY(8dvh);
 	opacity: 0;
 	transition: opacity 3s ease;
+	width: 100dvw;
+	height: auto;
 }
 
 #start {
@@ -211,11 +222,13 @@ details[open]::-webkit-scrollbar {
 }
 details::details-content {
 	height: 0;
-	transition: height 0.3s ease;
-	content-visibility: 0.3s ease allow-discrete;
+	transition:
+		height 1s ease,
+		content-visibility 1s ease allow-discrete;
 	overflow-y: scroll;
 }
 details[open]::details-content {
+	/* max-height: 60dvh; */
 	height: auto;
 }
 
@@ -228,7 +241,7 @@ details[open]::details-content {
 
 #info > button,
 details {
-	border: solid 1.8px var(--primary-bg-color);
+	border: none;
 }
 #about {
 	text-align: left;
@@ -244,7 +257,7 @@ details {
 	justify-content: flex-end;
 	color: var(--primary-text-color);
 	font-size: 1rem;
-	padding: 1.5rem;
+	padding: 2vw;
 	padding-top: 2vw;
 	width: 100vw;
 	height: 100dvh;
@@ -254,19 +267,20 @@ details {
 
 	& > .close-button,
 	details {
-		font-size: 1rem;
-
+		font-size: 1.3rem;
+		min-height: 3.5rem;
 		width: 93vw;
 		max-width: 600px;
-		padding: 2vw 3vw;
+		padding: 1vw 3vw;
 		& > p {
-			margin: 2vw 1vw 2vw 1vw;
+			margin: 3vw 1vw 2vw 2vw;
 		}
 	}
 }
 
 summary {
-	padding: 1vw;
+	padding: 2vw;
+	padding-top: 3vw;
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
@@ -280,22 +294,24 @@ summary::-webkit-details-marker {
 }
 
 summary::after {
-	font-size: 1.8rem;
-	line-height: 1.2rem;
+	font-size: 2rem;
+	line-height: 1.6rem;
 	content: "+";
 	font-weight: bold;
 	text-align: right;
 }
 details[open] summary::after {
-	font-size: 1.8rem;
+	font-size: 2rem;
 	content: "–";
-	line-height: 1.2rem;
+	line-height: 1.6rem;
 }
 details > p {
+	touch-action: auto;
+
 	margin: 0;
 	font-weight: normal;
 	font-family: "JetBrainsMono";
-	font-size: 0.9rem;
+	font-size: 1.1rem;
 }
 .indent {
 	text-indent: 8vw;

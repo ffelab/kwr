@@ -37,12 +37,20 @@ const puzzleData = {
 			},
 			16: { c: "Wortteil vom Wortteil", l: "3", s: "SIL" },
 			17: { c: "Anwärter auf den War-zuerst-da-Titel", l: "2", s: "EI" },
-			18: { c: "", l: "3", s: "URI" },
+			18: {
+				c: "Spitzname vom Sachsen-Bier mit schwedischem Konigskopf: Dem fehlt nicht viel zum gemütlich sein",
+				l: "3",
+				s: "URI",
+			},
 			19: { c: "", l: "8", s: "PLANFILM" },
 			22: { c: "Deren ... besingt das Life", l: "4", s: "OPUS" },
 			23: { c: "", l: "4", s: "BLAA" },
 			25: { c: "", l: "10", s: "GESCHMAEHT" },
-			28: { c: "", l: "2", s: "LL" },
+			28: {
+				c: "Kennzeichen von Landsberg am 5 waagerecht",
+				l: "2",
+				s: "LL",
+			},
 			29: {
 				c: "Sein Käpt'n erzählt ihm das Blaue vom Himmel: Blöder Dösbaddel",
 				l: "4",

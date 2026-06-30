@@ -67,7 +67,7 @@ const puzzleData = {
 				l: "4",
 				s: "GTFO",
 			},
-			15: {
+			17: {
 				c: "Zeit heißer Nachfrage nach soleil, mer und plage",
 				l: "3",
 				s: "ETE",

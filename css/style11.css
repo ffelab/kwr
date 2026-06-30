@@ -132,7 +132,7 @@ body.dark {
 }
 
 #start {
-	border: solid var(--primary-bg-color) 1.8px;
+	border: solid var(--primary-bg-color) 3px;
 	font-size: min(1.6rem, calc(94dvw / 16));
 	padding: 1dvw 3dvw;
 	animation: glow 1s ease-in-out infinite;

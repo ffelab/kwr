@@ -93,7 +93,7 @@ const puzzleData = {
 				s: "ENCRYPTION",
 			},
 			20: {
-				c: "Die gab alliierten \nCodebreakern Rätsel auf",
+				c: "Das gab alliierten \nCodebreakern Rätsel auf",
 				l: "6",
 				s: "ENIGMA",
 			},

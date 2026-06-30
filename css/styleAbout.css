@@ -156,7 +156,7 @@ body.dark {
 }
 
 #start {
-	border: solid var(--primary-bg-color) 1.8px;
+	border: solid var(--primary-bg-color) 3px;
 	font-size: min(1.6rem, calc(94dvw / 16));
 	padding: 1dvw 3dvw;
 	animation: glow 1s ease-in-out infinite;
@@ -193,7 +193,7 @@ details {
 button,
 details {
 	background-color: rgba(0, 0, 0, 0.9);
-	border: 1.8px solid var(--primary-text-color);
+	border: 3px solid var(--primary-text-color);
 	border-radius: 2px;
 	color: var(--primary-bg-color);
 	font-weight: bold;

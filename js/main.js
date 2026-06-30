@@ -894,6 +894,7 @@ async function checkMotionPermission() {
 		}
 	} else {
 		permissionGranted = true;
+		document.querySelector(".schummeln").textContent = "";
 		btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 		btn_reqPermission.style.textDecoration = "none";
 		closeInfo();
@@ -1398,7 +1399,7 @@ function runSequence() {
 	const targets = allCells.filter((c) => c.target);
 	const total = targets.length;
 
-	const TOTAL_DURATION = 5000;
+	const TOTAL_DURATION = 3000;
 	const TICK = 140;
 	const totalTicks = Math.floor(TOTAL_DURATION / TICK);
 

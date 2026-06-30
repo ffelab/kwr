@@ -71,7 +71,7 @@ const puzzleData = {
 			},
 			8: { c: "Wissen macht so", l: "2", s: "AH" },
 			9: {
-				c: "Den um den: wie Schritt für Schritt mit Dampfantrieb",
+				c: "Den um den: wie Schritt für \nSchritt mit Dampfantrieb",
 				l: "3",
 				s: "ZUG",
 			},

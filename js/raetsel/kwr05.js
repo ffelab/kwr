@@ -70,7 +70,11 @@ const puzzleData = {
 		SENKRECHT: {
 			1: { c: "So ein Unfug, Humbug, Mumpitz!", l: "5", s: "STUSS" },
 			2: { c: "Kurz die Realität erweitert", l: "2", s: "AR" },
-			3: { c: "Winziger Unruhestifter ", l: "8", s: "BACILLUS" },
+			3: {
+				c: "Winziger Unruhestifter, unangenehm erregend",
+				l: "8",
+				s: "BACILLUS",
+			},
 			4: {
 				c: "Wer zu den Aktualitäten des Tages mit den Acheln zuckt, dem ist die Aufwärts abwärts",
 				l: "4",

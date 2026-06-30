@@ -46,19 +46,6 @@
 	touch-action: none;
 }
 
-.titel-num {
-	z-index: 1000;
-	font-size: 2.6rem;
-	color: var(--primary-text-color);
-	font-weight: 800;
-	width: fit-content;
-	height: fit-content;
-	position: fixed;
-	margin-left: 2vw;
-	opacity: 0;
-	/* transition: opacity 1s linear; */
-}
-
 #titel-wrapper {
 	padding-top: 5vw;
 	position: absolute;
@@ -219,11 +206,11 @@ body.dark {
 .box.active::after {
 	content: "";
 	position: absolute;
-	width: 2.3px;
-	height: 60%;
+	width: 2.5px;
+	height: 55%;
 	background: white;
 	border: none;
-	left: 18%;
+	left: 15%;
 	top: 20%;
 
 	animation: blink 1s step-end infinite;

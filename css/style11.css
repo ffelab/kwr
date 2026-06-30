@@ -36,6 +36,7 @@
 	--primary-text-color: rgb(0, 0, 0);
 	/* --primary-text-color: rgb(44, 14, 176); */
 	--darker-text-color: rgb(10, 20, 45);
+	interpolate-size: allow-keywords;
 }
 
 * {
@@ -43,6 +44,67 @@
 	margin: 0;
 	padding: 0;
 	touch-action: none;
+}
+
+#titel-wrapper {
+	padding-top: 5vw;
+	position: absolute;
+	opacity: 1;
+	/* transition: opacity 1.5s ease-in; */
+
+	z-index: 999;
+	display: flex;
+	flex-direction: row;
+	padding-top: 3dvw;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: center;
+	height: 100dvh;
+	padding-bottom: 50dvw;
+	width: 100dvw;
+	gap: 3dvw;
+	background-color: var(--primary-text-color);
+}
+
+.titel-container {
+	margin: 1vw;
+	/* border: solid var(--primary-text-color) 1.5px; */
+	border-radius: 2px;
+	margin-top: 1dvh;
+	display: grid;
+	grid-template-columns: repeat(5, min(20px, calc(94vw / 3.5)));
+	/* animation: slide 2s ease-in-out infinite alternate; */
+	/* background: var(--primary-highlight-color); */
+	/* transform: skew(10deg); */
+	overflow: hidden;
+}
+
+.titel-box {
+	color: var(--primary-bg-color);
+	position: relative;
+	aspect-ratio: 1 / 1;
+	max-width: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* border: 1.5px solid var(--primary-bg-color); */
+	background: var(--primary-text-color);
+	font-family: "JetBrainsMono";
+	webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* old Edge/IE */
+	user-select: none; /* modern browsers */
+	opacity: 0; /* start invisible */
+	transition: opacity 3s ease;
+}
+
+.titel-box.black {
+	box-sizing: content-box;
+	background: var(--primary-bg-color);
+
+	/* background-color: transparent; */
+	cursor: default;
+	border: none;
+	pointer-events: none;
 }
 
 body {
@@ -61,19 +123,20 @@ body.dark {
 }
 
 #start-container {
-	width: 100vw;
-	height: 100vh;
-	background-color: var(--primary-bg-color);
-	position: absolute;
-	z-index: 9999;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transform: translateY(8dvh);
+	opacity: 0;
+	transition: opacity 3s ease;
 }
 
 #start {
+	border: solid var(--primary-bg-color) 1.8px;
 	font-size: min(1.6rem, calc(94dvw / 16));
-	padding: 0 2dvw;
+	padding: 1dvw 3dvw;
+	animation: glow 1s ease-in-out infinite;
+	box-shadow: 0 0 0.2px 0px var(--primary-bg-color);
 }
 
 #raetsel-container {

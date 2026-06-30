@@ -390,48 +390,48 @@ document.addEventListener("click", unlockAudio);
 
 function triggerWinAnimation() {
 	console.log("PUZZLE SOLVED!");
-	// clearHighlight();
+	clearHighlight();
 
-	// display.textContent = "🎉 Gelöst! 🎉";
+	display.textContent = "🎉 Gelöst! 🎉";
 
-	// const centerCells = [
-	// 	{ r: SIZE / 2 - 1, c: SIZE / 2 - 1 },
-	// 	{ r: SIZE / 2 - 1, c: SIZE / 2 },
-	// 	{ r: SIZE / 2, c: SIZE / 2 - 1 },
-	// 	{ r: SIZE / 2, c: SIZE / 2 },
-	// ];
+	const centerCells = [
+		{ r: SIZE / 2 - 1, c: SIZE / 2 - 1 },
+		{ r: SIZE / 2 - 1, c: SIZE / 2 },
+		{ r: SIZE / 2, c: SIZE / 2 - 1 },
+		{ r: SIZE / 2, c: SIZE / 2 },
+	];
 
-	// for (let r = 0; r < SIZE; r++) {
-	// 	for (let c = 0; c < SIZE; c++) {
-	// 		const cell = grid[r][c].el;
+	for (let r = 0; r < SIZE; r++) {
+		for (let c = 0; c < SIZE; c++) {
+			const cell = grid[r][c].el;
 
-	// 		if (cell.classList.contains("black")) continue;
+			if (cell.classList.contains("black")) continue;
 
-	// 		let dist = Infinity;
+			let dist = Infinity;
 
-	// 		for (const center of centerCells) {
-	// 			const d = Math.abs(r - center.r) + Math.abs(c - center.c);
-	// 			dist = Math.min(dist, d);
-	// 		}
+			for (const center of centerCells) {
+				const d = Math.abs(r - center.r) + Math.abs(c - center.c);
+				dist = Math.min(dist, d);
+			}
 
-	// 		const delay = dist * 70;
+			const delay = dist * 70;
 
-	// 		setTimeout(() => {
-	// 			audio.play();
-	// 			cell.style.setProperty("--win-color", getRandomColor());
-	// 			cell.classList.add("win-blink");
-	// 		}, delay);
-	// 	}
-	// }
+			setTimeout(() => {
+				audio.play();
+				cell.style.setProperty("--win-color", getRandomColor());
+				cell.classList.add("win-blink");
+			}, delay);
+		}
+	}
 
-	// // cleanup
-	// setTimeout(() => {
-	// 	for (let r = 0; r < SIZE; r++) {
-	// 		for (let c = 0; c < SIZE; c++) {
-	// 			grid[r][c].el.classList.remove("win-blink");
-	// 		}
-	// 	}
-	// }, SIZE * 1000); // uncomment all after edit!
+	// cleanup
+	setTimeout(() => {
+		for (let r = 0; r < SIZE; r++) {
+			for (let c = 0; c < SIZE; c++) {
+				grid[r][c].el.classList.remove("win-blink");
+			}
+		}
+	}, SIZE * 1000); // uncomment all after edit!
 }
 
 /* ===================== INPUT ===================== */
@@ -444,7 +444,7 @@ function writeCell(value) {
 	cell.letterEl.textContent = value;
 	savePuzzle();
 
-	if (!checkAllSolved()) {
+	if (checkAllSolved()) {
 		// REMOVE "!" AFTER EDITING! Uncomment
 		triggerWinAnimation();
 
@@ -610,7 +610,7 @@ function getCurrentClue() {
 	let clue = getWordStart(state.direction);
 
 	if (!clue) {
-		// toggleDirection(); //UNUNCOMMENT AFTER EDITING!!!!
+		toggleDirection(); //UNUNCOMMENT AFTER EDITING!!!!
 		clue = getWordStart(state.direction);
 	}
 

@@ -22,33 +22,59 @@
 		<link href="../css/style.css" rel="stylesheet" />
 	</head>
 
-	<body>
-		<!-- <div id="start-container">
-			<button id="start">Start</button>
-		</div> -->
+	<body class="dark">
+		<div id="titel-wrapper">
+			<div class="titel-container" id="titel-container1"></div>
+			<div class="titel-container" id="titel-container2"></div>
+			<div class="titel-container" id="titel-container3"></div>
+			<div class="titel-container" id="titel-container4"></div>
+			<div class="titel-container" id="titel-container5"></div>
+			<div class="titel-container" id="titel-container6"></div>
+			<div class="titel-container" id="titel-container7"></div>
+			<div class="titel-container" id="titel-container8"></div>
+			<div class="titel-container" id="titel-container9"></div>
+			<div class="titel-container" id="titel-container10"></div>
+			<div class="titel-container" id="titel-container11"></div>
+			<div class="titel-container" id="titel-container12"></div>
+
+			<div id="start-container">
+				<button id="start">RÄTSEL 02</button>
+			</div>
+		</div>
 
 		<div id="info" class="hidden">
-			<details>
-				<summary>HELP</summary>
+			<details name="story">
+				<summary>HILFE</summary>
 				<p>
-					Wisch den aktuellen Hinweis nach links oder rechts um den
-					nächsten oder den vorherigen Hinweis zu sehen, oder click
-					einfach auf das Feld, für das du den Hinweis sehen
-					möchtest.<br /><br />Click nochmal auf das ausgewählte Feld
-					um zwischen senkrecht und waagerecht hin und her zu
-					wechseln.
+					Wisch den aktuellen Hinweis nach links oder rechts für den
+					nächsten oder den vorherigen Hinweis, oder click einfach auf
+					das jeweilige Feld, für das du den Hinweis sehen möchtest.
+				</p>
+				<p class="indent">
+					Click nochmal auf das ausgewählte Feld um zwischen senkrecht
+					und waagerecht hin und her zu wechseln.
 				</p>
 			</details>
-			<details>
-				<summary>CHEAT</summary>
-				<p>
-					Du kannst dein Handy schütteln für ein paar extra
-					Buchstaben.
-					<button id="btn_reqPermission">Willst du schummeln?</button>
+			<details name="story">
+				<summary>SCHUMMELN</summary>
+				<p class="schummeln">
+					Willst du schummeln? Dann
+					<button id="btn_reqPermission">click hier</button>. Danach
+					kannst du dann dein Handy schütteln um einen korrekten
+					Buchstaben erscheinen zu lassen.
+				</p>
+				<p class="indent">
+					Aber Vorsicht! Dein Schummelzähler steigt mit jedem
+					Schütteln. Wie häufig du geschummelt hast kannst du dann
+					hier oder auf der Übersichtsseite einsehen.
 				</p>
 			</details>
-			<button class="reset-button close-button">RESET</button>
-			<button class="close-button">CLOSE</button>
+			<details name="story">
+				<summary>DRUCKEN</summary>
+				<p></p>
+			</details>
+			<button class="reset-button close-button">ZURÜCKSETZEN</button>
+			<button class="close-button">SCHLIESSEN</button>
 		</div>
 
 		<div id="raetsel-container"></div>

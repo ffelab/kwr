@@ -58,9 +58,9 @@ const puzzleData = {
 				s: "NATURTALENT",
 			},
 			8: {
-				c: "Schwing oft mit in Träumen der Ausspannsehnsucht",
+				c: "Übernatürliche Keller-Erscheinungen? Farb- und geruchslose Höchstprozentige",
 				l: "11",
-				s: "HAENGEMATTE",
+				s: "WEINGEISTER",
 			},
 			14: { c: "Stilistisch angesagt", l: "2", s: "IN" },
 			17: { c: "Gehört mal zu auf, mal zu zu", l: "2", s: "AB" },

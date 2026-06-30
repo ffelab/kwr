@@ -277,7 +277,7 @@ details::details-content {
 }
 details[open]::details-content {
 	/* max-height: 60dvh; */
-	height: calc(100dvh - (5 * 3.2rem) - (12vw));
+	height: calc(100dvh - (5 * 3.2rem) - (18vw));
 }
 
 #info > button,
@@ -416,9 +416,6 @@ details {
 			&.indent {
 				margin-bottom: 5vw;
 			}
-			&.schummeln {
-				margin-bottom: 5vw;
-			}
 
 			& > button {
 				margin: 0;
@@ -450,13 +447,13 @@ summary::-webkit-details-marker {
 summary::after {
 	font-size: 2rem;
 	line-height: 1.6rem;
-	content: "+";
+	content: "▪";
 	font-weight: bold;
 	text-align: right;
 }
 details[open] summary::after {
 	font-size: 2rem;
-	content: "–";
+	content: "■";
 	line-height: 1.6rem;
 }
 details > p {

@@ -212,6 +212,7 @@ function loadPuzzle() {
 	motionEnabled = data.motionEnabled || false;
 
 	if (motionEnabled) {
+		document.querySelector(".schummel").textContent = "";
 		btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 		btn_reqPermission.style.textDecoration = "none";
 		setMotionListeners();

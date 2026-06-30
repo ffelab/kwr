@@ -245,6 +245,7 @@ details {
 }
 #about {
 	text-align: left;
+
 	/* border-top: solid 9.5px var(--primary-bg-color); */
 }
 
@@ -307,13 +308,13 @@ summary::-webkit-details-marker {
 summary::after {
 	font-size: 2rem;
 	line-height: 1.6rem;
-	content: "+";
+	content: "▪";
 	font-weight: bold;
 	text-align: right;
 }
 details[open] summary::after {
 	font-size: 2rem;
-	content: "–";
+	content: "■";
 	line-height: 1.6rem;
 }
 details > p {

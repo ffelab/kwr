@@ -111,7 +111,7 @@ const puzzleData = {
 			7: {
 				c: "„Die Menschen gleichen einander in den Worten, aber an den ... kann man sie unterscheiden“ (Molière)",
 				l: "5",
-				s: "EINEN",
+				s: "TATEN",
 			},
 			8: {
 				c: "Führen manche großartig im Kleidungs-Schilde",

@@ -28,12 +28,12 @@ const puzzleData = {
 	CLUES: {
 		WAAGERECHT: {
 			1: {
-				c: "Gröbere Holzarbeit der Möchtegern-Postennachrücker",
+				c: "Gröbere Holzarbeit der \nMöchtegern-Postennachrücker",
 				l: "8",
 				s: "ABSAEGEN",
 			},
 			7: {
-				c: "Erst existenzielle Aufforderung, dann doch nur eine Niete",
+				c: "Erst existenzielle Aufforderung, \ndann doch nur eine Niete",
 				l: "6",
 				s: "LEBLOS",
 			},
@@ -43,7 +43,7 @@ const puzzleData = {
 				s: "ASE",
 			},
 			11: {
-				c: "Wo tierische Schaulust die Miete bezahlt",
+				c: "Wo tierische Schaulust \ndie Miete bezahlt",
 				l: "3",
 				s: "ZOO",
 			},
@@ -63,12 +63,12 @@ const puzzleData = {
 				s: "GUSS",
 			},
 			16: {
-				c: "",
+				c: "Internetsprech für „get the fuck out“",
 				l: "4",
 				s: "GTFO",
 			},
 			17: {
-				c: "Zeit heißer Nachfrage nach soleil, mer und plage",
+				c: "Zeit heißer Nachfrage nach \nsoleil, mer und plage",
 				l: "3",
 				s: "ETE",
 			},
@@ -115,12 +115,12 @@ const puzzleData = {
 				s: "ELO",
 			},
 			5: {
-				c: "Wenn 19 und der letzte eine Allianz eingehen",
+				c: "Wenn 19 und der letzte \neine Allianz eingehen",
 				l: "6",
 				s: "ESZETT",
 			},
 			6: {
-				c: "Weibliche Fachkraft für treffsichere Bestandsregulierung",
+				c: "Weibliche Fachkraft für \ntreffsichere Bestandsregulierung",
 				l: "8",
 				s: "JAEGERIN",
 			},
@@ -135,12 +135,12 @@ const puzzleData = {
 				s: "STUTEN",
 			},
 			12: {
-				c: "Druckverfahren dieses Buchs (eigentlich)",
+				c: "Druckverfahren dieses Buchs \n(eigentlich)",
 				l: "6",
 				s: "OFFSET",
 			},
 			19: {
-				c: "Kurzer Titel längerer Auf-die-Beine-Prozedur",
+				c: "Kurzer Titel längerer \nAuf-die-Beine-Prozedur",
 				l: "4",
 				s: "REHA",
 			},
@@ -150,7 +150,7 @@ const puzzleData = {
 				s: "ORML",
 			},
 			21: {
-				c: "Eckt nicht an, läuft dennoch nicht ganz rund",
+				c: "Eckt nicht an, läuft dennoch\n nicht ganz rund",
 				l: "4",
 				s: "OVAL",
 			},
@@ -160,7 +160,7 @@ const puzzleData = {
 				s: "TIDE",
 			},
 			24: {
-				c: "Soll sicher funktionieren: Zahlen zum Zahlen",
+				c: "Soll sicher funktionieren: \nZahlen zum Zahlen",
 				l: "3",
 				s: "TAN",
 			},

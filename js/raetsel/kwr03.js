@@ -104,7 +104,7 @@ const puzzleData = {
 				s: "ADOBE",
 			},
 			10: {
-				c: "Mal künstlich handschriftlich, mal szenisch anweisend,\nmal ausführlich programmiert",
+				c: "Mal szenisch anweisend,\nmal ausführlich programmiert",
 				l: "6",
 				s: "SKRIPT",
 			},

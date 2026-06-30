@@ -33,7 +33,7 @@ const puzzleData = {
 				s: "ABSAEGEN",
 			},
 			7: {
-				c: "",
+				c: "Erst existenzielle Aufforderung, dann doch nur eine Niete",
 				l: "6",
 				s: "LEBLOS",
 			},
@@ -43,7 +43,7 @@ const puzzleData = {
 				s: "ASE",
 			},
 			11: {
-				c: "",
+				c: "Wo tierische Schaulust die Miete bezahlt",
 				l: "3",
 				s: "ZOO",
 			},
@@ -58,7 +58,7 @@ const puzzleData = {
 				s: "HEFT",
 			},
 			15: {
-				c: "",
+				c: "Wo's aus einem ist, gibt's einen formgebenden Moment",
 				l: "4",
 				s: "GUSS",
 			},
@@ -115,17 +115,17 @@ const puzzleData = {
 				s: "ELO",
 			},
 			5: {
-				c: "",
+				c: "Wenn 19 und der letzte eine Allianz eingehen",
 				l: "6",
 				s: "ESZETT",
 			},
 			6: {
-				c: "",
+				c: "Weibliche Fachkraft für treffsichere Bestandsregulierung",
 				l: "8",
 				s: "JAEGERIN",
 			},
 			8: {
-				c: "",
+				c: "Blaublütiger der Bilder-Welt? Schnappschussschütze!",
 				l: "8",
 				s: "FOTOGRAF",
 			},
@@ -150,7 +150,7 @@ const puzzleData = {
 				s: "ORML",
 			},
 			21: {
-				c: "",
+				c: "Eckt nicht an, läuft dennoch nicht ganz rund",
 				l: "4",
 				s: "OVAL",
 			},
@@ -165,7 +165,7 @@ const puzzleData = {
 				s: "TAN",
 			},
 			25: {
-				c: "",
+				c: "Slawischer Käse, britischer Aristokrat",
 				l: "3",
 				s: "SIR",
 			},

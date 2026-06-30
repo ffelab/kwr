@@ -443,7 +443,7 @@ function writeCell(value) {
 	cell.letterEl.textContent = value;
 	savePuzzle();
 
-	if (!checkAllSolved()) {
+	if (checkAllSolved()) {
 		// REMOVE "!" AFTER EDITING! Uncomment
 		triggerWinAnimation();
 
@@ -609,7 +609,7 @@ function getCurrentClue() {
 	let clue = getWordStart(state.direction);
 
 	if (!clue) {
-		// toggleDirection(); //UNUNCOMMENT AFTER EDITING!!!!
+		toggleDirection(); //UNUNCOMMENT AFTER EDITING!!!!
 		clue = getWordStart(state.direction);
 	}
 
@@ -755,6 +755,7 @@ toggleBtn.addEventListener("click", () => {
 	clearHighlight();
 	openInfo();
 });
+// document.getElementById("info").addEventListener("click", closeInfo); // schließt dann auch wenn man die buttons clicked
 const infoButtons = info.querySelectorAll(".close-button");
 infoButtons.forEach((btn) => {
 	btn.addEventListener("click", closeInfo);
@@ -1078,9 +1079,24 @@ if (display.textContent === "")
 	display.textContent =
 		"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
 
+document.querySelectorAll(".box").forEach((box) => {
+	if (box.querySelector(".question-number")) {
+		const number = box.querySelector(".question-number");
+		const letter = box.querySelector(".letter");
+		const text = letter ? letter.textContent : box.textContent;
+		if (text.trim() !== "" && !box.classList.contains("active")) {
+			number.classList.add("smaller");
+		}
+	}
+});
+
+// START SEQUENCE //
+
 document.getElementById("start").addEventListener("click", async () => {
 	document.getElementById("titel-wrapper").style.opacity = "0";
 	document.getElementById("titel-wrapper").style.pointerEvents = "none";
+	document.getElementById("hinweis-container").style.display = "flex";
+	containerEl.style.display = "grid";
 	body.classList.remove("dark");
 });
 

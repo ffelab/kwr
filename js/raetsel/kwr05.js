@@ -45,7 +45,11 @@ const puzzleData = {
 			19: { c: "", l: "8", s: "PLANFILM" },
 			22: { c: "Deren ... besingt das Life", l: "4", s: "OPUS" },
 			23: { c: "", l: "4", s: "BLAA" },
-			25: { c: "", l: "10", s: "GESCHMAEHT" },
+			25: {
+				c: "Anerkennungsverweigert: Böhmermanns poetische Wirkung auf Erdoğan",
+				l: "10",
+				s: "GESCHMAEHT",
+			},
 			28: {
 				c: "Kennzeichen von Landsberg am 5 waagerecht",
 				l: "2",
@@ -66,13 +70,13 @@ const puzzleData = {
 		SENKRECHT: {
 			1: { c: "So ein Unfug, Humbug, Mumpitz!", l: "5", s: "STUSS" },
 			2: { c: "Kurz die Realität erweitert", l: "2", s: "AR" },
-			3: { c: "", l: "8", s: "BACILLUS" },
+			3: { c: "Winziger Unruhestifter ", l: "8", s: "BACILLUS" },
 			4: {
 				c: "Wer zu den Aktualitäten des Tages mit den Acheln zuckt, dem ist die Aufwärts abwärts",
 				l: "4",
 				s: "EGAL",
 			},
-			5: { c: "", l: "4", s: "LAIE" },
+			5: { c: "Zeitgenosse ohne Expertenstatus", l: "4", s: "LAIE" },
 			6: {
 				c: "Nahrungsstier in umgestelltem Blueless",
 				l: "8",
@@ -85,8 +89,16 @@ const puzzleData = {
 				l: "5",
 				s: "ELLEN",
 			},
-			11: { c: "", l: "", s: "KALIF" },
-			14: { c: "", l: "", s: "TIPPELN" },
+			11: {
+				c: "Mächtiger im Morgenland: Dem fehlt's zum Staat an Ornia",
+				l: "",
+				s: "KALIF",
+			},
+			14: {
+				c: "Bescheidene Art der Fortbewegung, kein guter Rat, kein Tringeld",
+				l: "7",
+				s: "TIPPELN",
+			},
 			15: { c: "", l: "", s: "ERMAHNT" },
 			20: { c: "Kommt in den Becher oder Börse", l: "5", s: "ASCHE" },
 			21: { c: "", l: "", s: "IBANS" },

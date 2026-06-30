@@ -33,7 +33,7 @@
 	/* --primary-highlight-color: #ff4c31;
 	--secondary-highlight-color: #ffe1dc; */
 
-	--primary-text-color: rgb(23, 23, 23);
+	--primary-text-color: rgb(0, 0, 0);
 	/* --primary-text-color: rgb(44, 14, 176); */
 	--darker-text-color: rgb(10, 20, 45);
 	interpolate-size: allow-keywords;
@@ -131,15 +131,16 @@ body {
 }
 
 body.dark {
-	background-color: var(--primary-text-color);
+	background-color: black;
 }
 
 #start-container {
-	height: 10vh;
 	/* width: fit-content; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transform: translateY(8dvh);
+
 	opacity: 0;
 	transition: opacity 3s ease;
 }
@@ -251,10 +252,10 @@ details {
 }
 
 details {
-	display: flex;
+	/* display: flex; */
 	flex-direction: column;
 	align-items: center;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 details::-webkit-scrollbar {
 	/* display: none; */
@@ -275,7 +276,7 @@ details::details-content {
 }
 details[open]::details-content {
 	/* max-height: 60dvh; */
-	height: auto;
+	height: calc(100dvh - (5 * 3.2rem) - (12vw));
 }
 
 #info > button,
@@ -324,9 +325,9 @@ details {
 
 .question-number {
 	position: absolute;
-	top: 0.04rem;
-	left: 0.1rem;
-	font-size: min(1rem, calc(96vw / 37));
+	top: -1px;
+	left: 1px;
+	font-size: min(1rem, calc(96vw / 40));
 	font-weight: 900;
 	pointer-events: none;
 	webkit-user-select: none; /* Safari */
@@ -394,7 +395,7 @@ details {
 	background-color: rgba(0, 0, 0, 0.8);
 	color: var(--primary-text-color);
 	font-size: 1rem;
-	padding: 1.5rem;
+	padding: 2vw;
 	width: 100vw;
 	height: 100dvh;
 	position: absolute;
@@ -403,6 +404,7 @@ details {
 
 	& > .close-button,
 	details {
+		text-align: left;
 		font-size: 1.3rem;
 		min-height: 3.2rem;
 		width: 93vw;
@@ -422,6 +424,9 @@ details {
 				border: none;
 			}
 		}
+	}
+	& > .close-button {
+		text-indent: 2vw;
 	}
 }
 
@@ -467,7 +472,7 @@ details > p {
 
 #btn_reqPermission {
 	margin-top: 2vw;
-	font-size: 1rem;
+	font-size: 1.1rem;
 	text-decoration: underline dotted;
 	z-index: 200;
 }
@@ -524,6 +529,11 @@ details > p {
 	#raetsel-container {
 		border: solid var(--primary-text-color) 2px;
 		margin-top: 3vw;
+		display: none;
+	}
+	#hinweis-container {
+		display: none;
+		border: none;
 	}
 	.box {
 		border: solid var(--primary-text-color) 2px;
@@ -532,6 +542,17 @@ details > p {
 		justify-content: center;
 		/* gap: 5vw; */
 	}
+
+	#titel-wrapper {
+		transform: translateY(10%);
+		gap: 10px;
+		overflow: hidden;
+		max-width: 500px;
+	}
+	.titel-container {
+		margin: 5px;
+	}
+
 	#hinweis-liste {
 		display: block;
 	}

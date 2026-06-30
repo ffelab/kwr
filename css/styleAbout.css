@@ -33,7 +33,7 @@
 	/* --primary-highlight-color: #ff4c31;
 	--secondary-highlight-color: #ffe1dc; */
 
-	--primary-text-color: rgb(23, 23, 23);
+	--primary-text-color: rgb(0, 0, 0);
 	/* --primary-text-color: rgb(44, 14, 176); */
 	--darker-text-color: rgb(10, 20, 45);
 	interpolate-size: allow-keywords;
@@ -229,7 +229,7 @@ details::details-content {
 }
 details[open]::details-content {
 	/* max-height: 60dvh; */
-	height: auto;
+	height: calc(100dvh - (4 * 3.2rem) - (11vw));
 }
 
 #raetsel-wrapper {
@@ -249,6 +249,9 @@ details {
 }
 
 #info {
+	position: absolute;
+	bottom: 0;
+	background-color: var(--primary-bg-color);
 	flex-direction: column;
 	display: flex;
 	gap: 2vw;
@@ -260,13 +263,14 @@ details {
 	padding: 2vw;
 	padding-top: 2vw;
 	width: 100vw;
-	height: 100dvh;
+	height: fit-content;
 	position: absolute;
 	z-index: 100;
 	hyphens: auto;
 
 	& > .close-button,
 	details {
+		text-align: left;
 		font-size: 1.3rem;
 		min-height: 3.2rem;
 		width: 93vw;

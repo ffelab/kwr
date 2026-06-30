@@ -105,7 +105,7 @@ const puzzleData = {
 			},
 			13: { c: "Anderorts auch Alm", l: "4", s: "ALPE" },
 			14: {
-				c: "Höchst spannend: Fließt auch mald in Fischers Netz",
+				c: "Höchst spannend: Fließt auch mal in Fischers Netz",
 				l: "5",
 				s: "STROM",
 			},

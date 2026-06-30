@@ -62,7 +62,7 @@ const puzzleData = {
 				l: "4",
 				s: "GUSS",
 			},
-			15: {
+			16: {
 				c: "",
 				l: "4",
 				s: "GTFO",

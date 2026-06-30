@@ -413,7 +413,7 @@ details {
 		padding: 0vw 3vw;
 		& > p {
 			margin: 1vw 1vw 0vw 2vw;
-			&.indent {
+			&.last {
 				margin-bottom: 5vw;
 			}
 

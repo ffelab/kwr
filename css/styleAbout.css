@@ -276,6 +276,7 @@ details {
 				margin-bottom: 5vw;
 			}
 			&.uebersicht {
+				max-width: calc(68px * 4);
 				margin-top: 5vw;
 				text-align: center;
 			}

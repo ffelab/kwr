@@ -478,6 +478,8 @@ solved.forEach((el) => {
 		} else {
 			schummelMsg = `mit ${schummelzaehler}-mal Schummeln gelöst.`;
 		}
+		document.querySelector(".uebersicht").style.color =
+			"var(--primary-highlight-color)";
 		document.querySelector(".uebersicht").innerHTML =
 			`Du hast Rätsel ${el.dataset.id}<br>${schummelMsg}`;
 	});
@@ -489,6 +491,10 @@ uebersicht.forEach((el) => {
 			solved.forEach((el) => {
 				el.style.boxShadow = "0 0 0px 1px var(--primary-bg-color)";
 			});
+			document.querySelector(".uebersicht").style.color =
+				"var(--primary-bg-color)";
+			document.querySelector(".uebersicht").innerHTML =
+				"Hier findest du deine <br />gelösten Rätsel.";
 		});
 	}
 });

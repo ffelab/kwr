@@ -133,6 +133,9 @@ body.dark {
 	justify-content: center;
 	height: 16dvh;
 }
+a.buch {
+	display: none;
+}
 
 @media (min-width: 470px) {
 	body {
@@ -157,5 +160,7 @@ body.dark {
 	a.buch {
 		color: var(--primary-bg-color);
 		cursor: pointer;
+		display: block;
+		text-decoration: none;
 	}
 }

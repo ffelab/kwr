@@ -795,7 +795,7 @@ function runSequence() {
 	const targets = allCells.filter((c) => c.target);
 	const total = targets.length;
 
-	const TOTAL_DURATION = 5000;
+	const TOTAL_DURATION = 3000;
 	const TICK = 140;
 	const totalTicks = Math.floor(TOTAL_DURATION / TICK);
 

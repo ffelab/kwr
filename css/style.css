@@ -264,7 +264,7 @@ details::details-content {
 }
 details[open]::details-content {
 	/* max-height: 60dvh; */
-	height: calc(100dvh - (5 * 3.2rem) - (18vw));
+	height: calc(100dvh - (5 * 3rem) - (14vw));
 }
 
 #info > button,
@@ -376,7 +376,7 @@ details {
 
 #info {
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 2vw;
 	align-items: center;
 	text-align: left;
 	justify-content: flex-end;
@@ -392,14 +392,17 @@ details {
 
 	& > .close-button,
 	details {
+		/* background-color: var(--primary-text-color);
+		color: var(--primary-bg-color); */
 		text-align: left;
-		font-size: 1.3rem;
-		min-height: 3.2rem;
+		font-size: 1.2rem;
+		min-height: 3rem;
 		width: 93vw;
 		max-width: 600px;
-		padding: 0vw 3vw;
+		margin-bottom: 0;
+		/* border: none; */
 		& > p {
-			margin: 1vw 1vw 0vw 2vw;
+			margin: 2vw 3vw 0vw 5vw;
 			&.last {
 				margin-bottom: 5vw;
 			}
@@ -411,13 +414,13 @@ details {
 		}
 	}
 	& > .close-button {
-		text-indent: 2vw;
+		text-indent: 5vw;
 	}
 }
 
 summary {
-	padding: 3vw 2vw;
-
+	padding: 3vw 5vw;
+	transform: translateY(1px);
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
@@ -449,7 +452,7 @@ details > p {
 	margin: 0;
 	font-weight: normal;
 	font-family: "JetBrainsMono";
-	font-size: 1.1rem;
+	font-size: 1rem;
 }
 .indent {
 	text-indent: 8vw;
@@ -457,7 +460,7 @@ details > p {
 
 #btn_reqPermission {
 	margin-top: 2vw;
-	font-size: 1.1rem;
+	font-size: 1rem;
 	text-decoration: underline dotted;
 	z-index: 200;
 }

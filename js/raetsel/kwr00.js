@@ -111,7 +111,7 @@ const puzzleData = {
 				s: "LE",
 			},
 			4: {
-				c: "Mit Verlaub: James hatte die zum Töten",
+				c: "Mit Verlaub: \nJames hatte die zum Töten",
 				l: "6",
 				s: "LIZENZ",
 			},
@@ -128,7 +128,7 @@ const puzzleData = {
 			},
 			12: { c: "Vorm Biss steht die Bude ", l: "2", s: "IM" },
 			15: {
-				c: "Hängt man das ... Capitale dran, liest es sich viel länger",
+				c: "Hängt man das ... Capitale dran, \nliest es sich viel länger",
 				l: "2",
 				s: "AN",
 			},

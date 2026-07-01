@@ -56,7 +56,11 @@ const puzzleData = {
 				l: "7",
 				s: "FAECHER",
 			},
-			7: { c: "Entertainment Genie ohne Talentlücke", l: "4", s: "EGOT" },
+			7: {
+				c: "Entertainment Genie \nohne Talentlücke",
+				l: "4",
+				s: "EGOT",
+			},
 			8: {
 				c: "Postfaschistin in Benitos Fußstapfen",
 				l: "8",

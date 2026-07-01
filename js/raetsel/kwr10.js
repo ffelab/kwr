@@ -73,7 +73,7 @@ const puzzleData = {
 				s: "NOTE",
 			},
 			2: { c: "Führt hoch und runter", l: "11", s: "WANDERKARTE" },
-			3: { c: "Hannes hat davon mindesdtens 7", l: "6", s: "LIEDER" },
+			3: { c: "Hannes hat davon mindestens 7", l: "6", s: "LIEDER" },
 			4: { c: "Sicher ohne Rücksicht auf Verluste", l: "4", s: "TIFF" },
 			5: {
 				c: "Von woaus Elia dieses Semester postet",

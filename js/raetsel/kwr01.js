@@ -73,12 +73,12 @@ const puzzleData = {
 				s: "KEN",
 			},
 			23: {
-				c: "Sollte eigentlich häufiger an CAPTCHA scheitern als ich",
+				c: "Sollte eigentlich häufiger an CAPTCHAs scheitern als ich",
 				l: "3",
 				s: "BOT",
 			},
 			24: {
-				c: "Hier eine missliche Lage, anderswo nicht",
+				c: "Hier eine missliche Lage, \nanderswo nicht",
 				l: "3",
 				s: "NOT",
 			},
@@ -102,7 +102,7 @@ const puzzleData = {
 			3: { c: "Hat höchsten Stellenwert", l: "4", s: "OBEN" },
 			4: { c: "Cash besingts im letzten Cover", l: "4", s: "HURT" },
 			5: {
-				c: "Ägyptischer Sonnengott + buchstäblicher Alkoholgehalt + Auftakt vom Countdown",
+				c: "Ägyptischer Sonnengott + buchstäblicher Alkoholgehalt + Countdownauftakt = Riots",
 				l: "8",
 				s: "REVOLTEN",
 			},
@@ -112,7 +112,7 @@ const puzzleData = {
 				s: "INA",
 			},
 			7: {
-				c: "Plötzlich ganz grün hinter den Ohren nach Wutausbruch",
+				c: "Plötzlich ganz grün hinter den \nOhren nach Wutausbruch",
 				l: "4",
 				s: "HULK",
 			},

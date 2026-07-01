@@ -229,7 +229,7 @@ details::details-content {
 }
 details[open]::details-content {
 	/* max-height: 60dvh; */
-	height: calc(100dvh - (4 * 3.2rem) - (11vw));
+	height: calc(100dvh - (4 * 3rem) - (11vw));
 }
 
 #info > button,
@@ -265,13 +265,14 @@ details {
 	& > .close-button,
 	details {
 		text-align: left;
-		font-size: 1.3rem;
-		min-height: 3.2rem;
+		font-size: 1.2rem;
+		min-height: 3rem;
 		width: 93vw;
 		max-width: 600px;
-		padding: 0vw 3vw;
+		margin-bottom: 0;
+		border: none;
 		& > p {
-			margin: 1vw 1vw 0vw 2vw;
+			margin: 2vw 3vw 0vw 5vw;
 			&.last {
 				margin-bottom: 5vw;
 			}
@@ -285,7 +286,7 @@ details {
 }
 
 summary {
-	padding: 3vw 2vw;
+	padding: 3vw 5vw;
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
@@ -317,7 +318,7 @@ details > p {
 	margin: 0;
 	font-weight: normal;
 	font-family: "JetBrainsMono";
-	font-size: 1.1rem;
+	font-size: 1rem;
 }
 .indent {
 	text-indent: 8vw;
@@ -466,12 +467,15 @@ a.buch {
 	.box {
 		border: solid var(--primary-text-color) 2px;
 	}
+	.animationtitel-box {
+		border: 1px solid var(--lighter-bg-color);
+	}
 	body {
 		justify-content: center;
 		overflow: hidden;
 	}
 	#animationtitel-wrapper {
-		transform: translateY(10%);
+		transform: translateY(5%);
 		gap: 10px;
 		overflow: hidden;
 	}
@@ -499,15 +503,28 @@ a.buch {
 	button {
 		padding: 3px 7px;
 	}
-	a.buch {
+	.buch {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.08rem;
+		width: 100dvw;
 		text-decoration: none;
 		pointer-events: all;
 		z-index: 1000;
-		display: block;
 		color: var(--primary-bg-color);
 		cursor: pointer;
 		transform: translateY(200px);
 		opacity: 0;
 		transition: opacity 3s ease;
+		& > p {
+			max-width: 700px;
+			width: 100%;
+		}
+	}
+
+	.indent {
+		text-indent: 2vw;
 	}
 }

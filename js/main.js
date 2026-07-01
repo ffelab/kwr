@@ -835,7 +835,7 @@ checkButton.addEventListener("pointerup", () => {
 	clearTimeout(checkHoldTimer);
 	let { row, col } = state.current;
 	display.textContent =
-		"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
+		"Wähle ein Feld aus, um den Hinweis\n zu lesen. Swipe nach rechts oder links\n für den jeweils nächsten Hinweis.";
 	display.style.color = "var(--between-dark-light)";
 
 	if (!checkActive) {
@@ -848,7 +848,7 @@ checkButton.addEventListener("pointerup", () => {
 				display.style.color = "var(--primary-text-color)";
 			} else {
 				display.textContent =
-					"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
+					"Wähle ein Feld aus, um den Hinweis\n zu lesen. Swipe nach rechts oder links\n für den jeweils nächsten Hinweis.";
 				display.style.color = "var(--between-dark-light)";
 			}
 		}, 3500);
@@ -860,7 +860,7 @@ checkButton.addEventListener("pointerup", () => {
 	restoreGridState(checkPreviewState);
 
 	display.textContent =
-		"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
+		"Wähle ein Feld aus, um den Hinweis\n zu lesen. Swipe nach rechts oder links\n für den jeweils nächsten Hinweis.";
 	display.style.color = "var(--between-dark-light)";
 	if (state.current.row) setActive(row, col);
 });
@@ -1091,7 +1091,7 @@ function fillRandomField() {
 
 if (display.textContent === "")
 	display.textContent =
-		"Click auf ein Feld für den jeweiligen Hinweis. Swipe nach rechts oder \nlinks für den Nächsten";
+		"Wähle ein Feld aus, um den Hinweis\n zu lesen. Swipe nach rechts oder links\n für den jeweils nächsten Hinweis.";
 
 document.querySelectorAll(".box").forEach((box) => {
 	if (box.querySelector(".question-number")) {

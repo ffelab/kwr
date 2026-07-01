@@ -67,7 +67,7 @@ const puzzleData = {
 				s: "CODE",
 			},
 			5: {
-				c: "Browseranleitung: Haufenweise Text musst'e lesen",
+				c: "Browseranleitung: \nHaufenweise Text musst'e lesen",
 				l: "4",
 				s: "HTML",
 			},
@@ -82,19 +82,19 @@ const puzzleData = {
 				s: "DAEMPFER",
 			},
 			9: {
-				c: "Handliche bilden zuweilen 5 senkrechts ab",
+				c: "Handliche bilden zuweilen \n5 senkrechts ab",
 				l: "8",
 				s: "MONITORE",
 			},
 		},
 		SENKRECHT: {
 			1: {
-				c: "Hauptstadt im Land, das die Kolonisatoren einst „Gold Coast“ nannten",
+				c: "Hauptstadt im Land, das Kolonisatoren einst \n„Gold Coast“ nannten",
 				l: "5",
 				s: "ACCRA",
 			},
 			2: {
-				c: "Klingt blumig, die gesamten Chlorophylle",
+				c: "Klingt blumig, die \ngesamten Chlorophylle",
 				l: "5",
 				s: "FLORA",
 			},

@@ -130,7 +130,7 @@ body.dark {
 	transform: translateY(8dvh);
 
 	opacity: 0;
-	transition: opacity 3s ease;
+	transition: opacity 1s ease;
 }
 
 #start {

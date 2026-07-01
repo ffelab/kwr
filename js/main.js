@@ -1335,7 +1335,7 @@ for (let i = 0; i < NUM; i++) {
 			const cell = document.createElement("div");
 			cell.className = "titel-box";
 			// all cells start completely hidden
-			cell.style.opacity = "0";
+			cell.style.opacity = "1";
 			cell.style.border = "";
 			container.appendChild(cell);
 			containerCells.push({ el: cell, r, c });
@@ -1404,7 +1404,7 @@ function runSequence() {
 	const targets = allCells.filter((c) => c.target);
 	const total = targets.length;
 
-	const TOTAL_DURATION = 3000;
+	const TOTAL_DURATION = 1000;
 	const TICK = 140;
 	const totalTicks = Math.floor(TOTAL_DURATION / TICK);
 

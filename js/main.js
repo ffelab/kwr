@@ -825,6 +825,9 @@ checkButton.addEventListener("pointerdown", () => {
 		checkErrors();
 
 		schummelzaehler++;
+		document.querySelector(".schummeln").innerHTML = "";
+		document.querySelector(".schummeln").textContent =
+			`Schummelzähler: ${schummelzaehler}`;
 	}, 1000);
 });
 
@@ -899,9 +902,10 @@ async function checkMotionPermission() {
 		}
 	} else {
 		permissionGranted = true;
-		document.querySelector(".schummeln").textContent = "";
-		btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
-		btn_reqPermission.style.textDecoration = "none";
+		document.querySelector(".schummeln").innerHTML = "";
+		document.querySelector(".schummeln").textContent =
+			`Schummelzähler: ${schummelzaehler}`;
+
 		closeInfo();
 		setMotionListeners();
 		savePuzzle();
@@ -942,10 +946,12 @@ function setMotionListeners() {
 			lastShakeTime = now;
 
 			fillRandomField();
-			btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
+			document.querySelector(".schummeln").innerHTML = "";
+			document.querySelector(".schummeln").textContent =
+				`Schummelzähler: ${schummelzaehler}`;
 			display.style.color = "var(--darker-highlight-color)";
 			display.textContent = "Schummeln aktiviert!";
-			schummelzaehler++;
+
 			setTimeout(() => {
 				if (!solved && state.current.row !== null) {
 					showClue();

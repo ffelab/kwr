@@ -945,6 +945,7 @@ function setMotionListeners() {
 			btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
 			display.style.color = "var(--darker-highlight-color)";
 			display.textContent = "Schummeln aktiviert!";
+			schummelzaehler++;
 			setTimeout(() => {
 				if (!solved && state.current.row !== null) {
 					showClue();

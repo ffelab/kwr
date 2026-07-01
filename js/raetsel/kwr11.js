@@ -87,13 +87,13 @@ const puzzleData = {
 				s: "AEUSSERES",
 			},
 			3: {
-				c: "Orale Versionen? Ausgesproche Varianz!",
+				c: "Orale Versionen? Ausgesprochene Varianz!",
 				l: "9",
 				s: "MUNDARTEN",
 			},
 			4: { c: "Kurzer Ozon-Killer ausm Kühlschrank", l: "4", s: "FCKW" },
 			6: {
-				c: "Höchstkultur: Ihr 15 senkrecht erstreckte ich von Quito bis Santiago",
+				c: "Höchstkultur: Ihr 15 senkrecht erstreckte sich von Quito bis Santiago",
 				l: "4",
 				s: "INKA",
 			},

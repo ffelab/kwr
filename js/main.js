@@ -212,9 +212,11 @@ function loadPuzzle() {
 	motionEnabled = data.motionEnabled || false;
 
 	if (motionEnabled) {
-		document.querySelector(".schummeln").textContent = "";
-		btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
-		btn_reqPermission.style.textDecoration = "none";
+		document.querySelector(".schummeln").innerHTML = "";
+		document.querySelector(".schummeln").textContent =
+			`Schummelzähler: ${schummelzaehler}`;
+		// btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
+		// btn_reqPermission.style.textDecoration = "none";
 		setMotionListeners();
 	}
 }
@@ -883,8 +885,11 @@ async function checkMotionPermission() {
 
 			if (permission === "granted") {
 				permissionGranted = true;
-				btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
-				btn_reqPermission.style.textDecoration = "none";
+				document.querySelector(".schummeln").innerHTML = "";
+				document.querySelector(".schummeln").textContent =
+					`Schummelzähler: ${schummelzaehler}`;
+				// btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
+				// btn_reqPermission.style.textDecoration = "none";
 				closeInfo();
 				setMotionListeners();
 				savePuzzle();

@@ -243,7 +243,7 @@ details {
 	/* display: flex; */
 	flex-direction: column;
 	align-items: center;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 details::-webkit-scrollbar {
 	/* display: none; */
@@ -414,7 +414,9 @@ details {
 		}
 	}
 	& > .close-button {
-		text-indent: 5vw;
+		padding: 3vw 5vw;
+
+		line-height: 1.6rem;
 	}
 }
 

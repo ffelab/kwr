@@ -255,7 +255,7 @@ details::details-content {
 }
 details[open]::details-content {
 	/* max-height: 60dvh; */
-	height: calc(100dvh - (5 * 3rem) - (16vw));
+	height: calc(100dvh - (5 * 3rem) - (20vw));
 }
 
 #info > button,
@@ -408,7 +408,9 @@ details {
 		}
 	}
 	& > .close-button {
-		text-indent: 5vw;
+		padding: 3vw 5vw;
+
+		line-height: 1.6rem;
 	}
 }
 

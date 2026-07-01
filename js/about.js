@@ -396,9 +396,10 @@ function buildPuzzle(container, blackFields) {
 
 			if (isBlackField(blackFields, r, c)) {
 				cell.classList.add("black");
-				container.style.border =
-					"solid var(--primary-highlight-color) 2.5px";
+				// container.style.border =
+				// 	"solid var(--primary-highlight-color) 2.5px";
 				container.style.opacity = "1";
+				container.classList.add("solved");
 			}
 
 			const letterEl = document.createElement("div");
@@ -452,6 +453,44 @@ document.getElementById("start").addEventListener("click", async () => {
 		"none";
 	const body = document.querySelector("body");
 	body.classList.remove("dark");
+});
+
+const solved = document.querySelectorAll(".solved");
+const uebersicht = document.querySelectorAll(".raetsel-container");
+
+solved.forEach((el) => {
+	el.addEventListener("click", () => {
+		solved.forEach((el) => {
+			el.style.boxShadow = "0 0 0px 1px var(--primary-bg-color)";
+		});
+		el.style.boxShadow = "0 0 0px 2.5px var(--primary-highlight-color)";
+
+		const num = parseInt(el.dataset.id) - 1;
+		const PUZZLE_ID = String(num).padStart(2, "0");
+		const saved = localStorage.getItem(`kwr${PUZZLE_ID}`);
+		const data = JSON.parse(saved);
+		const schummelzaehler = data.schummelzaehler || 0;
+		let schummelMsg = "";
+		if (schummelzaehler == 0) {
+			schummelMsg = "ohne Schummeln gelöst!";
+		} else if (schummelzaehler >= 10) {
+			schummelMsg = `mit ${schummelzaehler}-mal Schummeln „gelöst“.`;
+		} else {
+			schummelMsg = `mit ${schummelzaehler}-mal Schummeln gelöst.`;
+		}
+		document.querySelector(".uebersicht").innerHTML =
+			`Du hast Rätsel ${el.dataset.id}<br>${schummelMsg}`;
+	});
+});
+
+uebersicht.forEach((el) => {
+	if (!el.classList.contains("solved")) {
+		el.addEventListener("click", () => {
+			solved.forEach((el) => {
+				el.style.boxShadow = "0 0 0px 1px var(--primary-bg-color)";
+			});
+		});
+	}
 });
 
 // ─── Field definitions (unchanged) ───────────────────────────────────────────

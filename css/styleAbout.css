@@ -232,13 +232,6 @@ details[open]::details-content {
 	height: calc(100dvh - (4 * 3.2rem) - (11vw));
 }
 
-#raetsel-wrapper {
-	display: grid;
-	width: fit-content;
-	grid-template-columns: repeat(4, min(70px, calc(100vw / 4)));
-	padding-left: 2vw;
-}
-
 #info > button,
 details {
 	border: none;
@@ -382,6 +375,13 @@ details > p {
 	user-select: none; /* modern browsers */
 }
 
+#raetsel-wrapper {
+	display: grid;
+	width: fit-content;
+	grid-template-columns: repeat(4, min(68px, calc(100vw / 4)));
+	padding-left: 2vw;
+}
+
 .raetsel-container > .titel-box {
 	border: 1px solid var(--primary-text-color);
 }
@@ -396,7 +396,7 @@ details > p {
 }
 
 .raetsel-container {
-	border: solid var(--primary-text-color) 1.8px;
+	/* border: solid var(--primary-text-color) 1.8px; */
 	opacity: 0.5;
 	border-radius: 2px;
 	margin-top: 1dvh;
@@ -426,6 +426,9 @@ details > p {
 	webkit-user-select: none; /* Safari */
 	-ms-user-select: none; /* old Edge/IE */
 	user-select: none; /* modern browsers */
+}
+.solved {
+	box-shadow: 0 0 0px 1px var(--primary-bg-color);
 }
 
 .box.black {

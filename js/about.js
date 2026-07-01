@@ -472,16 +472,13 @@ solved.forEach((el) => {
 		const schummelzaehler = data.schummelzaehler || 0;
 		let schummelMsg = "";
 		if (schummelzaehler == 0) {
-			schummelMsg = "ohne Schummeln gelöst!";
-		} else if (schummelzaehler >= 10) {
-			schummelMsg = `mit ${schummelzaehler}-mal Schummeln „gelöst“.`;
+			schummelMsg = `Du hast Rätsel ${el.dataset.id}<br> ohne Schummeln gelöst!`;
 		} else {
-			schummelMsg = `mit ${schummelzaehler}-mal Schummeln gelöst.`;
+			schummelMsg = `Du hast bei Rätsel ${el.dataset.id} <br>${schummelzaehler}-mal geschummelt...`;
 		}
 		document.querySelector(".uebersicht").style.color =
 			"var(--primary-highlight-color)";
-		document.querySelector(".uebersicht").innerHTML =
-			`Du hast Rätsel ${el.dataset.id}<br>${schummelMsg}`;
+		document.querySelector(".uebersicht").innerHTML = schummelMsg;
 	});
 });
 

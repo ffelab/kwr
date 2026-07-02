@@ -227,7 +227,7 @@ function attachStream(stream) {
 }
 
 var lastDetectTime = 0;
-var DETECT_INTERVAL = 80; // ms, ~12fps
+var DETECT_INTERVAL = 160; // ms, ~24fps
 
 function tick(timestamp) {
 	requestAnimationFrame(tick);

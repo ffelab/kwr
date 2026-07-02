@@ -459,6 +459,56 @@ a.buch {
 	display: none;
 }
 
+form {
+	font-weight: nomal;
+	margin-top: 2vw;
+	max-width: 700px;
+	width: 93dvw;
+	overflow: hidden;
+	display: block;
+	gap: 1vw;
+	justify-content: space-between;
+}
+label {
+	font-size: 1rem;
+	margin: 1vw 5vw 3vw;
+}
+
+form > div {
+	width: 100%;
+	justify-content: center;
+	display: flex;
+}
+
+input {
+	text-decoration: none;
+	padding-left: 2vw;
+	font-family: "JetBrainsMono";
+	width: fit-content;
+	margin: 1vw 5vw 3vw;
+	font-size: 1.31rem;
+	border-radius: 2px;
+	border: none;
+	text-align: left;
+}
+div > input {
+	margin: 1vw 0 3vw;
+}
+.submit {
+	color: var(--primary-bg-color);
+	font-family: "JetBrainsMono";
+	border: none;
+	background: none;
+	font-size: 1rem;
+	font-weight: normal;
+	text-align: center;
+	padding: 0;
+	padding-bottom: 10vw;
+	width: 100%;
+	margin: 0vw;
+	text-decoration: underline dotted;
+}
+
 @media (min-width: 470px) {
 	#raetsel-container {
 		border: solid var(--primary-text-color) 2px;
@@ -526,5 +576,45 @@ a.buch {
 
 	.indent {
 		text-indent: 2vw;
+	}
+	form {
+		margin-top: 2vw;
+		max-width: 700px;
+		width: 100%;
+		display: flex;
+		gap: 1vw;
+		justify-content: space-between;
+	}
+	label {
+		font-size: 1rem;
+		margin: 0;
+		padding: 2px;
+	}
+	form > div {
+		width: fit-content;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		gap: 2vw;
+	}
+
+	input {
+		width: 200px;
+		margin-right: 3vw;
+		text-decoration: none;
+		font-family: "JetBrainsMono";
+		width: auto;
+		text-indent: 1vw;
+		margin: 0;
+		font-size: 0.8rem;
+		border-radius: 2px;
+		border: none;
+		padding: 2px;
+		height: fit-content;
+	}
+
+	.submit {
+		width: 200px;
+		padding-bottom: 0;
 	}
 }

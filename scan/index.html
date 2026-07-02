@@ -16,11 +16,57 @@
 		<div id="info" class="hidden">
 			<details name="story">
 				<summary>HILFE</summary>
-				<p></p>
+				<p>
+					Wo bei einem Kreuzworträtsel normalerweise Zahlen stehen
+					würden, sind beim Wandrätsel nur kleine gemussterte Quadrate
+					zu sehen. Die heißen Aruco-Marker. Diese Seite kann mithilfe
+					von AR die Marker erkennen, in Echtzeit tracken und die
+					dazugehörigen Inhalte anzeigen – die Hinweise für das
+					Wandrätsel. Du kannst also einfach die Kamera auf einen
+					Marker richten, um den Hinweis anzuzeigen. Wenn du den
+					Hinweis auf der Anzeige festhalten willst, musst du den
+					großen -Knopf gedrückt halten.
+				</p>
+				<p class="indent last">
+					Die Felder, die mit einem Kreis markiert sind, ergeben
+					zusammen das Lösungswort. Du musst sie allerdings noch in
+					die richtige Reihenfolge bringen. Wenn du das Wort weißt,
+					gib es beim nächsten Menüpunkt ein.
+				</p>
 			</details>
 			<details name="story">
 				<summary>LÖSUNGSWORT</summary>
-				<p></p>
+				<p class="last">
+					Du hast das Lösungswort vom Wandrätsel geknackt? Dann gib es
+					unten in das Eingabefeld ein und schick's ab. Vergiss nicht
+					deine Mail anzugeben. Der*die Erste mit der richtigen Lösung
+					gewinnt einen tollen Preis!
+				</p>
+				<form action="https://formspree.io/f/maqgljke" method="post">
+					<input
+						required
+						autocomplete="off"
+						autocorrect="off"
+						spellcheck="false"
+						placeholder="LOESUNGSWORT"
+						id="LÖSUNGSWORT"
+						name="LÖSUNGSWORT"
+						type="text"
+						oninput="this.value = this.value.toUpperCase()"
+					/>
+					<input
+						required
+						autocomplete="off"
+						autocorrect="off"
+						autocapitalize="off"
+						spellcheck="false"
+						placeholder="deine.mail@adresse.de"
+						id="E-MAIL"
+						name="E-MAIL"
+						type="text"
+					/>
+					<input class="submit" type="submit" value="Absenden" />
+				</form>
 			</details>
 			<button class="close-button">SCHLIESSEN</button>
 		</div>

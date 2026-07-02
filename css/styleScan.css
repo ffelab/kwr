@@ -266,7 +266,7 @@ details {
 	border-radius: 2px;
 	color: var(--primary-bg-color);
 	flex-direction: column;
-	align-items: center;
+	/* align-items: center; */
 	overflow: hidden;
 	font-weight: bold;
 	border: solid 2.6px var(--primary-bg-color);
@@ -290,11 +290,11 @@ details {
 
 	& > .close-button,
 	details {
+		text-align: left;
 		font-family: "JetBrainsMono";
 		font-weight: 700;
 		/* background-color: var(--primary-text-color);
 			color: var(--primary-bg-color); */
-		text-align: left;
 		font-size: 1.2rem;
 		min-height: 3rem;
 		width: 93vw;
@@ -366,4 +366,26 @@ details > p {
 }
 .flex {
 	display: flex;
+}
+
+input {
+	text-decoration: none;
+	padding-left: 2vw;
+	font-family: "JetBrainsMono";
+	width: calc(100% - 10vw);
+	margin: 0 5vw 5vw;
+	font-size: 1.3rem;
+	border-radius: 2px;
+	border: none;
+	text-align: center;
+}
+.submit {
+	font-family: "JetBrainsMono";
+	border: none;
+	background: none;
+	font-size: 1rem;
+	font-weight: normal;
+	text-align: center;
+	margin: 0vw 5vw;
+	text-decoration: underline dotted;
 }

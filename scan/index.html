@@ -146,7 +146,7 @@
 
 			/* Locked state for the hold button */
 			#hold-btn.held {
-				background-color: var(--darker-highlight-color);
+				background-color: var(--primary-highlight-color);
 				color: var(--primary-bg-color);
 			}
 
@@ -173,7 +173,7 @@
 
 			/* Locked display border highlight */
 			#id-display.held {
-				border-color: var(--darker-highlight-color);
+				border-color: var(--primary-highlight-color);
 			}
 
 			#id-value {
@@ -188,7 +188,7 @@
 				white-space: pre-wrap;
 			}
 			#id-value.held {
-				color: var(--darker-highlight-color);
+				color: var(--primary-highlight-color);
 			}
 			#id-value.empty {
 				color: var(--between-dark-light);
@@ -201,7 +201,7 @@
 		</style>
 		<script>
 			var clues = {
-				1: "→ So manche Kreaturen vor Indesign \n↓ Erbinfo vorne in Hafenstadt + \nGibt es in dick, dünn, blind + \nDer südlichste von Nordamerikas \nXXL-Seen = Police-Pendant",
+				1: "→ So manche Kreaturen vor Indesign \n↓ Erbinfo vorne in Hafen-Città + \nGibt es in dick, dünn, blind + \nDer südlichste von Nordamerikas \nXXL-Seen = Police-Pendant",
 				2: "↓ Möglicher Vorstand von Engel, Bischof und Gebirge",
 				3: "↓ Atmen wird überbewertet wenn die der Wespe nachstrebt",
 				4: "↓ Knapp hinter Mercedes: Auto mit Geltungsdrang",
@@ -545,7 +545,7 @@
 
 				var fontSize = Math.max(24, canvas.width / 10);
 				context.font = "bold " + fontSize + "px 'JetBrainsMono'";
-				context.fillStyle = "#252cff";
+				context.fillStyle = "#676cfd";
 				var clueNum = marker.id + 1;
 
 				var xMax = -Infinity,

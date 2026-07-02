@@ -593,9 +593,12 @@ div > input {
 	form > div {
 		width: fit-content;
 		justify-content: center;
-		align-items: center;
 		display: flex;
 		gap: 2vw;
+	}
+
+	div > input {
+		margin: 0.4rem 0;
 	}
 
 	input {

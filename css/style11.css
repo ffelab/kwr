@@ -393,11 +393,8 @@ details {
 		margin-bottom: 0;
 		/* border: none; */
 		& > p {
-			margin: 2vw 3vw 0vw 5vw;
+			margin: 2vw 4vw 0vw 5vw;
 			&.indent {
-				margin-bottom: 5vw;
-			}
-			&.schummeln {
 				margin-bottom: 5vw;
 			}
 

@@ -264,7 +264,7 @@ details::details-content {
 }
 details[open]::details-content {
 	/* max-height: 60dvh; */
-	height: calc(100dvh - (5 * 3rem) - (14vw));
+	height: calc(100dvh - (5 * 3rem) - (20vw));
 }
 
 #info > button,

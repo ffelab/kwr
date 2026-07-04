@@ -1362,7 +1362,7 @@ function isTarget(i, r, c) {
 function cellOn(cell) {
 	cell.el.style.opacity = "1";
 	cell.el.style.background = "var(--primary-bg-color)";
-	cell.el.style.border = "2px solid var(--primary-bg-color)";
+	cell.el.style.border = "1.5px solid var(--primary-bg-color)";
 }
 
 // Hide a cell completely

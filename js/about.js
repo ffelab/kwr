@@ -718,7 +718,7 @@ for (let i = 0; i < NUM; i++) {
 	const container = document.getElementById(
 		`animationtitel-container${i + 1}`,
 	);
-	container.innerHTML = "";
+	// container.innerHTML = "";
 	const containerCells = [];
 
 	for (let r = 0; r < 5; r++) {
@@ -853,6 +853,7 @@ function runSequence() {
 
 			document.getElementById("start-container").style.opacity = "1";
 			document.querySelector(".buch").style.opacity = "1";
+			document.querySelector("#desktop-qr").style.opacity = "1";
 		}
 	}, TICK);
 }

@@ -87,7 +87,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	/* border: 1.5px solid var(--primary-bg-color); */
+	/* border: 1.5px solid var(--primary-text-color); */
 	background: var(--primary-text-color);
 	font-family: "JetBrainsMono";
 	webkit-user-select: none; /* Safari */
@@ -103,7 +103,7 @@
 
 	/* background-color: transparent; */
 	cursor: default;
-	border: none;
+	border: 1.5px solid var(--primary-text-color);
 	pointer-events: none;
 }
 

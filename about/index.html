@@ -54,7 +54,9 @@
 			<div
 				class="animationtitel-container"
 				id="animationtitel-container8"
-			></div>
+			>
+				<img id="desktop-qr" href="../img/41Artboard_31.svg" />
+			</div>
 			<div
 				class="animationtitel-container"
 				id="animationtitel-container9"
@@ -76,6 +78,7 @@
 				<button id="start">Start</button>
 			</div>
 		</div>
+
 		<div id="container-wrapper">
 			<div class="titel-container" id="titel-container1"></div>
 			<div class="titel-container" id="titel-container2"></div>
@@ -118,15 +121,8 @@
 					der nächsten Ausgaben nicht zu verpassen – oder falls du
 					noch gar kein Buch hast.
 				</p>
+
 				<form action="https://formspree.io/f/maqgljke" method="post">
-					<div>
-						<input
-							id="bestellung"
-							name="bestellung"
-							type="checkbox"
-						/>
-						<label for="bestellung">Ich will ein Buch!</label>
-					</div>
 					<input
 						required
 						autocomplete="off"
@@ -136,6 +132,18 @@
 						placeholder="deine.mail@adresse.de"
 						id="E-MAIL"
 						name="E-MAIL"
+						type="text"
+						size="23"
+					/>
+					<input
+						required
+						autocomplete="off"
+						autocorrect="off"
+						autocapitalize="off"
+						spellcheck="false"
+						placeholder="Brauchst du ein Buch?"
+						id="BUCH"
+						name="BUCH"
 						type="text"
 						size="23"
 					/>
@@ -254,50 +262,7 @@
 			</details>
 		</div>
 		<div class="buch">
-			<p>
-				Willkommen zum
-				<span style="font-weight: 900">RÄTSELBLOG</span>, einem hybriden
-				Kreuzworträtselbuch zwischen Print und Digital. Auf den Seiten
-				vom RÄTSELBLOG befinden sich QR-Codes, die zu 16
-				Kreuzworträtseln führen. Dazwischen sind weiterführende Links
-				rund ums Rätseln versteckt.
-			</p>
-			<p class="indent">
-				Mit der Zeit werde ich weitere Rätsel veröffentlichen. Du
-				brauchst aber kein neues Buch um diese zu lösen. Mit dem
-				RÄTSELBLOG erhältst du Zugang zu immer wieder wechselnden
-				digitalen Inhalten über das gleiche physische Objekt. Pass gut
-				drauf auf, damit es noch einige Knobelrunden hält.
-			</p>
-			<p class="indent last">
-				Trag dich unten in den E-Mail-Verteiler ein, um den Release der
-				nächsten Ausgaben nicht zu verpassen – oder falls du noch gar
-				kein Buch hast.
-			</p>
-			<form action="https://formspree.io/f/maqgljke" method="post">
-				<div>
-					<input
-						id="bestellung-Desktop"
-						name="bestellung-Desktop"
-						type="checkbox"
-					/>
-					<label for="bestellung-Desktop">Ich will ein Buch!</label>
-				</div>
-				<input
-					required
-					autocomplete="off"
-					autocorrect="off"
-					autocapitalize="off"
-					spellcheck="false"
-					placeholder="deine.mail@adresse.de"
-					id="E-MAIL-Desktop"
-					name="E-MAIL-Desktop"
-					type="text"
-					size="25"
-				/>
-
-				<input class="submit" type="submit" value="Absenden" />
-			</form>
+			<p>Scan den Code, um die mobile Seite zu öffnen.</p>
 		</div>
 
 		<script src="../js/about.js" type="text/javascript"></script>

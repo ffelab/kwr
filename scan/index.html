@@ -320,6 +320,7 @@
 
 					/* border: none; */
 					& > p {
+						hyphens: auto;
 						margin: 2vw 4vw 0vw 5vw;
 						&.last {
 							margin-bottom: 5vw;
@@ -387,16 +388,17 @@
 
 			input {
 				text-decoration: none;
-				padding-left: 2vw;
+				padding: 1vw 2vw;
 				font-family: "JetBrainsMono";
 				width: calc(100% - 10vw);
 				margin: 0 5vw 5vw;
-				font-size: 1.3rem;
+				font-size: 1rem;
 				border-radius: 2px;
 				border: none;
 				text-align: center;
 			}
 			.submit {
+				color: var(--primary-bg-color);
 				font-family: "JetBrainsMono";
 				border: none;
 				background: none;
@@ -944,10 +946,10 @@
 			<details name="story">
 				<summary>LÖSUNGSWORT</summary>
 				<p class="last">
-					Du hast das Lösungswort vom Wandrätsel geknackt? Dann gib es
-					unten in das Eingabefeld ein und schick's ab. Vergiss nicht
-					deine Mail anzugeben. Der*die Erste mit der richtigen Lösung
-					gewinnt einen tollen Preis!
+					Du hast das Lösungswort vom Wandrätsel geknackt? Dann trag
+					es unten in das Eingabefeld ein und schick's ab. Vergiss
+					nicht deine E-Mail anzugeben. Der*die Erste mit der
+					richtigen Lösung gewinnt einen tollen Preis!
 				</p>
 				<form action="https://formspree.io/f/maqgljke" method="post">
 					<input
@@ -970,7 +972,7 @@
 						placeholder="deine.mail@adresse.de"
 						id="E-MAIL"
 						name="E-MAIL"
-						type="text"
+						type="email"
 					/>
 					<input class="submit" type="submit" value="Absenden" />
 				</form>

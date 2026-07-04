@@ -480,9 +480,10 @@ form > div {
 	display: flex;
 }
 
-input {
+input,
+textarea {
 	text-decoration: none;
-	padding-left: 2vw;
+	padding: 1vw 2vw;
 	font-family: "JetBrainsMono";
 	width: fit-content;
 	margin: 1vw 5vw 3vw;

@@ -40,29 +40,37 @@ const puzzleData = {
 	CLUES: {
 		WAAGERECHT: {
 			1: {
-				c: "Bloß nicht noch so einen abonnieren",
+				c: "Fluten das Postfach, zu Werbezwecken oder Nischeninteressen",
 				l: "10",
 				s: "NEWSLETTER",
 			},
 			7: { c: "Ein Megagramm", l: "5", s: "TONNE" },
 			8: { c: "Die Hinweise sind aus meiner", l: "5", s: "FEDER" },
 			9: {
-				c: "Kartenspiel mit schöner sieben zu deutsch",
+				c: "Kartenspiel mit schöner sieben \nzu deutsch",
 				l: "5",
 				s: "BESEN",
 			},
 			10: {
-				c: "Wenn die Software noch nicht ganz fertig ist",
+				c: "Wenn die Software noch \nnicht ganz fertig ist",
 				l: "4",
 				s: "BETA",
 			},
-			13: { c: "Was willst du mit dem Pastis, ya!", l: "4", s: "RAKI" },
+			13: {
+				c: "Ist bei Ouzo, Sambuca und Pastis in geselliger Runde dabei",
+				l: "4",
+				s: "RAKI",
+			},
 			14: {
-				c: "'Fix it in post' für Grafik Designer*innen",
+				c: "Kürzt die Vorbereitung \nzum Druck ausüben ab",
 				l: "5",
 				s: "REPRO",
 			},
-			17: { c: "Tanz in die fünfte Jahreszeit", l: "5", s: "GARDE" },
+			17: {
+				c: "Das Letzte was Fechter*innen \nzu hören bekommen",
+				l: "5",
+				s: "GARDE",
+			},
 			18: { c: "Massiv am Cruisen damals", l: "5", s: "TOENE" },
 			19: {
 				c: "Vorm Tag am See – checkt ihr?",
@@ -72,19 +80,23 @@ const puzzleData = {
 		},
 		SENKRECHT: {
 			1: {
-				c: "Bekomme hoffentlich die beste hierfür",
+				c: "Ich bekomme hoffentlich \ndie beste hierfür",
 				l: "4",
 				s: "NOTE",
 			},
 			2: { c: "Führt hoch und runter", l: "11", s: "WANDERKARTE" },
-			3: { c: "", l: "6", s: "LIEDER" },
+			3: {
+				c: "Wenn 18 waagerecht künstlerische Einheiten bilden",
+				l: "6",
+				s: "LIEDER",
+			},
 			4: {
-				c: "Top in Fotografie-Feld: Steht für Verlustfreiheit",
+				c: "Top in Fotografie-Feld: \nSteht für Verlustfreiheit",
 				l: "4",
 				s: "TIFF",
 			},
 			5: {
-				c: "Von woaus Elia dieses Semester postet: Da pflückt's sich gerne ganz von selbst",
+				c: "Elias Forschungsgebiet: Da pflückt's sich gerne ganz von selbst",
 				l: "11",
 				s: "ERDBEERFELD",
 			},

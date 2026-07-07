@@ -1,7 +1,7 @@
 const puzzleData = {
 	PUZZLE_ID: "06",
 	SIZE: 10,
-	MIN_WORD_LENGTH: 3,
+	MIN_WORD_LENGTH: 2,
 	BLACK_FIELDS: [
 		[1, 3],
 		[1, 4],
@@ -30,8 +30,105 @@ const puzzleData = {
 	],
 	CLUES: {
 		WAAGERECHT: {
-			1: { c: "", l: "", s: "" },
+			1: {
+				c: "Ausrichtung vom Kopf wenn die \n30 waagerecht ungleich groß",
+				l: "10",
+				s: "WINDSCHIEF",
+			},
+			7: {
+				c: "Klassischer Erstling \nunter den Pronomen",
+				l: "3",
+				s: "EGO",
+			},
+			8: { c: "Einzelposten einst im Osten", l: "3", s: "ZAR" },
+			9: { c: "Kurz eine", l: "2", s: "NE" },
+			12: { c: "Wird dementsprechend gleichgesetzt", l: "2", s: "SO" },
+			13: { c: "Römisch 550", l: "2", s: "DL" },
+			14: {
+				c: "Hält fest an seiner Laubfarbe, \nwie auch an seinem Stamm-Platz",
+				l: "2",
+				s: "EFEU",
+			},
+			17: {
+				c: "Bei Burger  King Konkurrenz dem royalen Hamburger angehängt",
+				l: "",
+				s: "TS",
+			},
+			18: { c: "Betreibt Staatenbildung zuhauf", l: "6", s: "AMEISE" },
+			19: { c: "Türkisches Brotboot", l: "4", s: "PIDE" },
+			20: { c: "Kannst du hier im Menü aktivieren", l: "6", s: "MOGELN" },
+			21: { c: "Von Amts wegen im Latein verkürzt", l: "2", s: "EO" },
+			23: {
+				c: "Kürzlich Land mit König oder entsetzlich sächlich beim King",
+				l: "2",
+				s: "ES",
+			},
+			24: {
+				c: "Sagt man in Berlin, wenn's in Norddeutschland 9 waagerecht heißt",
+				l: "2",
+				s: "WA",
+			},
+			25: {
+				c: "Eine Glühbirne im Gedankenstromkreis",
+				l: "4",
+				s: "IDEE",
+			},
+			28: {
+				c: "Anhangs erwähnt bei Joch und Kahn, Kreuz und Zahn",
+				l: "6",
+				s: "BEIN",
+			},
+			30: { c: "Gehisste Hörorgane", l: "10", s: "SEGELOHREN" },
 		},
-		SENKRECHT: {},
+		SENKRECHT: {
+			1: {
+				c: "Macht sich bemerkbar aufm Parkplatz, wird sichtbar aufm Globus",
+				l: "10",
+				s: "WENDEKREIS",
+			},
+			2: { c: "Stachelt den Hasen zum Rennen an", l: "", s: "IGEL" },
+			3: { c: "Kurze Nummer \nkann auch mal verneinen", l: "", s: "NO" },
+			4: { c: "Kfz.-Kennzeichen Itzehoe", l: "", s: "IZ" },
+			5: {
+				c: "Ausgangspunkt von Pet Shop Boys richtungsweisender Hymne",
+				l: "",
+				s: "EAST",
+			},
+			6: {
+				c: "Anti-monarchisches Märchen? \nTop-Tier-Taucher!",
+				l: "",
+				s: "FROSCHMANN",
+			},
+			10: { c: "Entscheidet über früher oder später", l: "", s: "TEMPO" },
+			11: {
+				c: "Verdreht den Kopf \nund auch den Magen",
+				l: "",
+				s: "FUSEL",
+			},
+			15: { c: "Weder furcht- noch fruchtlos", l: "5", s: "FEIGE" },
+			16: {
+				c: "Wenn die Versicherung dort stattfindet, wird's wohl wahr sein",
+				l: "5",
+				s: "EIDES",
+			},
+			22: { c: "Lyrik im Erdboden", l: "3", s: "ODE" },
+			24: {
+				c: "Der Anfang vom Spruch \nzum Schall aus dem Wald",
+				l: "3",
+				s: "WIE",
+			},
+			26: { c: "Bodenständiges Geschoss", l: "2", s: "EG" },
+			27: { c: "Ostfriesisch: kleiner Bach", l: "2", s: "EE" },
+			28: {
+				c: "Unterwäsche oder \nBahrain Top-Level-Domain",
+				l: "2",
+				s: "BH",
+			},
+			29: {
+				c: "Vervollständigt mit 23 waagerecht \nund sie das Personal-Trio",
+				l: "2",
+				s: "ER",
+			},
+		},
 	},
 };

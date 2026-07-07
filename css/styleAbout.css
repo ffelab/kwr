@@ -378,6 +378,9 @@ details > p {
 }
 
 #raetsel-wrapper {
+	left: 50%;
+	transform: translateX(-50%);
+	position: relative;
 	display: grid;
 	width: fit-content;
 	grid-template-columns: repeat(4, min(68px, calc(100vw / 4)));

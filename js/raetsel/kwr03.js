@@ -82,7 +82,7 @@ const puzzleData = {
 				s: "INTERN",
 			},
 			16: {
-				c: `Ist doch glatt was anderes als „vor Langem“`,
+				c: `Ist doch glatt was anderes \nals „vor Langem“`,
 				l: "4",
 				s: "EBEN",
 			},

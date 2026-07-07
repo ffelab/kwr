@@ -123,7 +123,7 @@ const puzzleData = {
 				s: "AKTEN",
 			},
 			19: {
-				c: "Hat sich bewährt zwischen Lisabon und Helsinki",
+				c: "Hat sich bewährt zwischen Lissabon und Helsinki",
 				l: "4",
 				s: "EURO",
 			},

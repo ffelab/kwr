@@ -53,7 +53,7 @@ const puzzleData = {
 				s: "ETSY",
 			},
 			14: {
-				c: "Der Chef hält's in der Hand, die Rätsellösenden möglicherweise auch",
+				c: "Der Chef hält's in der Hand, die Rätsellösenden womöglich auch",
 				l: "4",
 				s: "HEFT",
 			},
@@ -83,17 +83,17 @@ const puzzleData = {
 				s: "ROOT",
 			},
 			23: {
-				c: "",
+				c: "Gängiger Gesprächs-Name \nim Giornalismo",
 				l: "10",
 				s: "INTERVISTA",
 			},
 			26: {
-				c: "",
+				c: "Verständnisverlautbarung + \nwahnsinnig satirisches Magazin + \n9 oder 1 = Persischer Nachname",
 				l: "6",
 				s: "AHMADI",
 			},
 			27: {
-				c: "",
+				c: "Verwendungszweck von Böllern",
 				l: "8",
 				s: "KNALLERN",
 			},

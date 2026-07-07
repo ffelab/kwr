@@ -72,7 +72,7 @@ const puzzleData = {
 				s: "HTML",
 			},
 			6: {
-				c: "Objekt der Cartoon-Koyoten-Begierde: Der absolute Renner",
+				c: "Objekt der Cartoon-Coyoten-Begierde: Der absolute Renner",
 				l: "10",
 				s: "ROADRUNNER",
 			},
@@ -104,7 +104,7 @@ const puzzleData = {
 				s: "ERDBEEREN",
 			},
 			5: {
-				c: "Aufnahme versteckt im Dayton-Hof",
+				c: "Aufnahme versteckt \nim Dayton-Hof",
 				l: "9",
 				s: "HANDYFOTO",
 			},

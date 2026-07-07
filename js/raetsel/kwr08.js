@@ -64,7 +64,7 @@ const puzzleData = {
 				s: "GAME",
 			},
 			5: {
-				c: "Beim Gebäck stehts für doppelt, beim Licht für halb",
+				c: "Beim Gebäck steht's für doppelt, beim Licht für halb",
 				l: "4",
 				s: "ZWIE",
 			},
@@ -74,7 +74,7 @@ const puzzleData = {
 				s: "NULL",
 			},
 			8: {
-				c: "Steinerne Motivwahl bei der Hautverziehrung? Flotte Dekoration als direkter Nachfolger der Höhlenmalerei!",
+				c: "Steinerne Motivwahl bei der Hautverzierung? Flotte Dekoration als direkter Nachfolger der Höhlenmalerei!",
 				l: "10",
 				s: "WANDTATTOO",
 			},

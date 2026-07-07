@@ -102,12 +102,12 @@ const puzzleData = {
 				s: "PLUS",
 			},
 			16: {
-				c: "Dieser Tag ist verhasst, diese Tage aufbauend",
+				c: "Dieser Tag ist verhasst, \ndiese Tage aufbauend",
 				l: "3",
 				s: "MON",
 			},
 			17: {
-				c: "Die Kugel für den Sommer, den Zapfen für den Winter",
+				c: "Die Kugel für den Sommer, \nden Zapfen für den Winter",
 				l: "3",
 				s: "EIS",
 			},

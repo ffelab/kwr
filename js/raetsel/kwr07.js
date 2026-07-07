@@ -79,18 +79,18 @@ const puzzleData = {
 	CLUES: {
 		WAAGERECHT: {
 			3: {
-				c: "Heiratsgezeichneter? Der ist nicht mehr aktuell!",
+				c: "Heiratsgezeichneter? \nDer ist nicht mehr aktuell!",
 				l: "10",
 				s: "EHEMALIGER",
 			},
 			4: { c: "Türkisches Gewässer", l: "2", s: "SU" },
 			5: {
-				c: "Treudoofer Bär aus dem Hundert-Morgen-Wald",
+				c: "Treudoofer Bär aus dem \nHundert-Morgen-Wald",
 				l: "2",
 				s: "PU",
 			},
 			10: {
-				c: "Dieser König erscheint dem Knaben in windiger Nacht",
+				c: "Dieser König erscheint dem \nKnaben in windiger Nacht",
 				l: "3",
 				s: "ERL",
 			},
@@ -98,13 +98,13 @@ const puzzleData = {
 		},
 		SENKRECHT: {
 			1: {
-				c: "Zwischen Aus und Ehen ist das Lyrik-Element keine Absicht",
+				c: "Zwischen Aus und Ehen ist das \nLyrik-Element keine Absicht",
 				l: "4",
 				s: "VERS",
 			},
 			2: { c: "Stufenweise günstiger im Druck", l: "4", s: "GRAU" },
 			6: {
-				c: "Diese ist im Englischen keine Behauptung",
+				c: "Diese ist im Englischen \nkeine Behauptung",
 				l: "5",
 				s: "THESE",
 			},

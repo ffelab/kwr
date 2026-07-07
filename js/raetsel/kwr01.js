@@ -100,7 +100,7 @@ const puzzleData = {
 				s: "RENITENZ",
 			},
 			3: { c: "Hat höchsten Stellenwert", l: "4", s: "OBEN" },
-			4: { c: "Cash besingts im letzten Cover", l: "4", s: "HURT" },
+			4: { c: "Cash besingt's im letzten Cover", l: "4", s: "HURT" },
 			5: {
 				c: "Ägyptischer Sonnengott + buchstäblicher Alkoholgehalt + Countdownauftakt = Riots",
 				l: "8",

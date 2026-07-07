@@ -1,30 +1,140 @@
-/* ===================== 1. CONFIG & PUZZLE DATA ===================== */
+// const CACHE_KEY = "userLocationCache";
+// const CACHE_TIME = 1000 * 60 * 60 * 24; // 24h
+// localStorage.removeItem(CACHE_KEY);
+
+// // -------------------- CACHE --------------------
+// function getCache() {
+// 	const raw = localStorage.getItem(CACHE_KEY);
+// 	if (!raw) return null;
+
+// 	const data = JSON.parse(raw);
+
+// 	if (Date.now() - data.timestamp > CACHE_TIME) {
+// 		localStorage.removeItem(CACHE_KEY);
+// 		return null;
+// 	}
+
+// 	return data.value;
+// }
+
+// function setCache(value) {
+// 	localStorage.setItem(
+// 		CACHE_KEY,
+// 		JSON.stringify({
+// 			value,
+// 			timestamp: Date.now(),
+// 		}),
+// 	);
+// }
+
+// // -------------------- GPS --------------------
+// function getGPSLocation() {
+// 	return new Promise((resolve, reject) => {
+// 		if (!navigator.geolocation) return reject("No geolocation");
+
+// 		navigator.geolocation.getCurrentPosition(
+// 			async (pos) => {
+// 				const { latitude, longitude } = pos.coords;
+
+// 				try {
+// 					const res = await fetch(
+// 						`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
+// 					);
+
+// 					const data = await res.json();
+
+// 					const city =
+// 						data.address.city ||
+// 						data.address.town ||
+// 						data.address.village;
+
+// 					resolve(city);
+// 				} catch (err) {
+// 					reject(err);
+// 				}
+// 			},
+// 			reject,
+// 			{ enableHighAccuracy: true, timeout: 5000 },
+// 		);
+// 	});
+// }
+
+// // -------------------- IP FALLBACK --------------------
+// async function getIPLocation() {
+// 	const res = await fetch(
+// 		"https://api.ipdata.co?api-key=2b4cb62ac6f29b072111dd7abcdef8c0f3cac6a88b2c9f3fb6519fd8",
+// 	);
+// 	const data = await res.json();
+// 	return data.city;
+// }
+
+// // -------------------- MAIN PIPELINE --------------------
+// async function getUserCity() {
+// 	// 1. CACHE
+// 	const cached = getCache();
+// 	if (cached) {
+// 		console.log("Cache:", cached);
+// 		display.innerHTML = `Cache: ${cached}`;
+// 		return cached;
+// 	}
+
+// 	// 2. GPS
+// 	try {
+// 		const gpsCity = await getGPSLocation();
+// 		console.log("GPS:", gpsCity);
+// 		display.innerHTML = `GPS: ${gpsCity}`;
+
+// 		setCache(gpsCity);
+// 		return gpsCity;
+// 	} catch (e) {
+// 		console.log("GPS failed, fallback to IP");
+// 	}
+
+// 	// 3. IP fallback
+// 	try {
+// 		const ipCity = await getIPLocation();
+// 		console.log("IP:", ipCity);
+// 		display.innerHTML = `IP: ${ipCity}`;
+
+// 		setCache(ipCity);
+// 		return ipCity;
+// 	} catch (e) {
+// 		console.log("All location methods failed");
+// 		display.innerHTML = "All location methods failed";
+// 		return null;
+// 	}
+// }
+
+// document.getElementById("start").addEventListener("click", async () => {
+// 	const city = await getUserCity();
+
+// 	display.innerHTML = `User Location: ${city}`;
+// 	document.getElementById("start-container").style.display = "none";
+// });
+
+/* ===================== CONFIG & CONSTANTS ===================== */
 
 const { PUZZLE_ID, SIZE, MIN_WORD_LENGTH, BLACK_FIELDS, NUMBER_FIELDS, CLUES } =
 	puzzleData;
 
-/* ===================== 2. GLOBAL STATE ===================== */
-
-let schummelzaehler = 0; // cheat counter
-let permissionGranted = false; // device-motion permission
-let motionEnabled = false; // whether shake-to-cheat is active (persisted)
+let schummelzaehler = 0;
+let permissionGranted = false;
 let solved = false;
 let errorTimeout = null;
-
-// Timer state
 let startTime = null;
 let elapsed = 0;
 let timerRunning = false;
 let finalTime = 0;
 
-// Current selection / navigation state
+/* ===================== STATE ===================== */
+
 const state = {
 	current: { row: null, col: null },
 	direction: "horizontal",
 	currentClueIndex: 0,
 };
 
-/* ===================== 3. DOM REFERENCES ===================== */
+/* ===================== DOM REFERENCES ===================== */
 
 const containerEl = document.getElementById("raetsel-container");
 const toggleBtn = document.getElementById("Switch");
@@ -34,25 +144,8 @@ const backspaceBtn = document.querySelector(".backspace-button");
 const info = document.getElementById("info");
 const checkButton = document.getElementById("cmd");
 const body = document.querySelector("body");
-const btn_reqPermission = document.getElementById("btn_reqPermission");
 
-/* ===================== 4. AUDIO ===================== */
-
-const audio = new Audio("../img/freesound_community-winsquare-6993.mp3");
-
-function unlockAudio() {
-	audio.pause().then(() => {
-		audio.currentTime = 0;
-	});
-
-	document.removeEventListener("touchstart", unlockAudio);
-	document.removeEventListener("click", unlockAudio);
-}
-
-document.addEventListener("touchstart", unlockAudio);
-document.addEventListener("click", unlockAudio);
-
-/* ===================== 5. GRID BUILDING ===================== */
+/* ===================== GRID ===================== */
 
 const grid = [];
 
@@ -89,70 +182,22 @@ function isBlack(r, c) {
 	return grid[r][c].el.classList.contains("black");
 }
 
-/* ===================== 6. TIMER ===================== */
-
-function getElapsedTime() {
-	if (!timerRunning) return elapsed;
-	return elapsed + (Date.now() - startTime);
-}
-
-function formatTime(ms) {
-	const totalSeconds = Math.floor(ms / 1000);
-
-	const hours = Math.floor(totalSeconds / 3600);
-	const minutes = Math.floor((totalSeconds % 3600) / 60);
-	const seconds = totalSeconds % 60;
-
-	if (hours > 0) {
-		return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
-			.toString()
-			.padStart(2, "0")}`;
-	}
-
-	return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-}
-
-function pauseTimer() {
-	if (!timerRunning) return;
-
-	elapsed += Date.now() - startTime;
-	timerRunning = false;
-	startTime = null;
-
-	savePuzzle();
-}
-
-function resumeTimer() {
-	if (solved) return;
-	if (timerRunning) return;
-
-	startTime = Date.now();
-	timerRunning = true;
-}
-
-const updateTimeDisplay = setInterval(() => {
-	if (solved) return;
-	document.querySelector(".zeit").innerHTML = "";
-	document.querySelector(".zeit").innerHTML =
-		`Zeit verstrichen: ${formatTime(getElapsedTime())}`;
-}, 1000);
-
-/* ===================== 7. PERSISTENCE ===================== */
+/* ===================== PERSISTENCE ===================== */
 
 function savePuzzle() {
 	const puzzleState = {
 		grid: grid.map((row) => row.map((cell) => cell.letter || "")),
 		schummelzaehler,
 		permissionGranted,
-		motionEnabled,
 		time: getElapsedTime(),
 		solved: solved,
 		finalTime: finalTime,
 	};
 
+	console.log(elapsed / 1000);
+
 	localStorage.setItem(`kwr${PUZZLE_ID}`, JSON.stringify(puzzleState));
 }
-
 function loadPuzzle() {
 	const saved = localStorage.getItem(`kwr${PUZZLE_ID}`);
 
@@ -171,17 +216,23 @@ function loadPuzzle() {
 	}
 
 	solved = data.solved || false;
+
 	elapsed = data.time || 0;
+
 	schummelzaehler = data.schummelzaehler || 0;
+
 	motionEnabled = data.motionEnabled || false;
 
 	if (motionEnabled) {
-		updateSchummelDisplay();
+		document.querySelector(".schummeln").innerHTML = "";
+		document.querySelector(".schummeln").textContent =
+			`Schummelzähler: ${schummelzaehler}`;
+
 		setMotionListeners();
 	}
 }
 
-/* ===================== 8. HIGHLIGHT & NAVIGATION ===================== */
+/* ===================== HIGHLIGHT & NAVIGATION ===================== */
 
 function clearHighlight() {
 	document
@@ -193,7 +244,7 @@ function clearHighlight() {
 function highlightWord(r, c) {
 	const horiz = state.direction === "horizontal";
 
-	// Go backward to start of word
+	// GO backward to start of word
 	let primary = horiz ? c : r;
 	while (
 		primary > 0 &&
@@ -205,7 +256,7 @@ function highlightWord(r, c) {
 	}
 	grid[horiz ? r : primary][horiz ? primary : c].el.classList.add("word");
 
-	// Go forward to end of word
+	// GO forward to end of word
 	let fwd = (horiz ? c : r) + 1;
 	while (fwd < SIZE && !isBlack(horiz ? r : fwd, horiz ? fwd : c)) {
 		grid[horiz ? r : fwd][horiz ? fwd : c].el.classList.add("word");
@@ -232,30 +283,30 @@ function toggleDirection() {
 	setActive(state.current.row, state.current.col);
 }
 
-/* ===================== 9. SOLVING / WIN LOGIC ===================== */
-
-// Shared helper: locate the starting cell of the clue with the given number.
-function findClueStartCell(number) {
-	for (let r = 0; r < SIZE; r++) {
-		for (let c = 0; c < SIZE; c++) {
-			const numEl = grid[r][c].el.querySelector(".question-number");
-			if (numEl?.textContent == number) {
-				return { r, c };
-			}
-		}
-	}
-	return null;
-}
-
 function checkAllSolved() {
-	for (const dir of ["WAAGERECHT", "SENKRECHT"]) {
+	for (const dir of ["WAAGERECHT", "SENKRECHT".toUpperCase()]) {
 		for (const number in CLUES[dir]) {
 			const entry = CLUES[dir][number];
 			const solution = entry.s;
 
-			const start = findClueStartCell(number);
+			// find start cell
+			let start = null;
+
+			for (let r = 0; r < SIZE; r++) {
+				for (let c = 0; c < SIZE; c++) {
+					const numEl =
+						grid[r][c].el.querySelector(".question-number");
+					if (numEl?.textContent == number) {
+						start = { r, c };
+						break;
+					}
+				}
+				if (start) break;
+			}
+
 			if (!start) continue;
 
+			// compare letters
 			let r = start.r;
 			let c = start.c;
 
@@ -286,7 +337,20 @@ function checkErrors() {
 			const entry = CLUES[dir][number];
 			const solution = entry.s;
 
-			const start = findClueStartCell(number);
+			let start = null;
+
+			for (let r = 0; r < SIZE; r++) {
+				for (let c = 0; c < SIZE; c++) {
+					const numEl =
+						grid[r][c].el.querySelector(".question-number");
+					if (numEl?.textContent == number) {
+						start = { r, c };
+						break;
+					}
+				}
+				if (start) break;
+			}
+
 			if (!start) continue;
 
 			let r = start.r;
@@ -324,9 +388,22 @@ function getRandomColor() {
 
 	return colors[Math.floor(Math.random() * colors.length)];
 }
+var audio = new Audio("../img/freesound_community-winsquare-6993.mp3");
+function unlockAudio() {
+	audio.pause().then(() => {
+		audio.currentTime = 0;
+	});
+
+	document.removeEventListener("touchstart", unlockAudio);
+	document.removeEventListener("click", unlockAudio);
+}
+
+document.addEventListener("touchstart", unlockAudio);
+document.addEventListener("click", unlockAudio);
 
 function triggerWinAnimation() {
 	if (solved) return;
+	console.log("PUZZLE SOLVED!");
 	clearHighlight();
 
 	display.textContent = `🎉 Gelöst in ${formatTime(getElapsedTime())}! 🎉`;
@@ -361,14 +438,14 @@ function triggerWinAnimation() {
 		}
 	}
 
-	// Cleanup blink animation
+	// cleanup
 	setTimeout(() => {
 		for (let r = 0; r < SIZE; r++) {
 			for (let c = 0; c < SIZE; c++) {
 				grid[r][c].el.classList.remove("win-blink");
 			}
 		}
-	}, SIZE * 1000);
+	}, SIZE * 1000); // uncomment all after edit!
 
 	solved = true;
 	clearInterval(updateTimeDisplay);
@@ -377,7 +454,7 @@ function triggerWinAnimation() {
 		`Rätsel gelöst in ${formatTime(getElapsedTime())}`;
 	pauseTimer();
 
-	finalTime = getElapsedTime();
+	const finalTime = getElapsedTime();
 
 	const solvedPuzzle = {
 		grid: grid.map((row) => row.map((cell) => cell.letter || "")),
@@ -388,9 +465,30 @@ function triggerWinAnimation() {
 		finalTime: finalTime,
 	};
 	localStorage.setItem(`finished${PUZZLE_ID}`, JSON.stringify(solvedPuzzle));
+
+	const solution = localStorage.getItem(`finished${PUZZLE_ID}`);
+	const dataSolution = JSON.parse(solution);
 }
 
-/* ===================== 10. INPUT HANDLING ===================== */
+function pauseTimer() {
+	if (!timerRunning) return;
+
+	elapsed += Date.now() - startTime;
+	timerRunning = false;
+	startTime = null;
+
+	savePuzzle();
+}
+
+function resumeTimer() {
+	if (solved) return;
+	if (timerRunning) return;
+
+	startTime = Date.now();
+	timerRunning = true;
+}
+
+/* ===================== INPUT ===================== */
 
 function writeCell(value) {
 	if (state.current.row === null) return;
@@ -401,6 +499,7 @@ function writeCell(value) {
 	savePuzzle();
 
 	if (checkAllSolved()) {
+		// REMOVE "!" AFTER EDITING! Uncomment
 		triggerWinAnimation();
 	} else {
 		moveNext();
@@ -450,7 +549,7 @@ function handleBackspace() {
 	savePuzzle();
 }
 
-/* ===================== 11. CLUES ===================== */
+/* ===================== CLUES ===================== */
 
 function addNumberField() {
 	let questionNumber = 1;
@@ -460,9 +559,11 @@ function addNumberField() {
 			const cell = grid[r][c];
 
 			if (NUMBER_FIELDS) {
-				const isNumberField = (r, c) =>
-					NUMBER_FIELDS.some(([br, bc]) => br === r && bc === c);
-
+				function isNumberField(r, c) {
+					return NUMBER_FIELDS.some(
+						([br, bc]) => br === r && bc === c,
+					);
+				}
 				if (isNumberField(r, c)) {
 					const numEl = document.createElement("div");
 					numEl.className = "question-number";
@@ -471,14 +572,12 @@ function addNumberField() {
 				}
 			} else {
 				if (cell.el.classList.contains("black")) continue;
-
+				let right2 = null;
+				let bottom2 = null;
 				const left = grid[r][c - 1];
 				const right = grid[r][c + 1];
 				const top = grid[r - 1]?.[c];
 				const bottom = grid[r + 1]?.[c];
-
-				let right2 = null;
-				let bottom2 = null;
 				if (MIN_WORD_LENGTH > 2) {
 					right2 = grid[r][c + 2];
 					bottom2 = grid[r + 2]?.[c];
@@ -549,7 +648,7 @@ function getCurrentClue() {
 	let clue = getWordStart(state.direction);
 
 	if (!clue) {
-		toggleDirection();
+		toggleDirection(); //UNUNCOMMENT AFTER EDITING!!!!
 		clue = getWordStart(state.direction);
 	}
 
@@ -596,14 +695,11 @@ function goToClue(index) {
 	}
 }
 
-/* ===================== 12. INFO PANEL ===================== */
-
 function openInfo() {
 	info.classList.remove("hidden");
 	info.classList.add("flex");
 	body.classList.add("dark");
 }
-
 function closeInfo() {
 	clearHighlight();
 	state.current = { row: null, col: null };
@@ -614,7 +710,7 @@ function closeInfo() {
 	body.classList.remove("dark");
 }
 
-/* ===================== 13. SWIPE GESTURE (clue navigation) ===================== */
+/* ===================== SWIPE ===================== */
 
 const swipe = { startX: 0, currentX: 0, active: false };
 
@@ -668,8 +764,69 @@ function animateClueTransition(swipeDir) {
 	}, 200);
 }
 
-/* ===================== 14. CHECK-SOLUTION BUTTON (press & hold) ===================== */
+/* ===================== EVENT LISTENERS ===================== */
 
+containerEl.addEventListener("click", (e) => {
+	const cellEl = e.target.closest(".box");
+	if (!cellEl) return;
+
+	const r = Number(cellEl.dataset.row);
+	const c = Number(cellEl.dataset.col);
+	const clickedSameCell = state.current.row === r && state.current.col === c;
+
+	display.style.color = "var(--primary-text-color)";
+
+	if (clickedSameCell) toggleDirection();
+	else setActive(r, c);
+});
+
+letterBtns.forEach((btn) => {
+	btn.addEventListener("click", () => {
+		writeCell(String(btn.id));
+	});
+});
+
+backspaceBtn.addEventListener("click", handleBackspace);
+
+toggleBtn.addEventListener("click", () => {
+	state.current = { row: null, col: null };
+	clearHighlight();
+	openInfo();
+});
+document.querySelector(".zeit").addEventListener("click", closeInfo);
+const infoButtons = info.querySelectorAll(".close-button");
+infoButtons.forEach((btn) => {
+	btn.addEventListener("click", closeInfo);
+});
+const reset = info.querySelector(".reset-button");
+reset.addEventListener("click", () => {
+	for (let r = 0; r < SIZE; r++) {
+		for (let c = 0; c < SIZE; c++) {
+			const cell = grid[r][c];
+
+			cell.letter = "";
+			cell.letterEl.textContent = "";
+
+			cell.el.classList.remove("cheated");
+		}
+	}
+});
+
+document.addEventListener("keydown", (e) => {
+	const { row, col } = state.current;
+	if (isBlack(row, col)) {
+		clearHighlight();
+		return;
+	}
+
+	if (/^[a-zA-Z]$/.test(e.key)) {
+		writeCell(e.key.toUpperCase());
+	} else if (e.key === "Backspace") {
+		handleBackspace();
+	}
+});
+
+//=========== check solution eventlinstener ===========
 let checkHoldTimer = null;
 let checkActive = false;
 let checkPreviewState = null;
@@ -695,13 +852,6 @@ function restoreGridState(snapshot) {
 	}
 }
 
-function updateSchummelDisplay() {
-	const el = document.querySelector(".schummeln");
-	if (!el) return;
-	el.innerHTML = "";
-	el.textContent = `Schummelzähler: ${schummelzaehler}`;
-}
-
 checkButton.addEventListener("pointerdown", () => {
 	checkPreviewState = snapshotGridState();
 
@@ -710,7 +860,9 @@ checkButton.addEventListener("pointerdown", () => {
 		checkErrors();
 
 		schummelzaehler++;
-		updateSchummelDisplay();
+		document.querySelector(".schummeln").innerHTML = "";
+		document.querySelector(".schummeln").textContent =
+			`Schummelzähler: ${schummelzaehler}`;
 	}, 1000);
 });
 
@@ -756,7 +908,9 @@ checkButton.addEventListener("pointercancel", () => {
 	}
 });
 
-/* ===================== 15. SHAKE-TO-CHEAT (device motion) ===================== */
+//=================== SHAKE MECHANIK =====================//
+
+const btn_reqPermission = document.getElementById("btn_reqPermission");
 
 btn_reqPermission.addEventListener("click", () => {
 	checkMotionPermission();
@@ -769,8 +923,11 @@ async function checkMotionPermission() {
 
 			if (permission === "granted") {
 				permissionGranted = true;
-				motionEnabled = true;
-				updateSchummelDisplay();
+				document.querySelector(".schummeln").innerHTML = "";
+				document.querySelector(".schummeln").textContent =
+					`Schummelzähler: ${schummelzaehler}`;
+				// btn_reqPermission.textContent = `Schummelzähler: ${schummelzaehler}`;
+				// btn_reqPermission.style.textDecoration = "none";
 				closeInfo();
 				setMotionListeners();
 				savePuzzle();
@@ -780,8 +937,9 @@ async function checkMotionPermission() {
 		}
 	} else {
 		permissionGranted = true;
-		motionEnabled = true;
-		updateSchummelDisplay();
+		document.querySelector(".schummeln").innerHTML = "";
+		document.querySelector(".schummeln").textContent =
+			`Schummelzähler: ${schummelzaehler}`;
 
 		closeInfo();
 		setMotionListeners();
@@ -823,7 +981,9 @@ function setMotionListeners() {
 			lastShakeTime = now;
 
 			fillRandomField();
-			updateSchummelDisplay();
+			document.querySelector(".schummeln").innerHTML = "";
+			document.querySelector(".schummeln").textContent =
+				`Schummelzähler: ${schummelzaehler}`;
 			display.style.color = "var(--darker-highlight-color)";
 			display.textContent = "Schummeln aktiviert!";
 
@@ -841,6 +1001,31 @@ function setMotionListeners() {
 		}
 	});
 }
+
+/* ===================== INIT ===================== */
+
+buildGrid();
+loadPuzzle();
+addNumberField();
+
+let resetTouchStart = 0;
+let resetTouches = 0;
+
+document.addEventListener("touchstart", (e) => {
+	resetTouches = e.touches.length;
+	resetTouchStart = Date.now();
+});
+
+document.addEventListener("touchend", () => {
+	const duration = Date.now() - resetTouchStart;
+
+	if (resetTouches === 3 && duration > 1200) {
+		console.log("DEV RESET TRIGGERED");
+
+		localStorage.clear();
+		location.reload();
+	}
+});
 
 function fillRandomField() {
 	let { row, col } = state.current;
@@ -923,9 +1108,45 @@ function fillRandomField() {
 	schummelzaehler++;
 }
 
-/* ===================== 16. INTRO TITLE ANIMATION ===================== */
+if (display.textContent === "")
+	display.textContent =
+		"Wähle ein Feld aus, um den Hinweis zu lesen. Swipe nach rechts oder links für den jeweils nächsten Hinweis.";
 
-// 5x5 pixel-grid patterns for each letter/segment of the title animation.
+document.querySelectorAll(".box").forEach((box) => {
+	if (box.querySelector(".question-number")) {
+		const number = box.querySelector(".question-number");
+		const letter = box.querySelector(".letter");
+		const text = letter ? letter.textContent : box.textContent;
+		if (text.trim() !== "" && !box.classList.contains("active")) {
+			number.classList.add("smaller");
+		}
+	}
+});
+
+// START SEQUENCE //
+
+function getElapsedTime() {
+	if (!timerRunning) return elapsed;
+	return elapsed + (Date.now() - startTime);
+}
+
+document.getElementById("start").addEventListener("click", async () => {
+	if (!solved) {
+		if (!timerRunning) {
+			startTime = Date.now();
+			timerRunning = true;
+		}
+	}
+	document.getElementById("titel-wrapper").style.opacity = "0";
+	document.getElementById("titel-wrapper").style.pointerEvents = "none";
+	document.getElementById("hinweis-container").style.display = "flex";
+	containerEl.style.display = "grid";
+	body.classList.remove("dark");
+	console.log(solved);
+});
+
+// ─── Field definitions (unchanged) ───────────────────────────────────────────
+
 const Titel_FIELDS1 = [
 	[0, 0],
 	[0, 1],
@@ -1134,10 +1355,12 @@ const TitelFieldsList = [
 	Titel_FIELDS12,
 ];
 
+// ─── Setup ────────────────────────────────────────────────────────────────────
+
 const NUM = 12;
 const wrapper = document.getElementById("titel-wrapper");
 
-// Each container gets a flat array of 25 cell elements (5x5 grid)
+// Each container gets a flat array of 25 cell elements
 const cells = [];
 
 for (let i = 0; i < NUM; i++) {
@@ -1149,7 +1372,8 @@ for (let i = 0; i < NUM; i++) {
 		for (let c = 0; c < 5; c++) {
 			const cell = document.createElement("div");
 			cell.className = "titel-box";
-			cell.style.opacity = "1"; // all cells start completely hidden (opacity handled via cellOff below)
+			// all cells start completely hidden
+			cell.style.opacity = "1";
 			cell.style.border = "";
 			container.appendChild(cell);
 			containerCells.push({ el: cell, r, c });
@@ -1158,6 +1382,8 @@ for (let i = 0; i < NUM; i++) {
 
 	cells.push(containerCells);
 }
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function isTarget(i, r, c) {
 	return TitelFieldsList[i].some(([tr, tc]) => tr === r && tc === c);
@@ -1173,6 +1399,8 @@ function cellOff(cell) {
 	cell.el.style.opacity = "0";
 	cell.el.style.border = "";
 }
+
+// ─── Animation ────────────────────────────────────────────────────────────────
 
 function getAllTargetCells() {
 	const all = [];
@@ -1265,72 +1493,9 @@ function runSequence() {
 	}, TICK);
 }
 
-/* ===================== 17. GENERAL EVENT LISTENERS ===================== */
+runSequence();
 
-containerEl.addEventListener("click", (e) => {
-	const cellEl = e.target.closest(".box");
-	if (!cellEl) return;
-
-	const r = Number(cellEl.dataset.row);
-	const c = Number(cellEl.dataset.col);
-	const clickedSameCell = state.current.row === r && state.current.col === c;
-
-	display.style.color = "var(--primary-text-color)";
-
-	if (clickedSameCell) toggleDirection();
-	else setActive(r, c);
-});
-
-letterBtns.forEach((btn) => {
-	btn.addEventListener("click", () => {
-		writeCell(String(btn.id));
-	});
-});
-
-backspaceBtn.addEventListener("click", handleBackspace);
-
-toggleBtn.addEventListener("click", () => {
-	state.current = { row: null, col: null };
-	clearHighlight();
-	openInfo();
-});
-
-document.querySelector(".zeit").addEventListener("click", closeInfo);
-
-const infoButtons = info.querySelectorAll(".close-button");
-infoButtons.forEach((btn) => {
-	btn.addEventListener("click", closeInfo);
-});
-
-const reset = info.querySelector(".reset-button");
-reset.addEventListener("click", () => {
-	for (let r = 0; r < SIZE; r++) {
-		for (let c = 0; c < SIZE; c++) {
-			const cell = grid[r][c];
-
-			cell.letter = "";
-			cell.letterEl.textContent = "";
-
-			cell.el.classList.remove("cheated");
-		}
-	}
-});
-
-document.addEventListener("keydown", (e) => {
-	const { row, col } = state.current;
-	if (isBlack(row, col)) {
-		clearHighlight();
-		return;
-	}
-
-	if (/^[a-zA-Z]$/.test(e.key)) {
-		writeCell(e.key.toUpperCase());
-	} else if (e.key === "Backspace") {
-		handleBackspace();
-	}
-});
-
-// Tab switch / minimize -> pause/resume timer
+// tab switch / minimize
 document.addEventListener("visibilitychange", () => {
 	if (document.hidden) {
 		pauseTimer();
@@ -1339,169 +1504,28 @@ document.addEventListener("visibilitychange", () => {
 	}
 });
 
-// Page close / reload -> persist timer
+// page close / reload
 window.addEventListener("beforeunload", pauseTimer);
 
-// Dev reset: 3-finger long-press clears all local storage and reloads
-let resetTouchStart = 0;
-let resetTouches = 0;
+function formatTime(ms) {
+	const totalSeconds = Math.floor(ms / 1000);
 
-document.addEventListener("touchstart", (e) => {
-	resetTouches = e.touches.length;
-	resetTouchStart = Date.now();
-});
+	const hours = Math.floor(totalSeconds / 3600);
+	const minutes = Math.floor((totalSeconds % 3600) / 60);
+	const seconds = totalSeconds % 60;
 
-document.addEventListener("touchend", () => {
-	const duration = Date.now() - resetTouchStart;
-
-	if (resetTouches === 3 && duration > 1200) {
-		console.log("DEV RESET TRIGGERED");
-
-		localStorage.clear();
-		location.reload();
+	if (hours > 0) {
+		return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
+			.toString()
+			.padStart(2, "0")}`;
 	}
-});
 
-/* ===================== 18. INIT / START SEQUENCE ===================== */
+	return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
 
-buildGrid();
-loadPuzzle();
-addNumberField();
-runSequence();
-
-if (display.textContent === "")
-	display.textContent =
-		"Wähle ein Feld aus, um den Hinweis zu lesen. Swipe nach rechts oder links für den jeweils nächsten Hinweis.";
-
-document.querySelectorAll(".box").forEach((box) => {
-	const number = box.querySelector(".question-number");
-	if (number) {
-		const letter = box.querySelector(".letter");
-		const text = letter ? letter.textContent : box.textContent;
-		if (text.trim() !== "" && !box.classList.contains("active")) {
-			number.classList.add("smaller");
-		}
-	}
-});
-
-document.getElementById("start").addEventListener("click", async () => {
-	if (!solved) {
-		if (!timerRunning) {
-			startTime = Date.now();
-			timerRunning = true;
-		}
-	}
-	document.getElementById("titel-wrapper").style.opacity = "0";
-	document.getElementById("titel-wrapper").style.pointerEvents = "none";
-	document.getElementById("hinweis-container").style.display = "flex";
-	containerEl.style.display = "grid";
-	body.classList.remove("dark");
-});
-
-/* =============================================================================
-   19. LEGACY / UNUSED CODE
-   The block below (GPS + IP-based location lookup) is not wired up to
-   anything in the puzzle above — it's fully commented out in the source
-   this file was organized from, and kept here only for reference in case
-   it's needed again later. Safe to delete if not.
-   ============================================================================= */
-
-// const CACHE_KEY = "userLocationCache";
-// const CACHE_TIME = 1000 * 60 * 60 * 24; // 24h
-// localStorage.removeItem(CACHE_KEY);
-//
-// function getCache() {
-// 	const raw = localStorage.getItem(CACHE_KEY);
-// 	if (!raw) return null;
-//
-// 	const data = JSON.parse(raw);
-//
-// 	if (Date.now() - data.timestamp > CACHE_TIME) {
-// 		localStorage.removeItem(CACHE_KEY);
-// 		return null;
-// 	}
-//
-// 	return data.value;
-// }
-//
-// function setCache(value) {
-// 	localStorage.setItem(
-// 		CACHE_KEY,
-// 		JSON.stringify({
-// 			value,
-// 			timestamp: Date.now(),
-// 		}),
-// 	);
-// }
-//
-// function getGPSLocation() {
-// 	return new Promise((resolve, reject) => {
-// 		if (!navigator.geolocation) return reject("No geolocation");
-//
-// 		navigator.geolocation.getCurrentPosition(
-// 			async (pos) => {
-// 				const { latitude, longitude } = pos.coords;
-//
-// 				try {
-// 					const res = await fetch(
-// 						`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
-// 					);
-//
-// 					const data = await res.json();
-//
-// 					const city =
-// 						data.address.city ||
-// 						data.address.town ||
-// 						data.address.village;
-//
-// 					resolve(city);
-// 				} catch (err) {
-// 					reject(err);
-// 				}
-// 			},
-// 			reject,
-// 			{ enableHighAccuracy: true, timeout: 5000 },
-// 		);
-// 	});
-// }
-//
-// async function getIPLocation() {
-// 	const res = await fetch(
-// 		"https://api.ipdata.co?api-key=2b4cb62ac6f29b072111dd7abcdef8c0f3cac6a88b2c9f3fb6519fd8",
-// 	);
-// 	const data = await res.json();
-// 	return data.city;
-// }
-//
-// async function getUserCity() {
-// 	const cached = getCache();
-// 	if (cached) {
-// 		display.innerHTML = `Cache: ${cached}`;
-// 		return cached;
-// 	}
-//
-// 	try {
-// 		const gpsCity = await getGPSLocation();
-// 		display.innerHTML = `GPS: ${gpsCity}`;
-// 		setCache(gpsCity);
-// 		return gpsCity;
-// 	} catch (e) {
-// 		console.log("GPS failed, fallback to IP");
-// 	}
-//
-// 	try {
-// 		const ipCity = await getIPLocation();
-// 		display.innerHTML = `IP: ${ipCity}`;
-// 		setCache(ipCity);
-// 		return ipCity;
-// 	} catch (e) {
-// 		display.innerHTML = "All location methods failed";
-// 		return null;
-// 	}
-// }
-//
-// document.getElementById("start").addEventListener("click", async () => {
-// 	const city = await getUserCity();
-// 	display.innerHTML = `User Location: ${city}`;
-// 	document.getElementById("start-container").style.display = "none";
-// });
+const updateTimeDisplay = setInterval(() => {
+	if (solved) return;
+	document.querySelector(".zeit").innerHTML = "";
+	document.querySelector(".zeit").innerHTML =
+		`Zeit verstrichen: ${formatTime(getElapsedTime())}`;
+}, 1000);

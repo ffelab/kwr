@@ -231,6 +231,8 @@ details {
 }
 
 details {
+	z-index: 999;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -504,6 +506,14 @@ details > p {
 
 .correct {
 	color: var(--darker-highlight-color);
+}
+
+.zeit {
+	font-size: 1rem;
+	color: var(--primary-bg-color);
+	position: fixed;
+	top: calc(94vw / 2 + 4vw);
+	pointer-events: none;
 }
 
 @media (min-width: 470px) {

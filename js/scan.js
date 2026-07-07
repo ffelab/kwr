@@ -130,7 +130,7 @@ var clues = {
 	129: "↓ Einer von zwei Hinterhofjargonlern mit verdrehten Konsonanten",
 	130: "↓ Umgestellte Handlung am Ende vom Schiffswettrennen",
 	131: "↓ Dem folgt Wan im Halbleiterland",
-	132: "→  #EMS",
+	132: "→  Ihr Westkurs kriegt sanften Norddreh richtung Nordsee",
 	133: "↓ Kurz kaum zu unterscheiden: Abschiedsfloskel oder Transportoption?",
 	134: "→ Kommt nach Citybekanntschaft und vor Metropolenehe in der urbanen Liebesgeschichte",
 	135: "↓ Darauf stehen die Amis: \nEiner von Zehn",

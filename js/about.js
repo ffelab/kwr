@@ -457,6 +457,21 @@ document.getElementById("start").addEventListener("click", async () => {
 
 const solved = document.querySelectorAll(".solved");
 const uebersicht = document.querySelectorAll(".raetsel-container");
+function formatTime(ms) {
+	const totalSeconds = Math.floor(ms / 1000);
+
+	const hours = Math.floor(totalSeconds / 3600);
+	const minutes = Math.floor((totalSeconds % 3600) / 60);
+	const seconds = totalSeconds % 60;
+
+	if (hours > 0) {
+		return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
+			.toString()
+			.padStart(2, "0")}`;
+	}
+
+	return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
 
 solved.forEach((el) => {
 	el.addEventListener("click", () => {
@@ -467,18 +482,18 @@ solved.forEach((el) => {
 
 		const num = parseInt(el.dataset.id) - 1;
 		const PUZZLE_ID = String(num).padStart(2, "0");
-		const saved = localStorage.getItem(`kwr${PUZZLE_ID}`);
+		const saved = localStorage.getItem(`finished${PUZZLE_ID}`);
 		const data = JSON.parse(saved);
 		const schummelzaehler = data.schummelzaehler || 0;
+		const zeit = formatTime(data.finalTime);
 		let schummelMsg = "";
 		if (schummelzaehler == 0) {
-			schummelMsg = `Du hast Rätsel ${el.dataset.id}<br> ohne Schummeln gelöst!`;
+			schummelMsg = ``;
 		} else {
-			schummelMsg = `Du hast bei Rätsel ${el.dataset.id} <br>${schummelzaehler}-mal geschummelt...`;
+			schummelMsg = `mit ${schummelzaehler}-mal schummeln<br>`;
 		}
-		document.querySelector(".uebersicht").style.color =
-			"var(--primary-highlight-color)";
-		document.querySelector(".uebersicht").innerHTML = schummelMsg;
+		document.querySelector(".uebersicht").innerHTML =
+			`Du hast Rätsel ${el.dataset.id}<br>${schummelMsg}in ${zeit} gelöst.`;
 	});
 });
 

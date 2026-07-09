@@ -414,7 +414,8 @@ function moveNext() {
 
 	if (row < SIZE && col < SIZE && !isBlack(row, col)) {
 		setActive(row, col);
-		if (grid[row][col].letter !== "" && !isBlack(row, col)) moveNext();
+		// if (grid[row][col].letter !== !isBlack(row, col)) moveNext();
+		// if (grid[row][col].letter !== "" && !isBlack(row, col)) moveNext(); //skip filled in fields.
 	} else {
 		clearHighlight();
 		state.current = { row: null, col: null };
@@ -1314,6 +1315,7 @@ reset.addEventListener("click", () => {
 			cell.el.classList.remove("cheated");
 		}
 	}
+	solved = false;
 });
 
 document.addEventListener("keydown", (e) => {

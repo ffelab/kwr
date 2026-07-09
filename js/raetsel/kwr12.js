@@ -115,7 +115,7 @@ const puzzleData = {
 				s: "ELO",
 			},
 			5: {
-				c: "Wenn 19 und der letzte \neine Allianz eingehen",
+				c: "Wenn der 19. und der letzte \neine Allianz eingehen",
 				l: "6",
 				s: "ESZETT",
 			},

@@ -70,7 +70,7 @@ const puzzleData = {
 				s: "RESTURLAUB",
 			},
 			6: {
-				c: "",
+				c: "Aktionen für die ohne Torschusspanik",
 				l: "10",
 				s: "OFFENSIVEN",
 			},
@@ -82,7 +82,7 @@ const puzzleData = {
 		},
 		SENKRECHT: {
 			1: {
-				c: "",
+				c: "Pariser Untergrundnetzwerk + Heimat der Pierogi = Stehen statt Stadt",
 				l: "10",
 				s: "METROPOLEN",
 			},
@@ -97,7 +97,7 @@ const puzzleData = {
 				s: "WAHLBRIEFE",
 			},
 			4: {
-				c: "",
+				c: "Gebrannte Streifen? Hören sich alt an!",
 				l: "10",
 				s: "TONBAENDER",
 			},

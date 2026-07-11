@@ -38,7 +38,7 @@ const puzzleData = {
 				s: "LEBLOS",
 			},
 			9: {
-				c: "",
+				c: "Das Ende vom Enzym",
 				l: "3",
 				s: "ASE",
 			},

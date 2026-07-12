@@ -1,5 +1,5 @@
 const puzzleData = {
-	PUZZLE_ID: "03",
+	PUZZLE_ID: "00",
 	SIZE: 10,
 	MIN_WORD_LENGTH: 3,
 	BLACK_FIELDS: [

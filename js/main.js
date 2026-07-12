@@ -606,10 +606,6 @@ function openInfo() {
 }
 
 function closeInfo() {
-	clearHighlight();
-	state.current = { row: null, col: null };
-	display.textContent = "Wähle das nächste Feld aus";
-	display.style.color = "var(--between-dark-light)";
 	info.classList.add("hidden");
 	info.classList.remove("flex");
 	body.classList.remove("dark");
@@ -1291,8 +1287,6 @@ letterBtns.forEach((btn) => {
 backspaceBtn.addEventListener("click", handleBackspace);
 
 toggleBtn.addEventListener("click", () => {
-	state.current = { row: null, col: null };
-	clearHighlight();
 	openInfo();
 });
 
@@ -1305,6 +1299,11 @@ infoButtons.forEach((btn) => {
 
 const reset = info.querySelector(".reset-button");
 reset.addEventListener("click", () => {
+	const confirmed = confirm(
+		"Deine Antworten für dieses Rätsel werden zurückgesetzt.",
+	);
+	if (!confirmed) return;
+
 	for (let r = 0; r < SIZE; r++) {
 		for (let c = 0; c < SIZE; c++) {
 			const cell = grid[r][c];

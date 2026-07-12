@@ -2,173 +2,127 @@ const puzzleData = {
 	PUZZLE_ID: "08",
 	SIZE: 10,
 	MIN_WORD_LENGTH: 3,
-
 	BLACK_FIELDS: [
-		[0, 0],
-		[0, 2],
-		[0, 7],
-		[0, 9],
-		[1, 4],
-		[1, 5],
+		[0, 1],
+		[0, 3],
+		[0, 5],
+		// [0, 7],
 
-		[3, 2],
+		[1, 7],
+		[1, 9],
+
+		[2, 1],
+		[2, 3],
+		[2, 5],
+
+		[3, 0],
 		[3, 7],
+		[3, 9],
+
+		[4, 0],
 		[4, 1],
-		[4, 8],
-		[5, 1],
+
+		[4, 3],
+
+		[4, 5],
+
+		[5, 4],
+
+		[5, 6],
+
 		[5, 8],
+		[5, 9],
+
+		[6, 0],
 		[6, 2],
-		[6, 7],
+		[6, 9],
 
-		[8, 4],
-		[8, 5],
+		[7, 4],
+		[7, 6],
+		[7, 8],
 
-		[9, 0],
-		[9, 2],
-		[9, 7],
-		[9, 9],
+		[8, 0],
+		[8, 2],
+
+		[9, 4],
+		[9, 6],
+		[9, 8],
 	],
-	// NUMBER_FIELDS: [
-	// 	[0, 0],
-	// 	[0, 3],
-	// 	[0, 6],
-
-	// 	[1, 1],
-	// 	[1, 8],
-
-	// 	[2, 4],
-	// 	[2, 5],
-
-	// 	[3, 0],
-	// 	[3, 3],
-	// 	[3, 6],
-	// 	[3, 9],
-
-	// 	[4, 2],
-	// 	[5, 2],
-
-	// 	[6, 0],
-	// 	[6, 3],
-	// 	[6, 8],
-
-	// 	[8, 3],
-	// 	[8, 6],
-
-	// 	[9, 0],
-	// ],
 	CLUES: {
 		WAAGERECHT: {
-			2: {
-				c: "Im Match nur Set-Etappe",
-				l: "4",
-				s: "GAME",
-			},
-			5: {
-				c: "Beim Gebäck steht's für doppelt, beim Licht für halb",
-				l: "4",
-				s: "ZWIE",
-			},
+			4: { c: "Panda, Punto oder 500", l: "4", s: "FIAT" },
 			6: {
-				c: "Schäuble wollte die in schwarz",
+				c: "Einer sorgt für Abkühlung,\neinige füllen den Stundenplan",
+				l: "7",
+				s: "FAECHER",
+			},
+			7: {
+				c: "Entertainment Genie \nohne Talentlücke",
 				l: "4",
-				s: "NULL",
+				s: "EGOT",
 			},
 			8: {
-				c: "Steinerne Motivwahl bei der Hautverzierung? Flotte Dekoration als direkter Nachfolger der Höhlenmalerei!",
-				l: "10",
-				s: "WANDTATTOO",
+				c: "Postfaschistin in Benitos Fußstapfen",
+				l: "8",
+				s: "MELONI",
+			},
+			9: {
+				c: "Einerseits belastend störrisch, andererseits erträglich berauschend",
+				l: "4",
+				s: "ESEL",
 			},
 			11: {
-				c: "Vorm End wird er ganz \nbezaubernd, der nervige",
+				c: `Herzensangelegenheit: \nBemisst die Schläge`,
 				l: "4",
-				s: "REIZ",
-			},
-			12: {
-				c: "Lautstarke Zwischenbemerkung, \nhat alles was Furien haben",
-				l: "6",
-				s: "EINRUF",
-			},
-			13: {
-				c: "In zwei Wörtern: Beschreibt höher gelegenen Bereich, in einem: Benjamin mit Dauerkarte",
-				l: "2,4",
-				s: "ABOBEN",
+				s: "PULS",
 			},
 			15: {
-				c: "Synonyme de marron",
+				c: "Vorm niedlichen Außerirdischen wird's zur digitalen Außenwelt",
+				l: "6",
+				s: "INTERN",
+			},
+			16: {
+				c: `Ist doch glatt was anderes \nals „vor Langem“`,
 				l: "4",
-				s: "BRUN",
+				s: "EBEN",
 			},
-			17: {
-				c: "Berberitze Spitz-Name aus verdrehtem Neidspross",
-				l: "10",
-				s: "SPIESSDORN",
-			},
-			18: {
-				c: "Schweinischer Aufruf zum Schlammbad? Heimatort von Schwalbe, Simme und Co",
-				l: "4",
-				s: "SUHL",
-			},
+			18: { c: "Alle Kompasse führen dahin", l: "7", s: "NORDPOL" },
 			19: {
-				c: "Unendlicher Kern \nder Heddewigsnelke",
+				c: "Wasser-Land-Luft-, aber \nbloß nicht Zeitungswesen!",
 				l: "4",
-				s: "EWIG",
-			},
-			20: {
-				c: "Steht geschrieben: \nNach Plain, Tele, Blind",
-				l: "4",
-				s: "TEXT",
+				s: "ENTE",
 			},
 		},
 		SENKRECHT: {
-			1: {
-				c: "Wird aufgedreht nach dem Aufstehen und vor dem Blick \nin den Spiegel",
-				l: "4",
-				s: "SWAG",
-			},
+			1: { c: "Gar nicht mal so selten", l: "3", s: "OFT" },
 			2: {
-				c: "Attribut aus der Trickkiste \ngegen System oder Verteidiger",
-				l: "10",
-				s: "GEDRIBBELT",
-			},
-			3: {
-				c: "Sprichwörtlich: \n„Die Wunde ... den Finger, \nder Gedanke den Geist“",
-				l: "10",
-				s: "ENTZUENDET",
-			},
-			4: {
-				c: "Passt zum Walzer, Markt und Biss",
-				l: "4",
-				s: "FLOH",
-			},
-			5: {
-				c: "12 Zoll mit dem Körper gemessen",
-				l: "4,4",
-				s: "ZWEIFUSS",
-			},
-			7: {
-				c: "Ein verliebter Robert Smith lieferte den 20 waagerecht dazu",
-				l: "8",
-				s: "LOVESONG",
-			},
-			9: {
-				c: "Die klingen höchstens \nim opera house",
+				c: "Kommandeur*in und Informatiker*in sind sich einig: Dem folgt unweigerlich eine prompte Ausführung",
 				l: "6",
-				s: "TENORS",
+				s: "BEFEHL",
+			},
+			3: { c: "Aggregatzustand vom Bcuhsetabnasalt", l: "5", s: "CHAOS" },
+			4: { c: "Lieber vor Wahl als vor Wähler", l: "5", s: "FREIE" },
+			5: {
+				c: "Unverschämter Monopolist für Design-Software",
+				l: "5",
+				s: "ADOBE",
 			},
 			10: {
-				c: "Überflieger im Überfliegen",
+				c: "Mal szenisch anweisend,\nmal ausführlich programmiert",
 				l: "6",
-				s: "AIRBUS",
+				s: "SKRIPT",
 			},
-			14: {
-				c: "Ein Hauch von Weg",
-				l: "4",
-				s: "SPUR",
+			12: { c: "Naturtalent kann es sich sparen", l: "5", s: "UEBEN" },
+			13: {
+				c: "Hat man fünf- oder siebenfach beisammen zu haben",
+				l: "5",
+				s: "SINNE",
 			},
-			16: {
-				c: "Ausgezeichnete bekommen den weiter westlich",
-				l: "4",
-				s: "PRIX",
+			14: { c: "Aller Anfang ist der", l: "5", s: "START" },
+			17: {
+				c: "Wer das ruft, hält sich für Champions, nicht nur in Madrid",
+				l: "3",
+				s: "OLE",
 			},
 		},
 	},

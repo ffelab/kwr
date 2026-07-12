@@ -1,124 +1,105 @@
 const puzzleData = {
 	PUZZLE_ID: "11",
 	SIZE: 10,
-	MIN_WORD_LENGTH: 3,
+	MIN_WORD_LENGTH: 2,
 	BLACK_FIELDS: [
-		[0, 0],
-		[0, 3],
-		[0, 4],
-		[0, 5],
-		[0, 6],
-		[0, 9],
+		[1, 1],
+		[1, 2],
 
-		[2, 0],
-		[2, 9],
-		[3, 4],
-		[3, 5],
-		[4, 0],
+		[1, 4],
+		[1, 5],
+
+		[1, 7],
+		[1, 8],
+
+		[2, 1],
+		[2, 2],
+
+		[2, 4],
+		[2, 5],
+
+		[2, 7],
+		[2, 8],
+
 		[4, 1],
+		[4, 2],
+
+		[4, 4],
+		[4, 5],
+
+		[4, 7],
 		[4, 8],
-		[4, 9],
-		[5, 0],
-		[5, 3],
-		[5, 6],
-		[5, 9],
-		[6, 0],
-		[6, 9],
-		[7, 0],
-		[7, 9],
+
+		[5, 1],
+		[5, 2],
+
+		[5, 4],
+		[5, 5],
+
+		[5, 7],
+		[5, 8],
+
+		[7, 1],
+		[7, 2],
+
+		[7, 4],
+		[7, 5],
+
+		[7, 7],
+		[7, 8],
+
+		[8, 1],
+		[8, 2],
+
 		[8, 4],
 		[8, 5],
-		[9, 0],
-		[9, 2],
-		[9, 4],
-		[9, 5],
-		[9, 7],
-		[9, 9],
+
+		[8, 7],
+		[8, 8],
 	],
 	CLUES: {
 		WAAGERECHT: {
-			5: {
-				c: "Hat alles was der Surferchip hat: Wenn der Vorwurf abprallt",
+			1: {
+				c: "Medikamentennutzen? \nSchnittige Zahl!",
 				l: "10",
-				s: "FREISPRUCH",
+				s: "MITTELWERT",
 			},
-			8: {
-				c: "Radio ohne Ecken und Kanten? Information und Unterhaltung solidarisch finanziert!",
-				l: "8",
-				s: "RUNDFUNK",
+			5: {
+				c: "Spielerruf + Eselschimpf + Grün = Anlass zum Freizeitpläneschmieden",
+				l: "10",
+				s: "RESTURLAUB",
 			},
-			9: { c: "Top im office", l: "4", s: "DESK" },
-			10: {
-				c: "Kurz: Heute Gedenkstätte, das Haus am See mit grausamer Geschichte",
-				l: "4",
-				s: "HDWK",
+			6: {
+				c: "Aktionen für die ohne Torschusspanik",
+				l: "10",
+				s: "OFFENSIVEN",
 			},
-			11: {
-				c: "Trockene Angelegenheit: \nVohorname der Wahagenknecht",
-				l: "6",
-				s: "SAHARA",
+			7: {
+				c: "Chorknabens Experen-Dasein während des Schuljahres und auch zum Schluss",
+				l: "10",
+				s: "NOTENLESER",
 			},
-			16: {
-				c: "Ihre Mehrzahl kommt \npompös mit Pauken daher",
-				l: "8",
-				s: "TROMPETE",
-			},
-			19: {
-				c: "Ihr Geschäftsmodell: \nFlotte Fahrt voraus",
-				l: "8",
-				s: "REEDEREI",
-			},
-			20: {
-				c: "Sind Kollegah und Hugo \neigentlich verwandt?",
-				l: "4",
-				s: "BOSS",
-			},
-			21: { c: "Ist vorweg zu lesen im fairy tale", l: "4", s: "ONCE" },
 		},
 		SENKRECHT: {
 			1: {
-				c: "In die wird man über \nden Holzweg geführt",
-				l: "4",
-				s: "IRRE",
+				c: "Pariser Untergrundnetzwerk + Heimat der Pierogi = Stehen statt Stadt",
+				l: "10",
+				s: "METROPOLEN",
 			},
 			2: {
-				c: "Wer auf seins achtet, \nlässt sich sehen",
-				l: "9",
-				s: "AEUSSERES",
+				c: "Leistungsumfang von \nSandmännchens Nebentätigkeit",
+				l: "10",
+				s: "TAGTRAEUME",
 			},
 			3: {
-				c: "Orale Versionen? \nAusgesprochene Varianz!",
-				l: "9",
-				s: "MUNDARTEN",
+				c: "Senden Stubenhocker wie Weltenbummler ins Demokratümmel",
+				l: "10",
+				s: "WAHLBRIEFE",
 			},
 			4: {
-				c: "Scheiß auf den 23. von 26? \nKurzer Ozon-Killer \naus dem Kühlschrank!",
-				l: "4",
-				s: "FCKW",
-			},
-			6: {
-				c: "Höchstkultur: Ihr 15 senkrecht erstreckte sich von Quito bis Santiago",
-				l: "4",
-				s: "INKA",
-			},
-			7: { c: "Fließt im gleichnamigen Pott", l: "4", s: "RUHR" },
-			12: {
-				c: "Das letzte von Hans Albers \nhat keine Taschen",
-				l: "4",
-				s: "HEMD",
-			},
-			13: { c: "Anderorts auch Alm", l: "4", s: "ALPE" },
-			14: {
-				c: "Höchst spannend: als Dosen-Ware frei Haus geliefert",
-				l: "5",
-				s: "STROM",
-			},
-			15: { c: "Klingt-nach-Gliedmaß Gegenteil", l: "5", s: "REICH" },
-			17: { c: "Fürs Schnürchen wie ein Türchen", l: "4", s: "OESE" },
-			18: {
-				c: "Antiker Matchmaker, trifft stets \nknapp neben die Lunge",
-				l: "4",
-				s: "EROS",
+				c: "Gebrannte Streifen? \nHören sich alt an!",
+				l: "10",
+				s: "TONBAENDER",
 			},
 		},
 	},

@@ -1,105 +1,118 @@
 const puzzleData = {
 	PUZZLE_ID: "13",
 	SIZE: 10,
-	MIN_WORD_LENGTH: 2,
+	MIN_WORD_LENGTH: 3,
 	BLACK_FIELDS: [
-		[1, 1],
-		[1, 2],
+		[0, 1],
+		[0, 2],
+		[0, 3],
+		[0, 4],
+		[0, 5],
+		[0, 6],
+		[0, 7],
+		[0, 8],
 
 		[1, 4],
 		[1, 5],
 
-		[1, 7],
-		[1, 8],
-
 		[2, 1],
 		[2, 2],
-
 		[2, 4],
 		[2, 5],
-
 		[2, 7],
 		[2, 8],
 
 		[4, 1],
 		[4, 2],
-
 		[4, 4],
 		[4, 5],
-
 		[4, 7],
 		[4, 8],
 
+		[5, 0],
 		[5, 1],
 		[5, 2],
-
 		[5, 4],
 		[5, 5],
-
 		[5, 7],
 		[5, 8],
+		[5, 9],
 
-		[7, 1],
+		[6, 0],
+		[6, 9],
+
+		[7, 0],
 		[7, 2],
-
 		[7, 4],
 		[7, 5],
-
 		[7, 7],
-		[7, 8],
+		[7, 9],
 
-		[8, 1],
+		[8, 0],
 		[8, 2],
-
 		[8, 4],
 		[8, 5],
-
 		[8, 7],
-		[8, 8],
+		[8, 9],
+
+		[9, 0],
+
+		[9, 9],
 	],
 	CLUES: {
 		WAAGERECHT: {
-			1: {
-				c: "Medikamentennutzen? Schnittige Zahl!",
-				l: "10",
-				s: "MITTELWERT",
+			3: {
+				c: "Wird geschrieben oder geknackt",
+				l: "4",
+				s: "CODE",
 			},
 			5: {
-				c: "Spielerruf + Eselschimpf + Grün = Anlass zum Freizeitpläneschmieden",
-				l: "10",
-				s: "RESTURLAUB",
+				c: "Browseranleitung: \nHaufenweise Text musst'e lesen",
+				l: "4",
+				s: "HTML",
 			},
 			6: {
-				c: "Aktionen für die ohne Torschusspanik",
+				c: "Objekt der Cartoon-Coyoten-Begierde: Der absolute Renner",
 				l: "10",
-				s: "OFFENSIVEN",
+				s: "ROADRUNNER",
 			},
 			7: {
-				c: "",
-				l: "10",
-				s: "NOTENLESER",
+				c: "Euphoriebremse, oder bloß Lautstärkeschwächer",
+				l: "8",
+				s: "DAEMPFER",
+			},
+			9: {
+				c: "Handliche bilden zuweilen \n5 senkrechts ab",
+				l: "8",
+				s: "MONITORE",
 			},
 		},
 		SENKRECHT: {
 			1: {
-				c: "Pariser Untergrundnetzwerk + Heimat der Pierogi = Stehen statt Stadt",
-				l: "10",
-				s: "METROPOLEN",
+				c: "Hauptstadt im Land, das Kolonisatoren einst \n„Gold Coast“ nannten",
+				l: "5",
+				s: "ACCRA",
 			},
 			2: {
-				c: "",
-				l: "10",
-				s: "TAGTRAEUME",
-			},
-			3: {
-				c: "",
-				l: "10",
-				s: "WAHLBRIEFE",
+				c: "Klingt blumig, die \ngesamten Chlorophylle",
+				l: "5",
+				s: "FLORA",
 			},
 			4: {
-				c: "Gebrannte Streifen? Hören sich alt an!",
-				l: "10",
-				s: "TONBAENDER",
+				c: "Vervollständigen Feuersamen, Wasserfrüchte, Luftobst",
+				l: "9",
+				s: "ERDBEEREN",
+			},
+			5: {
+				c: "Aufnahme versteckt \nim Dayton-Hof",
+				l: "9",
+				s: "HANDYFOTO",
+			},
+			7: { c: "Passt zu Stadt wie zu 2 senkrecht", l: "4", s: "DARM" },
+			8: {
+				c: "Tankt im Sommer die Sonne, die man später schluckweise schmeckt",
+				l: "4",
+				s: "REBE",
 			},
 		},
 	},

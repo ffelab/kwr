@@ -511,15 +511,26 @@ div > input {
 }
 
 #danke {
-	text-align: left;
+	text-align: center;
 	font-size: 1rem;
 	line-height: 1.25rem;
 	margin: 5vw;
 	font-family: "italic";
 	position: fixed;
-
+	pointer-events: none;
 	top: 40%;
 	transform: translateY(-50%);
+}
+
+canvas {
+	z-index: 1;
+	touch-action: none;
+	user-select: none;
+	webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* old Edge/IE */
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 @media (min-width: 630px) {

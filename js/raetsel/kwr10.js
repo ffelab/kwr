@@ -96,7 +96,7 @@ const puzzleData = {
 				s: "TIFF",
 			},
 			5: {
-				c: "Elias Forschungsgebiet: Da pflückt's sich gerne ganz von selbst",
+				c: "Elias Forschungsgebiet: Da pflückt es sich gerne ganz von selbst",
 				l: "11",
 				s: "ERDBEERFELD",
 			},
@@ -104,7 +104,11 @@ const puzzleData = {
 			11: { c: "Hat der Hydrogeologe intus", l: "5", s: "DROGE" },
 			12: { c: "So eine scharfe Grafik", l: "6", s: "VEKTOR" },
 			15: { c: "Virales Internetphänomen", l: "4", s: "MEME" },
-			16: { c: "Gedrückt vor Lücken", l: "4", s: "LEER" },
+			16: {
+				c: "Gilt es beim Tasten vor Lücken zu drücken",
+				l: "4",
+				s: "LEER",
+			},
 		},
 	},
 };

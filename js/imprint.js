@@ -4,62 +4,8 @@ document.getElementById("start").addEventListener("click", async () => {
 		"none";
 	const body = document.querySelector("body");
 	body.classList.remove("dark");
-});
-
-const solved = document.querySelectorAll(".solved");
-const uebersicht = document.querySelectorAll(".raetsel-container");
-function formatTime(ms) {
-	const totalSeconds = Math.floor(ms / 1000);
-
-	const hours = Math.floor(totalSeconds / 3600);
-	const minutes = Math.floor((totalSeconds % 3600) / 60);
-	const seconds = totalSeconds % 60;
-
-	if (hours > 0) {
-		return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
-			.toString()
-			.padStart(2, "0")}`;
-	}
-
-	return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-}
-
-solved.forEach((el) => {
-	el.addEventListener("click", () => {
-		solved.forEach((el) => {
-			el.style.boxShadow = "0 0 0px 1px var(--primary-bg-color)";
-		});
-		el.style.boxShadow = "0 0 0px 2.5px var(--primary-highlight-color)";
-
-		const num = parseInt(el.dataset.id) - 1;
-		const PUZZLE_ID = String(num).padStart(2, "0");
-		const saved = localStorage.getItem(`finished${PUZZLE_ID}`);
-		const data = JSON.parse(saved);
-		const schummelzaehler = data.schummelzaehler || 0;
-		const zeit = formatTime(data.finalTime);
-		let schummelMsg = "";
-		if (schummelzaehler == 0) {
-			schummelMsg = ``;
-		} else {
-			schummelMsg = `mit ${schummelzaehler}-mal schummeln<br>`;
-		}
-		document.querySelector(".uebersicht").innerHTML =
-			`Du hast Rätsel ${el.dataset.id}<br>${schummelMsg}in ${zeit} gelöst.`;
-	});
-});
-
-uebersicht.forEach((el) => {
-	if (!el.classList.contains("solved")) {
-		el.addEventListener("click", () => {
-			solved.forEach((el) => {
-				el.style.boxShadow = "0 0 0px 1px var(--primary-bg-color)";
-			});
-			document.querySelector(".uebersicht").style.color =
-				"var(--primary-bg-color)";
-			document.querySelector(".uebersicht").innerHTML =
-				"Hier findest du deine <br />gelösten Rätsel.";
-		});
-	}
+	const details = document.getElementById("about");
+	details.classList.remove("hidden");
 });
 
 // ─── Field definitions (unchanged) ───────────────────────────────────────────
@@ -425,3 +371,106 @@ function runSequence() {
 }
 
 runSequence();
+
+const year = document.querySelector(".year");
+const date = new Date();
+let thisYear = date.getFullYear();
+year.textContent = thisYear;
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const body = document.querySelector("body");
+const pixels = [];
+const lifetime = 40000;
+const size = 20;
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// ctx.fillStyle = "#000";
+// ctx.font = "10px monospace";
+// ctx.textAlign = "center";
+// ctx.textBaseline = "middle";
+// ctx.fillText("Scratch it!", canvas.width / 2, canvas.height / 2);
+
+let lastDrawTime = 0;
+const delay = 1;
+
+let isDrawing = false;
+
+canvas.addEventListener("pointerdown", () => {
+	isDrawing = true;
+});
+
+canvas.addEventListener("pointerup", () => {
+	isDrawing = false;
+});
+
+canvas.addEventListener("pointerleave", () => {
+	isDrawing = false;
+});
+
+canvas.addEventListener("pointermove", (e) => {
+	if (!isDrawing) return;
+
+	const now = Date.now();
+	if (now - lastDrawTime > delay) {
+		drawPixel(e.clientX, e.clientY);
+		lastDrawTime = now;
+	}
+});
+
+function drawPixel(x, y) {
+	const size = 20;
+	const gridX = Math.floor(x / size) * size;
+	const gridY = Math.floor(y / size) * size;
+
+	pixels.push({
+		x: gridX,
+		y: gridY,
+		created: Date.now(),
+	});
+
+	if (pixels.length > 5000) pixels.shift();
+}
+
+function animate() {
+	const now = Date.now();
+
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	for (let i = pixels.length - 1; i >= 0; i--) {
+		const p = pixels[i];
+		const age = now - p.created;
+
+		/*====== Switch these two for toggling fade-out effect ======*/
+		const t = age / lifetime;
+		// const t = 0;
+
+		if (t >= 1) {
+			pixels.splice(i, 1);
+			continue;
+		}
+
+		//FADE-OUT
+		// if (age > lifetime) {
+		// 	pixels.splice(i, 1);
+		// 	continue;
+		// }
+
+		//SNAKE-MECHANIK
+		// if (pixels.length > 300) {
+		// 	pixels.splice(0, 1);
+		// 	continue;
+		// }
+
+		const alpha = 1 - t;
+
+		ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
+		ctx.fillRect(p.x, p.y, 20, 20);
+	}
+
+	requestAnimationFrame(animate);
+}
+
+animate();

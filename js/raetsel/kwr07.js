@@ -48,7 +48,7 @@ const puzzleData = {
 			},
 			10: { c: "Der Platz am Ende jeder Antwort", l: "3", s: "ORT" },
 			11: {
-				c: "Für die sind ein Bart schon ein großer Wald",
+				c: "Für die sind ein Bart \nschon ein großer Wald",
 				l: "6",
 				s: "LAEUSE",
 			},

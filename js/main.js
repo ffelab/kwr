@@ -173,11 +173,12 @@ function loadPuzzle() {
 	solved = data.solved || false;
 	elapsed = data.time || 0;
 	schummelzaehler = data.schummelzaehler || 0;
-	motionEnabled = data.motionEnabled || false;
+	motionEnabled = false;
+	permissionGranted = data.permissionGranted || false;
 
 	if (motionEnabled) {
 		updateSchummelDisplay();
-		setMotionListeners();
+		// setMotionListeners();
 	}
 }
 
@@ -719,7 +720,7 @@ checkButton.addEventListener("pointerup", () => {
 	display.style.color = "var(--between-dark-light)";
 
 	if (!checkActive) {
-		display.textContent = `Halte ? länger gedrückt um Antworten zu prüfen. Vorsicht: zählt als Schummeln!`;
+		display.textContent = `Halte die ?-Taste länger gedrückt \num Antworten zu überprüfen. \nACHTUNG: zählt als Schummeln!`;
 		display.style.color = "var(--primary-highlight-color)";
 
 		setTimeout(() => {

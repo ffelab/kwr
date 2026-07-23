@@ -191,7 +191,7 @@ const puzzleData = {
 	CLUES: {
 		WAAGERECHT: {
 			3: {
-				c: "Kürzel Düsseldorfer Flughafen + \n",
+				c: "Kürzel Düsseldorfer Flughafen + Zeitschrift-Nickname + Heiliger Titel = 1 + 2 senkrecht ...",
 				l: "8",
 				s: "DUSMAGST",
 			},
